@@ -7,10 +7,8 @@ Plug 'ryanoasis/vim-devicons'
 Plug 'jiangmiao/auto-pairs'
 
 " Intellisense
-"Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
-"Plug 'hrsh7th/vim-vsnip'
 Plug 'hrsh7th/cmp-nvim-lsp'
 
 " Themes
@@ -26,10 +24,15 @@ Plug 'junegunn/fzf'
 " Git plugin
 Plug 'tpope/vim-fugitive'
 
+" Python indent fix
+Plug 'Vimjas/vim-python-pep8-indent'
+
 call plug#end()
 
 " To have VIM jump to last position when reopen file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+
+filetype plugin indent on
 
 set number
 set relativenumber
@@ -43,7 +46,6 @@ set hidden
 set noshowmode
 set mouse=a
 
-filetype plugin indent on
 
 let g:lightline = {}
 let g:lightline.colorscheme = 'onedark'
@@ -55,7 +57,7 @@ let g:lightline.tab = {'active':['filename', 'modified'], 'inactive': ['filename
 " Built in :nohls macro key = <C-l>
 
 " To open new tab without entering the command
-nnoremap <silent> te :tabedit<Return>:tabm<Return>:Files<Return>
+nnoremap <silent> te :tabedit .<Return>
 
 " To change tabs in vim
 nnoremap <Tab> gt
@@ -68,14 +70,14 @@ nnoremap <silent> tc :tabclose<Return>
 nnoremap <S-b> :b<Space>
 
 " Open finder Alt/Meta + f
-nnoremap <M-f> :Files<cr>
+nnoremap <M-f> :Files<Return>
 
 " Open shell
-nnoremap <F5> :shell<cr>
+nnoremap <F5> :shell<Return>
 
-" To change option in auto complete
-"inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
-"inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
+" Quick command
+nnoremap <Esc>q :q<Return>
+nnoremap <Esc>w :w<Return>
 
 colorscheme onedark
 
@@ -87,5 +89,4 @@ function! MyFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-luafile ~/.config/nvim/lua/lsp/pyright-lsp.lua
 luafile ~/.config/nvim/lua/plugins/cmp-config.lua
