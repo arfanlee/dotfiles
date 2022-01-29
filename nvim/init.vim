@@ -10,6 +10,10 @@ Plug 'jiangmiao/auto-pairs'
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/vim-vsnip'
+
+" Rust linter
+Plug 'simrat39/rust-tools.nvim'
 
 " Themes
 Plug 'joshdick/onedark.vim'
@@ -32,8 +36,6 @@ call plug#end()
 " To have VIM jump to last position when reopen file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
 
-filetype plugin indent on
-
 set number
 set relativenumber
 set cursorline
@@ -45,7 +47,8 @@ set wildmenu " display menu option with shift/S+shift to select
 set hidden
 set noshowmode
 set mouse=a
-
+set nowrap
+set clipboard+=unnamedplus
 
 let g:lightline = {}
 let g:lightline.colorscheme = 'onedark'

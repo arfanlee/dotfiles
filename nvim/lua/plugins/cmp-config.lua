@@ -57,20 +57,14 @@ cmp.setup({
 			else
 				fallback()
 			end
-		end, {
-			"i",
-			"s",
-		}),
+		end, {"i", "s",}),
 		["<S-Tab>"] = cmp.mapping(function(fallback)
 			if cmp.visible() then
 				cmp.select_prev_item()
 			else
 				fallback()
 			end
-		end, {
-			"i",
-			"s",
-		}),
+		end, {"i", "s",}),
     },
 	formatting = {
 		fields = { "kind", "abbr", "menu" },
@@ -118,3 +112,7 @@ local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protoco
 require('lspconfig')['pyright'].setup {
 	capabilities = capabilities
 }
+require('lspconfig')['rust_analyzer'].setup{
+	capabilities = capabilities
+}
+require('rust-tools').setup{}
