@@ -68,7 +68,7 @@ Shell, (neo)vim & tmux configurations.
 5. Put `user_profle.ps1` and `poshell.json` into the directory.
 6. Insert `. $env:USERPROFILE\.config\powershell\user_profile.ps1` in $PROFILE.CurrentUserCurrentHost.
    - If there is an error, create the directory first where it says the path doesn't exists.
-Check [devslife](https://www.youtube.com/watch?v=5-aK2_WwrmM&t=8s) tutorial if there are something missing.
+   - Check [devslife](https://www.youtube.com/watch?v=5-aK2_WwrmM&t=8s) tutorial if there are something missing.
 #### Additional programs to install on Linux
 
  - preload
