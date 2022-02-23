@@ -30,7 +30,7 @@ Shell, (neo)vim & tmux configurations.
 #### Neovim configurations
 
 1. Install [neovim](https://github.com/neovim/neovim/) via [packages manager](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package) or [build](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package) it yourself.
-2. Put `nvim` folder into `$HOME/.config` (Linux) or into `C:\Users\{User}\AppData\Local` (Windows).
+2. Put `nvim` folder into `$HOME/.config` (Linux) or into `C:\Users\User\AppData\Local` (Windows).
    - Change the path for vim-plug and lua-config based on the path above or custom.
 3. Install [vim-plug](https://github.com/junegunn/vim-plug).
    `Optional`
@@ -65,7 +65,7 @@ Shell, (neo)vim & tmux configurations.
    Install-Module -Name Terminal-Icons -Repository PSGAllery -Force
    ```
 4. Create a `.config\powershell` file in any path you want. E.g: At the default path when Powershell launched.
-5. Put `user_profle.ps1` and `poshell.json` into the directory.
+5. Put `user_profle.ps1` and `xifost.omp.json` into the directory. Note: Change the paths in these files according to your preferences.
 6. Insert `. $env:USERPROFILE\.config\powershell\user_profile.ps1` in $PROFILE.CurrentUserCurrentHost.
    - If there is an error, create the directory first where it says the path doesn't exists.
    - Check [devslife](https://www.youtube.com/watch?v=5-aK2_WwrmM&t=8s) tutorial if there are something missing.
