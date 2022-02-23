@@ -2,7 +2,7 @@
 Import-Module posh-git
 Import-Module oh-my-posh
 Set-PoshPrompt Paradox
-$omp_config = Join-Path $PSScriptRoot ".\poshell.json"
+$omp_config = Join-Path $PSScriptRoot ".\xifost.omp.json"
 oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
 
 # Icons
@@ -41,10 +41,12 @@ Set-PSReadLineKeyHandler -Chord 'DownArrow' -Function HistorySearchForward
 Set-PSReadLineKeyhandler -Chord 'Ctrl+Backspace' -Function BackwardDeleteWord
 
 # Alias
-function hikari-bot { set-location "C:\Users\Blank\Documents\Programming\Python\Codes\Git\hikari-bot" }
+function applocal-dir { set-location "C:\Users\User\AppData\Local" }
+function config-dir { set-location "C:\Users\User\.config" }
 Set-Alias vi nvim
 Set-Alias grep findstr
-Set-Alias hibot hikari-bot
+Set-Alias vidir applocal-dir
+Set-Alias pdir config-dir
 
 # Utilities
 function which ($command) {
