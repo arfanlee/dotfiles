@@ -41,12 +41,27 @@ Set-PSReadLineKeyHandler -Chord 'DownArrow' -Function HistorySearchForward
 Set-PSReadLineKeyhandler -Chord 'Ctrl+Backspace' -Function BackwardDeleteWord
 
 # Alias
-function applocal-dir { set-location "C:\Users\User\AppData\Local" }
-function config-dir { set-location "C:\Users\User\.config" }
+function hikari-bot { set-location "C:\Users\Blank\Documents\Programming\Python\Codes\Git\hikari-bot" }
+function nvim-dir { set-location "C:\Users\Blank\AppData\Local\nvim" }
+function posh-dir { set-location "C:\Users\Blank\.config\powershell" }
+function touch-file {
+  Param(
+    [Parameter(Mandatory=$true)]
+    [string]$Path
+  )
+
+  if (Test-Path -LiteralPath $Path) {
+    (Get-Item -Path $Path).LastWriteTime = Get-Date
+  } else {
+    New-Item -Type File -Path $Path
+  }
+}
 Set-Alias vi nvim
 Set-Alias grep findstr
-Set-Alias vidir applocal-dir
-Set-Alias pdir config-dir
+Set-Alias hibot hikari-bot
+Set-Alias vidir nvim-dir
+Set-Alias pdir posh-dir
+Set-Alias touch touch-file
 
 # Utilities
 function which ($command) {
