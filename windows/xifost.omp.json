@@ -5,21 +5,6 @@
       "alignment": "left",
       "segments": [
         {
-          "foreground": "white",
-          "properties": {
-            "fetch_version": false,
-            "template": "({{ if .Error }}{{ .Error }}{{ else }}{{ if .Venv }}{{ .Venv }} {{ end }}{{ .Full }}{{ end }})"
-          },
-          "style": "plain",
-          "type": "python"
-        }
-      ],
-      "type": "prompt"
-    },
-    {
-      "alignment": "left",
-      "segments": [
-        {
           "foreground": "red",
           "properties": {
             "template": " % "
@@ -39,7 +24,7 @@
 		  "foreground_templates": ["{{ if gt .Code 0 }}red{{ end }}"],
           "properties": {
             "style": "folder",
-            "template": "➜ <cyan>{{ .Path }}</><blue>]</><white>$</>"
+            "template": "➜ <cyan>{{ .Path }}</><blue>]</>"
           },
           "style": "plain",
           "type": "path"
@@ -61,6 +46,30 @@
           },
           "style": "plain",
           "type": "git"
+        },
+        {
+          "foreground": "white",
+          "properties": {
+            "fetch_version": true,
+            "template": " via <green>\uE235</>{{ if .Error }}<red>{{ .Error }}</>{{ else }} <yellow>{{ .Full }}{{ end }} {{ if .Venv }}({{ .Venv }})</>{{ end }}"
+          },
+          "style": "plain",
+          "type": "python"
+		}
+      ],
+      "type": "prompt"
+    },
+	{
+      "alignment": "left",
+      "newline": true,
+      "segments": [
+        {
+          "foreground": "white",
+          "properties": {
+            "template": "$"
+          },
+          "style": "plain",
+          "type": "text"
         }
       ],
       "type": "prompt"
