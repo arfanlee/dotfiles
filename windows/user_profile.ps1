@@ -5,6 +5,9 @@ Set-PoshPrompt Paradox
 $omp_config = Join-Path $PSScriptRoot ".\xifost.omp.json"
 oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
 
+# Remove virtual environment default prompt
+$Env:VIRTUAL_ENV_DISABLE_PROMPT=1
+
 # Icons
 Import-Module Terminal-Icons
 
@@ -21,12 +24,12 @@ function OnViModeChange {
 Set-PSReadLineOption -Colors @{
   Command            = 'DarkGreen'
   Error				 = 'DarkRed'
-  Number             = 'Gray'
+  Number             = 'Yellow'
   Member             = 'Gray'
   Operator           = 'Gray'
   Type               = 'Gray'
-  Variable           = 'DarkGreen'
-  Parameter          = 'DarkGreen'
+  Variable           = 'Gray'
+  Parameter          = 'Gray'
   ContinuationPrompt = 'Gray'
   Default            = 'Gray'
 }
@@ -41,7 +44,6 @@ Set-PSReadLineKeyHandler -Chord 'DownArrow' -Function HistorySearchForward
 Set-PSReadLineKeyhandler -Chord 'Ctrl+Backspace' -Function BackwardDeleteWord
 
 # Alias
-function hikari-bot { set-location "C:\Users\Blank\Documents\Programming\Python\Codes\Git\hikari-bot" }
 function nvim-dir { set-location "C:\Users\Blank\AppData\Local\nvim" }
 function posh-dir { set-location "C:\Users\Blank\.config\powershell" }
 function touch-file {
@@ -58,7 +60,6 @@ function touch-file {
 }
 Set-Alias vi nvim
 Set-Alias grep findstr
-Set-Alias hibot hikari-bot
 Set-Alias vidir nvim-dir
 Set-Alias pdir posh-dir
 Set-Alias touch touch-file
