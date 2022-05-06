@@ -57,9 +57,9 @@ Shell, (neo)vim & tmux configurations.
    scoop install neovim
    scoop install nvm
    ```
-3. Install [oh-my-posh](https://ohmyposh.dev), [PSReadLine](https://github.com/PowerShell/PSReadLine), `Terminal-Icon`.
+3. Install [oh-my-posh](https://ohmyposh.dev), [PSReadLine](https://github.com/PowerShell/PSReadLine), `Terminal-Icons`.
    ```
-   Install-Module oh-my-posh -Scope CurrentUser -Force
+   scoop install oh-my-posh
    Install-Module posh-git -Scope CurrentUser -Force
    Install-Module -Name PSReadLine -AllowPrerelease -Scope CurrentUser -Force -SkipPublisherCheck
    Install-Module -Name Terminal-Icons -Repository PSGAllery -Force
