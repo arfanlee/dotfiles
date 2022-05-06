@@ -1,7 +1,5 @@
 # Prompt
 Import-Module posh-git
-Import-Module oh-my-posh
-Set-PoshPrompt Paradox
 $omp_config = Join-Path $PSScriptRoot ".\xifost.omp.json"
 oh-my-posh --init --shell pwsh --config $omp_config | Invoke-Expression
 
@@ -44,8 +42,8 @@ Set-PSReadLineKeyHandler -Chord 'DownArrow' -Function HistorySearchForward
 Set-PSReadLineKeyhandler -Chord 'Ctrl+Backspace' -Function BackwardDeleteWord
 
 # Alias
-function nvim-dir { set-location "C:\Users\Blank\AppData\Local\nvim" }
 function posh-dir { set-location "C:\Users\Blank\.config\powershell" }
+function nvim-dir { set-location "C:\Users\Blank\AppData\Local\nvim" }
 function touch-file {
   Param(
     [Parameter(Mandatory=$true)]
@@ -58,10 +56,10 @@ function touch-file {
     New-Item -Type File -Path $Path
   }
 }
+Set-Alias pdir posh-dir
 Set-Alias vi nvim
 Set-Alias grep findstr
 Set-Alias vidir nvim-dir
-Set-Alias pdir posh-dir
 Set-Alias touch touch-file
 
 # Utilities
