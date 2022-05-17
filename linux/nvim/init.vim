@@ -1,4 +1,4 @@
-call plug#begin('/home/xifost/.config/nvim/plugged')
+call plug#begin('C:\Users\Blank\AppData\Local\nvim\plugged')
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
@@ -17,6 +17,7 @@ Plug 'simrat39/rust-tools.nvim'
 
 " Themes
 Plug 'joshdick/onedark.vim'
+Plug 'projekt0n/github-nvim-theme'
 
 " Statusline theme
 Plug 'itchyny/lightline.vim'
@@ -34,8 +35,9 @@ Plug 'Vimjas/vim-python-pep8-indent'
 call plug#end()
 
 " To have VIM jump to last position when reopen file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
+set guifont=Hack\ NF:h14
 set number
 set relativenumber
 set cursorline
@@ -49,6 +51,9 @@ set noshowmode
 set mouse=a
 set nowrap
 set clipboard+=unnamedplus
+
+let g:neovide_remember_window_size=v:true
+let g:neovide_cursor_vfx_mode="torpedo"
 
 let g:lightline = {}
 let g:lightline.colorscheme = 'onedark'
@@ -80,7 +85,7 @@ nnoremap <F5> :shell<Return>
 
 " Quick command
 nnoremap <Esc>q :q<Return>
-nnoremap <Esc>w :w<Return>
+nnoremap <C-s> :w<Return>
 
 colorscheme onedark
 
