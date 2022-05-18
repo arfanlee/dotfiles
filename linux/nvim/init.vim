@@ -1,4 +1,4 @@
-call plug#begin('C:\Users\Blank\AppData\Local\nvim\plugged')
+call plug#begin('~/.config/nvim/plugged')
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
