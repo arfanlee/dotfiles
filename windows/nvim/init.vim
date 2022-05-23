@@ -32,10 +32,23 @@ Plug 'tpope/vim-fugitive'
 " Python indent fix
 Plug 'Vimjas/vim-python-pep8-indent'
 
+" NERDTree
+Plug 'preservim/nerdtree'
+
 call plug#end()
 
 " To have VIM jump to last position when reopen file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
+
+" NERDTree config.
+autocmd StdinReadPre * let s:std_in=1
+" Start NERDTree when Vim is started without file arguments.
+autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
+" Start NERDTree when Vim stats with a dir arg.
+autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in') |
+    \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | wincmd p | endif
+" Exit Vim if NERDTree is the only window remaining in the only tab.
+autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 set guifont=Hack\ NF:h14
 set number
@@ -52,15 +65,22 @@ set mouse=a
 set nowrap
 set clipboard+=unnamedplus
 
+" Neovide
 let g:neovide_remember_window_size=v:true
 let g:neovide_cursor_vfx_mode="torpedo"
 
+"Lightline
 let g:lightline = {}
 let g:lightline.colorscheme = 'onedark'
 let g:lightline.separator = {'left': '', 'right': ''}
 let g:lightline.subseparator = {'left': '', 'right': ''}
 let g:lightline.component_function = {'filetype': 'MyFiletype', 'fileformat': 'MyFileformat'}
 let g:lightline.tab = {'active':['filename', 'modified'], 'inactive': ['filename', 'modified'] }
+
+" NERDTRee
+let g:NERDTreeMinimalUI=1
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 
 " Built in :nohls macro key = <C-l>
 
@@ -78,14 +98,14 @@ nnoremap <silent> tc :tabclose<Return>
 nnoremap <S-b> :b<Space>
 
 " Open finder Alt/Meta + f
-nnoremap <M-f> :Files<Return>
-
-" Open shell
-nnoremap <F5> :shell<Return>
+nnoremap <silent> <M-f> :Files<Return>
 
 " Quick command
-nnoremap <Esc>q :q<Return>
-nnoremap <C-s> :w<Return>
+nnoremap <silent> <Esc>q :q<Return>
+nnoremap <silent> <C-s> :w<Return>
+
+" NERDTree Toggle
+nnoremap <silent> <C-f> :NERDTreeToggle<Return>
 
 colorscheme onedark
 
