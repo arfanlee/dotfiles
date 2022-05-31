@@ -1,80 +1,148 @@
 {
-  "$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
-  "blocks": [
-    {
-      "alignment": "left",
-      "segments": [
-        {
-          "foreground": "red",
-          "properties": {
-            "template": " % "
-          },
-          "style": "plain",
-          "type": "root"
-        },
-        {
-          "properties": {
-            "template": "<blue>[</><#FFFF00>{{ .UserName }}</><red>@</><#FFFFFF>{{ .HostName }}</> "
-          },
-          "style": "plain",
-          "type": "session"
-        },
-        {
-          "foreground": "green",
-		  "foreground_templates": ["{{ if gt .Code 0 }}red{{ end }}"],
-          "properties": {
-            "style": "folder",
-            "template": "➜ <cyan>{{ .Path }}</><blue>]</>"
-          },
-          "style": "plain",
-          "type": "path"
-        },
+	"$schema": "https://raw.githubusercontent.com/JanDeDobbeleer/oh-my-posh/main/themes/schema.json",
+	"blocks": [
 		{
-          "foreground": "green",
-          "foreground_templates": [
-            "{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}",
-            "{{ if and (gt .Ahead 0) (gt .Behind 0) }}red{{ end }}",
-            "{{ if gt .Ahead 0 }}magenta{{ end }}",
-            "{{ if gt .Behind 0 }}darkGray{{ end }}"
-          ],
-          "properties": {
-            "branch_icon": "\ue725 ",
-            "fetch_stash_count": true,
-            "fetch_status": true,
-            "fetch_upstream_icon": true,
-            "template": " 【{{ .HEAD }}{{ if gt .Ahead 0 }}<magenta>{{ .BranchStatus }}</>{{end}}{{ if gt .Behind 0 }}<darkGray>{{ .BranchStatus }}</>{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<cyan> \uf046 {{ .Staging.String }}</>{{ end }}】"
-          },
-          "style": "plain",
-          "type": "git"
-        },
-        {
-          "foreground": "white",
-          "properties": {
-            "fetch_version": true,
-            "template": " via <green>\uE235</>{{ if .Error }}<red>{{ .Error }}</>{{ else }} <yellow>{{ .Full }}{{ end }} {{ if .Venv }}({{ .Venv }})</>{{ end }}"
-          },
-          "style": "plain",
-          "type": "python"
+			"alignment": "left",
+			"segments": [
+				{
+					"foreground": "red",
+					"style": "plain",
+					"template": " $ ",
+					"type": "root"
+				},
+				{
+					"style": "plain",
+					"template": "<blue>[</><#FFFF00>{{ .UserName }}</><red>@</><#FFFFFF>{{ .HostName }}</> ",
+					"type": "session"
+				},
+				{
+					"foreground": "green",
+					"foreground_templates": [
+					"{{ if gt .Code 0 }}red{{ end }}"
+					],
+					"properties": {
+					"style": "folder"
+					},
+					"style": "plain",
+					"template": "\u279c <cyan>{{ .Path }}</><blue>]</>",
+					"type": "path"
+				},
+				{
+					"foreground": "green",
+					"foreground_templates": [
+						"{{ if or (.Working.Changed) (.Staging.Changed) }}yellow{{ end }}",
+						"{{ if and (gt .Ahead 0) (gt .Behind 0) }}red{{ end }}",
+						"{{ if gt .Ahead 0 }}magenta{{ end }}",
+						"{{ if gt .Behind 0 }}darkGray{{ end }}"
+					],
+					"properties": {
+						"branch_icon": "\ue725 ",
+						"fetch_stash_count": true,
+						"fetch_status": true,
+						"fetch_upstream_icon": true
+					},
+					"style": "plain",
+					"template": " \u3010{{ .HEAD }}{{ if gt .Ahead 0 }}<magenta>{{ .BranchStatus }}</>{{end}}{{ if gt .Behind 0 }}<darkGray>{{ .BranchStatus }}</>{{ end }}{{ if .Working.Changed }} \uf044 {{ .Working.String }}{{ end }}{{ if and (.Working.Changed) (.Staging.Changed) }} |{{ end }}{{ if .Staging.Changed }}<cyan> \uf046 {{ .Staging.String }}</>{{ end }}\u3011",
+					"type": "git"
+				}
+			],
+			"type": "prompt"
+		},
+		{
+			"alignment": "right",
+			"segments": [
+				{
+					"foreground": "white",
+					"properties": {
+						"fetch_version": true
+					},
+					"style": "diamond",
+					"template": "<green>\ue235</>{{ if .Error  }}<red>{{ .Error  }}</>{{ else  }} <yellow>{{ .Full  }}{{ end  }} {{ if .Venv  }}({{ .Venv  }})</>{{ end  }}",
+					"type": "python"
+				},
+				{
+					"foreground": "#3C873A",
+					"properties": {
+						"fetch_version": true,
+						"fetch_package_manager": true,
+						"npm_icon": " <#cc3a3a>\ue5fa</> ",
+						"yarn_icon": " <#348cba>\uf61a</>"
+					},
+					"style": "diamond",
+					"template": "\ue718 {{ if .PackageManagerIcon }}{{ .PackageManagerIcon }} {{ end }}{{ .Full }}",
+					"type": "node"
+				},
+				{
+					"foreground": "#ec2729",
+					"style": "diamond",
+					"template": "\ue738 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "java"
+				},
+				{
+					"foreground": "#0d6da8",
+					"style": "diamond",
+					"template": "\ue77f {{ if .Unsupported }}\uf071{{ else }}{{ .Full }}{{ end }}",
+					"type": "dotnet"
+				},
+				{
+					"foreground": "#06aad5",
+					"style": "diamond",
+					"template": "\ufcd1 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "go"
+				},
+				{
+					"foreground": "#925837",
+					"style": "diamond",
+					"template": "\ue7a8 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "rust"
+				},
+				{
+					"foreground": "#055b9c",
+					"style": "diamond",
+					"template": "\ue798 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "dart"
+				},
+				{
+					"foreground": "#ce092f",
+					"style": "diamond",
+					"template": "\ue753 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "angular"
+				},
+				{
+					"foreground": "#359a25",
+					"style": "diamond",
+					"template": "<#ca3c34>\ue624</> {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "julia"
+				},
+				{
+					"foreground": "#9c1006",
+					"style": "diamond",
+					"template": "\ue791 {{ if .Error }}{{ .Error }}{{ else }}{{ .Full }}{{ end }}",
+					"type": "ruby"
+				},
+				{
+					"foreground": "#ffffff",
+					"style": "diamond",
+					"template": "\ufd31 {{.Context}}{{if .Namespace}} :: {{.Namespace}}{{end}}",
+					"type": "kubectl"
+				}
+			],
+			"type": "prompt"
+		},
+		{
+			"alignment": "left",
+			"newline": true,
+			"segments": [
+				{
+				"foreground": "green",
+				"style": "diamond",
+				"template": "",
+				"type": "text"
+				}
+			],
+			"type": "prompt"
 		}
-      ],
-      "type": "prompt"
-    },
-	{
-      "alignment": "left",
-      "newline": true,
-      "segments": [
-        {
-          "foreground": "white",
-          "properties": {
-            "template": "$"
-          },
-          "style": "plain",
-          "type": "text"
-        }
-      ],
-      "type": "prompt"
-    }
-  ],
-  "final_space": true,
-  "version": 1
+	],
+	"final_space": true,
+	"version": 2
 }
