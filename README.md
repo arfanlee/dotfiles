@@ -71,7 +71,7 @@ Shell, (neo)vim & tmux configurations.
    - Check [devslife](https://www.youtube.com/watch?v=5-aK2_WwrmM&t=8s) tutorial if there are something missing.
 
 #### X Terminal
-1. Install `xterminal`
+1. Install `xterm`
 2. Put .Xresources file into home directory.
 
 #### Additional programs to install on Linux
