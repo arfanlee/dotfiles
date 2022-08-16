@@ -103,7 +103,7 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- }}}
 
 -- Keyboard map indicator and switcher
-mykeyboardlayout = awful.widget.keyboardlayout()
+-- mykeyboardlayout = awful.widget.keyboardlayout()
 
 -- {{{ Wibar
 
@@ -136,24 +136,24 @@ cpu_widget:buttons(awful.util.table.join(
 
 -- Date widget
 date_widget = wibox.widget.textbox()
-vicious.register(date_widget, vicious.widgets.date, "  %a %b %d  %H:%M ", 1)
+vicious.register(date_widget, vicious.widgets.date, "  %a %b %d  %H:%M ", 1.5)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
-	awful.button({ }, 1, function(t) t:view_only() end),
+	awful.button({}, 1, function(t) t:view_only() end),
 	awful.button({ modkey }, 1, function(t)
 		if client.focus then
 			client.focus:move_to_tag(t)
 		end
 	end),
-	awful.button({ }, 3, awful.tag.viewtoggle),
-	awful.button({ modkey }, 3, function(t)
+	awful.button({}, 3, awful.tag.viewtoggle),
+	awful.button({modkey}, 3, function(t)
 		if client.focus then
 			client.focus:toggle_tag(t)
 		end
 	end),
-	awful.button({ }, 4, function(t) awful.tag.viewnext(t.screen) end),
-	awful.button({ }, 5, function(t) awful.tag.viewprev(t.screen) end)
+	awful.button({}, 4, function(t) awful.tag.viewnext(t.screen) end),
+	awful.button({}, 5, function(t) awful.tag.viewprev(t.screen) end)
 )
 
 local tasklist_buttons = gears.table.join(
@@ -210,9 +210,72 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-		-- layout	= {
-		-- 	spacing	= -5
-		-- },
+		--style   = {
+		--	shape = gears.shape.rectangle,
+		--},
+		widget_template = {
+			{
+				{
+					layout = wibox.layout.fixed.vertical,
+					{
+						{
+							id = 'text_role',
+							align = "center",
+							widget = wibox.widget.textbox
+						},
+						--left = 6,
+						top = 6,
+						widget = wibox.container.margin
+					},
+					{
+						{
+							left = 10,
+							right = 10,
+							top = 5,
+							widget = wibox.container.margin
+						},
+						id = 'overline',
+						bg = '#3325a1',
+						shape = gears.shape.rectangle,
+						widget = wibox.container.background
+					}
+				},
+				left = 1,
+				right = 1,
+				widget = wibox.container.margin
+			},
+			id = 'background_role',
+			widget = wibox.container.background,
+			shape = gears.shape.rectangle,
+			create_callback = function(self, c3, index, objects)
+				local focused = false
+				for _, x in pairs(awful.screen.focused().selected_tags) do
+					if x.index == index then
+						focused = true
+						break
+					end
+				end
+				if focused then
+					self:get_children_by_id("overline")[1].bg = "#80cbc4"
+				else 
+					self:get_children_by_id("overline")[1].bg = "#212121" -- grey
+				end
+			end,
+			update_callback = function(self, c3, index, objects)
+				local focused = false
+				for _, x in pairs(awful.screen.focused().selected_tags) do
+					if x.index == index then
+						focused = true
+						break
+					end
+				end
+				if focused then
+					self:get_children_by_id("overline")[1].bg = "#80cbc4"
+				else 
+					self:get_children_by_id("overline")[1].bg = "#212121"
+				end
+			end
+		},
         buttons = taglist_buttons
     }
 
