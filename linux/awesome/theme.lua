@@ -13,10 +13,10 @@ local theme = {}
 
 theme.font          = "Hack Nerd Font 10"
 
-theme.bg_normal     = "#222222"
-theme.bg_focus      = "#5078AD"
+theme.bg_normal     = "#222222" -- greyish
+theme.bg_focus      = "#51DFFF" -- cyan
 theme.bg_urgent     = "#C34043"
-theme.bg_minimize   = "#957FB8"
+theme.bg_minimize   = "#51DFFF50"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#DCD7BA"
@@ -24,6 +24,7 @@ theme.fg_focus      = theme.bg_normal
 theme.fg_urgent     = theme.bg_normal
 theme.fg_minimize   = theme.bg_normal
 
+-- Client (window)
 theme.useless_gap   = dpi(0)
 theme.border_width  = dpi(2)
 theme.border_normal = theme.bg_normal
@@ -33,8 +34,8 @@ theme.border_marked = theme.bg_normal
 theme.tasklist_disable_icon = true
 theme.tasklist_plain_task_name = true
 
--- theme.taglist_bg_focus = "#AD50AA"
--- theme.taglist_fg_focus = "#000000"
+theme.taglist_bg_focus = "#444444"
+theme.taglist_fg_focus = theme.bg_focus
 
 -- There are other variable sets
 -- overriding the default one when
@@ -73,7 +74,7 @@ theme.menu_width  = dpi(150)
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
---theme.bg_widget = "#cc0000"
+-- theme.bg_widget = "#cc0000"
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
@@ -128,7 +129,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 -- theme.icon_theme = 'Papirus-Dark'
--- theme.wallpaper = "~/Wallpapers/wallpaper.jpg"
+-- theme.wallpaper = "~/wallpapers/planets.jpg"
 
 return theme
 
