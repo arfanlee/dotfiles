@@ -138,6 +138,27 @@ cpu_widget:buttons(awful.util.table.join(
 date_widget = wibox.widget.textbox()
 vicious.register(date_widget, vicious.widgets.date, "  %a %b %d  %H:%M ", 1.5)
 
+-- Volume widget
+local soundw = wibox.widget{
+    markup = '',
+    align  = 'center',
+    valign = 'center',
+    font = 'Hack Nerd Font 10',
+    widget = wibox.widget.textbox
+}
+vol_widget = wibox.widget.textbox()
+volwrapper = wibox.widget.background()
+vicious.register(vol_widget, vicious.widgets.volume,
+        function(widget, args)
+        if args[2] == "♩" then 
+            return '<span color="#f2241f">  <b> </b>' .. args[2] .. '</span>'
+        else 
+            return " " .. args[1] .. "%"
+        end
+        end,
+   1, "Master")
+--volwrapper:set_widget(vol_widget)
+
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
 	awful.button({}, 1, function(t) t:view_only() end),
@@ -215,22 +236,24 @@ awful.screen.connect_for_each_screen(function(s)
 		--},
 		widget_template = {
 			{
+				layout = wibox.layout.align.horizontal,
 				{
 					layout = wibox.layout.fixed.vertical,
 					{
 						{
 							id = 'text_role',
 							align = "center",
+							-- top = 5,
 							widget = wibox.widget.textbox
 						},
-						--left = 6,
+						--left = 3,
 						top = 6,
 						widget = wibox.container.margin
 					},
 					{
 						{
-							left = 10,
-							right = 10,
+							left = 12,
+							right = 12,
 							top = 5,
 							widget = wibox.container.margin
 						},
@@ -256,9 +279,9 @@ awful.screen.connect_for_each_screen(function(s)
 					end
 				end
 				if focused then
-					self:get_children_by_id("overline")[1].bg = "#80cbc4"
+					self:get_children_by_id("overline")[1].bg = beautiful.bg_focus
 				else 
-					self:get_children_by_id("overline")[1].bg = "#212121" -- grey
+					self:get_children_by_id("overline")[1].bg = beautiful.bg_normal -- grey
 				end
 			end,
 			update_callback = function(self, c3, index, objects)
@@ -270,9 +293,9 @@ awful.screen.connect_for_each_screen(function(s)
 					end
 				end
 				if focused then
-					self:get_children_by_id("overline")[1].bg = "#80cbc4"
+					self:get_children_by_id("overline")[1].bg = beautiful.bg_focus
 				else 
-					self:get_children_by_id("overline")[1].bg = "#212121"
+					self:get_children_by_id("overline")[1].bg = beautiful.bg_normal
 				end
 			end
 		},
@@ -306,7 +329,9 @@ awful.screen.connect_for_each_screen(function(s)
 			},
             s.mypromptbox,
         },
+
         s.mytasklist, -- Middle widget
+
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
@@ -320,6 +345,18 @@ awful.screen.connect_for_each_screen(function(s)
 				left = 5,
 				right = 5,
 				forced_width = 190,
+				layout = wibox.container.margin
+			},
+			{
+				{
+					vol_widget,
+					bottom = 2,
+					color = beautiful.bg_focus,
+					widget = wibox.container.margin
+				},
+				left = 5,
+				right = 5,
+				forced_width = 65,
 				layout = wibox.container.margin
 			},
 			{
