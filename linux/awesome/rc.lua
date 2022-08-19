@@ -50,7 +50,7 @@ end
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
 
 -- This is used later as the default terminal and editor to run.
-terminal = "xterm"
+terminal = "st"
 editor = os.getenv("EDITOR") or "vim"
 editor_cmd = terminal .. " -e " .. editor
 
@@ -70,9 +70,9 @@ awful.layout.layouts = {
     awful.layout.suit.tile.top,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
+    awful.layout.suit.spiral,
     -- awful.layout.suit.max.fullscreen,
     -- awful.layout.suit.floating,
-    -- awful.layout.suit.spiral,
     -- awful.layout.suit.spiral.dwindle,
     -- awful.layout.suit.magnifier,
     -- awful.layout.suit.corner.nw,
@@ -110,54 +110,50 @@ menubar.utils.terminal = terminal -- Set the terminal for applications that requ
 -- vicious.register(widget_name, format, intervals)
 
 -- Network widget
+wifi_icon = wibox.widget.textbox("  ")
 net_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.net)
-vicious.register(net_widget, vicious.widgets.net, "  ${wlan0 up_kb}Kbps/ ${wlan0 down_kb}Kbps ", 1.5)
+vicious.register(net_widget, vicious.widgets.wifiiw, " ${ssid} ", 1.5, "wlan0")
 
--- Memory widget
-ram_widget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.mem)
-vicious.register(ram_widget, vicious.widgets.mem, "  $1% ", 1.5)
-ram_widget:buttons(awful.util.table.join(
+-- Sound widget
+sound_icon = wibox.widget.textbox("  ")
+vol_widget = wibox.widget.textbox()
+vicious.register(vol_widget, vicious.widgets.volume,
+        function(widget, args)
+        if args[2] == "♩" then 
+            return '<span color="#F2241F"><b> </b>' .. args[2] .. '</span>'
+        else 
+            return " " .. args[1] .. "% "
+        end
+        end,
+   1, "Master")
+
+-- CPU widget
+tacho_icon = wibox.widget.textbox("  ")
+cpu_widget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.cpu)
+vicious.register(cpu_widget, vicious.widgets.cpu, " $1% ", 1.5)
+cpu_widget:buttons(awful.util.table.join(
     awful.button({}, 1, function() --left click 
-        awful.spawn("xterm -e htop")
+        awful.spawn(terminal .. " -e htop")
     end)
 ))
 
--- CPU widget
-cpu_widget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.cpu)
-vicious.register(cpu_widget, vicious.widgets.cpu, "  $1% ", 1.5)
-cpu_widget:buttons(awful.util.table.join(
+-- Memory widget
+ram_icon = wibox.widget.textbox("  ")
+ram_widget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.mem)
+vicious.register(ram_widget, vicious.widgets.mem, " $1% ", 1.5)
+ram_widget:buttons(awful.util.table.join(
     awful.button({}, 1, function() --left click 
-        awful.spawn("xterm -e htop")
+        awful.spawn(terminal .. " -e htop")
     end)
 ))
 
 -- Date widget
+cal_icon = wibox.widget.textbox("  ")
 date_widget = wibox.widget.textbox()
-vicious.register(date_widget, vicious.widgets.date, "  %a %b %d  %H:%M ", 1.5)
-
--- Volume widget
-local soundw = wibox.widget{
-    markup = '',
-    align  = 'center',
-    valign = 'center',
-    font = 'Hack Nerd Font 10',
-    widget = wibox.widget.textbox
-}
-vol_widget = wibox.widget.textbox()
-volwrapper = wibox.widget.background()
-vicious.register(vol_widget, vicious.widgets.volume,
-        function(widget, args)
-        if args[2] == "♩" then 
-            return '<span color="#f2241f">  <b> </b>' .. args[2] .. '</span>'
-        else 
-            return " " .. args[1] .. "%"
-        end
-        end,
-   1, "Master")
---volwrapper:set_widget(vol_widget)
+vicious.register(date_widget, vicious.widgets.date, " %a %b %d %H:%M ", 1.5)
 
 -- Create a wibox for each screen and add it
 local taglist_buttons = gears.table.join(
@@ -178,20 +174,20 @@ local taglist_buttons = gears.table.join(
 )
 
 local tasklist_buttons = gears.table.join(
-	awful.button({ }, 1, function(c)
+	awful.button({}, 1, function(c)
 		if c == client.focus then
 			c.minimized = true
 		else
 			c:emit_signal("request::activate", "tasklist", {raise = true})
 		end
 	end),
-	awful.button({ }, 3, function()
-		awful.menu.client_list({ theme = { width = 250 } })
+	awful.button({}, 3, function()
+		awful.menu.client_list({theme = {width = 250}})
 		end),
-	awful.button({ }, 4, function()
+	awful.button({}, 4, function()
 		awful.client.focus.byidx(1)
 		end),
-	awful.button({ }, 5, function()
+	awful.button({}, 5, function()
 		awful.client.focus.byidx(-1)
 		end))
 
@@ -231,9 +227,6 @@ awful.screen.connect_for_each_screen(function(s)
     s.mytaglist = awful.widget.taglist {
         screen  = s,
         filter  = awful.widget.taglist.filter.all,
-		--style   = {
-		--	shape = gears.shape.rectangle,
-		--},
 		widget_template = {
 			{
 				layout = wibox.layout.align.horizontal,
@@ -243,18 +236,16 @@ awful.screen.connect_for_each_screen(function(s)
 						{
 							id = 'text_role',
 							align = "center",
-							-- top = 5,
 							widget = wibox.widget.textbox
 						},
-						--left = 3,
-						top = 6,
+						top = 4,
 						widget = wibox.container.margin
 					},
 					{
 						{
 							left = 12,
 							right = 12,
-							top = 5,
+							top = 3,
 							widget = wibox.container.margin
 						},
 						id = 'overline',
@@ -262,10 +253,7 @@ awful.screen.connect_for_each_screen(function(s)
 						shape = gears.shape.rectangle,
 						widget = wibox.container.background
 					}
-				},
-				left = 1,
-				right = 1,
-				widget = wibox.container.margin
+				}
 			},
 			id = 'background_role',
 			widget = wibox.container.background,
@@ -317,81 +305,152 @@ awful.screen.connect_for_each_screen(function(s)
         layout = wibox.layout.align.horizontal,
         { -- Left widgets
             layout = wibox.layout.fixed.horizontal,
-			{
-				mylauncher,
-				right = 5,
-				layout = wibox.container.margin
-			},
+			mylauncher,
 			{
 				s.mytaglist,
+				left = 5,
 				right = 5,
-				layout = wibox.container.margin
+				layout = wibox.container.margin,
 			},
             s.mypromptbox,
         },
-
-        s.mytasklist, -- Middle widget
+		{ -- Middle tasklist
+            layout = wibox.layout.flex.horizontal,
+			{
+				s.mytasklist, -- Middle widget
+				top = 2,
+				bottom = 2,
+				layout = wibox.container.margin
+			}
+		},
 
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
             wibox.widget.systray(),
+			{ -- {{ Wi-Fi
+				{
+					wifi_icon,
+					fg = "#303030",
+					bg = "#FFB449",
+					widget = wibox.container.background
+				},
+				top = 2,
+				bottom = 2,
+				left = 5,
+				layout = wibox.container.margin
+			},
 			{
 				{
 					net_widget,
-					bottom = 2,
-					color = beautiful.bg_focus,
-					widget = wibox.container.margin
+					fg = "#FFB449",
+					color = beautiful.fg_widget,
+					widget = wibox.container.background
 				},
-				left = 5,
 				right = 5,
-				forced_width = 190,
+				top = 2,
+				bottom = 2,
+				forced_width = 70,
+				layout = wibox.container.margin,
+			}, -- }}
+			{ -- {{ Volume
+				{
+					sound_icon,
+					fg = "#303030",
+					bg = "#FDFD97",
+					widget = wibox.container.background
+				},
+				top = 2,
+				bottom = 2,
 				layout = wibox.container.margin
 			},
 			{
 				{
 					vol_widget,
-					bottom = 2,
-					color = beautiful.bg_focus,
-					widget = wibox.container.margin
+					fg = "#FDFD97",
+					bg = "#303030",
+					color = beautiful.fg_widget,
+					widget = wibox.container.background
 				},
-				left = 5,
+				forced_width = 55,
 				right = 5,
-				forced_width = 65,
+				top = 2,
+				bottom = 2,
+				layout = wibox.container.margin
+			}, -- }}
+			{ -- {{ CPU
+				{
+					tacho_icon,
+					fg = "#303030",
+					bg = "#98C379",
+					widget = wibox.container.background
+				},
+				top = 2,
+				bottom = 2,
 				layout = wibox.container.margin
 			},
 			{
 				{
 					cpu_widget,
-					bottom = 2,
-					color = beautiful.bg_focus,
-					widget = wibox.container.margin
+					fg = "#98C379",
+					--bg = "#303030",
+					color = beautiful.fg_widget,
+					widget = wibox.container.background
 				},
-				forced_width = 70,
+				forced_width = 45,
 				right = 5,
+				top = 2,
+				bottom = 2,
+				layout = wibox.container.margin
+			}, -- }}
+			{ -- {{ RAM
+				{
+					ram_icon,
+					fg = "#303030",
+					bg = "#61AFEF",
+					widget = wibox.container.background
+				},
+				top = 2,
+				bottom = 2,
 				layout = wibox.container.margin
 			},
 			{
 				{
 					ram_widget,
-					bottom = 2,
-					color = beautiful.bg_focus,
-					widget = wibox.container.margin
+					fg = "#61AFEF",
+					bg = "#303030",
+					color = beautiful.fg_widget,
+					widget = wibox.container.background
 				},
-				forced_width = 70,
+				forced_width = 45,
 				right = 5,
+				top = 2,
+				bottom = 2,
+				layout = wibox.container.margin
+			}, -- }}
+			{ -- {{ Datetime
+				{
+					cal_icon,
+					fg = "#303030",
+					bg = "#C678DD",
+					widget = wibox.container.background
+				},
+				top = 2,
+				bottom = 2,
 				layout = wibox.container.margin
 			},
 			{
 				{
 					date_widget,
-					bottom = 2,
-					color = beautiful.bg_focus,
-					widget = wibox.container.margin
+					fg = "#C678DD",
+					color = beautiful.fg_widget,
+					widget = wibox.container.background
 				},
 				right = 5,
+				top = 2,
+				bottom = 2,
 				layout = wibox.container.margin
-			},
-            s.mylayoutbox,
+			}, -- }}
+            s.mylayoutbox
         }
     }
 end)
@@ -478,6 +537,19 @@ globalkeys = gears.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
+
+	-- Volume
+	awful.key({}, "XF86AudioLowerVolume", 
+              function () 
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%") 
+              end,{description = "Decrease sound volume", group = "launcher"}),
+    awful.key({}, "XF86AudioRaiseVolume", 
+              function () 
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 +5%") 
+              end,{description = "Increase sound volume", group = "launcher"}),
+    awful.key({}, "XF86AudioMute", 
+              function () awful.util.spawn_with_shell("pactl set-sink-mute 0 toggle")
+              end,{description = "Mute sound", group = "launcher"}),
 
     -- Prompt
     awful.key({modkey}, "r", function () awful.spawn("rofi -show run") end,

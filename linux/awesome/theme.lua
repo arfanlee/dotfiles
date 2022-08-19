@@ -11,12 +11,12 @@ local themes_path = gfs.get_themes_dir()
 
 local theme = {}
 
-theme.font          = "Hack Nerd Font 10"
+theme.font          = "JetBrains Mono 10"
 
 theme.bg_normal     = "#222222" -- greyish
-theme.bg_focus      = "#51DFFF" -- cyan
+theme.bg_focus      = "#789FCC" -- dark blue pastel
 theme.bg_urgent     = "#C34043"
-theme.bg_minimize   = "#51DFFF50"
+theme.bg_minimize   = "#AFC9CF"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#DCD7BA"
@@ -34,6 +34,8 @@ theme.border_marked = theme.bg_normal
 theme.tasklist_disable_icon = true
 theme.tasklist_plain_task_name = true
 
+-- theme.taglist_bg_empty = "#222222"
+-- theme.taglist_bg_occupied = "#222222"
 theme.taglist_bg_focus = "#444444"
 theme.taglist_fg_focus = theme.bg_focus
 
@@ -51,10 +53,10 @@ theme.taglist_fg_focus = theme.bg_focus
 -- Generate taglist squares:
 local taglist_square_size = dpi(5)
 theme.taglist_squares_sel = theme_assets.taglist_squares_sel(
-    taglist_square_size, theme.fg_normal
+    taglist_square_size, theme.bg_focus
 )
 theme.taglist_squares_unsel = theme_assets.taglist_squares_unsel(
-    taglist_square_size, theme.fg_normal
+    taglist_square_size, theme.bg_focus
 )
 
 -- Variables set for theming notifications:
@@ -74,7 +76,7 @@ theme.menu_width  = dpi(150)
 -- You can add as many variables as
 -- you wish and access them by using
 -- beautiful.variable in your rc.lua
--- theme.bg_widget = "#cc0000"
+-- theme.fg_widget = "#FF000D"
 
 -- Define the image to load
 theme.titlebar_close_button_normal = themes_path.."default/titlebar/close_normal.png"
@@ -129,7 +131,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 -- theme.icon_theme = 'Papirus-Dark'
--- theme.wallpaper = "~/wallpapers/planets.jpg"
+theme.wallpaper = themes_path.."default/background.png"
 
 return theme
 
