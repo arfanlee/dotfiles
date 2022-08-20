@@ -1,16 +1,16 @@
 configuration {
-  display-drun: "Applications";
+  display-drun: "";
   display-window: "Windows";
   drun-display-format: "{name}";
-  font: "JetBrainsMono Nerd Font Medium 12";
-  modi: "window,run,drun";
+  font: "JetBrainsMono 10";
+  modi: "window,run,drun,filebrowser";
 }
 
 @theme "/dev/null"
 
 * {
   bg-normal: #222222;
-  bg-focus: #789FCC;
+  bg-focus: #1177AA;
 
   fg-normal: @bg-focus;
   fg-focus: #DCD7BA;
@@ -24,21 +24,23 @@ configuration {
 }
 
 window {
-  width: 35%;
+  width: 30%;
 }
 
 prompt {
-  background-color: @bg-focus;
-  text-color: @bg-normal;
+  background-color: #555555;
+  text-color: @fg-focus;
   enabled: true;
-  padding: 8 8 0 8;
+  padding: 8;
+  border: 8 0 8 8;
 }
 
 entry {
-  background-color: @bg-normal;
-  padding: 8;
-  border: 2 2 2 0;
-  border-color: @bg-focus;
+  placeholder: "Type here...";
+  placeholder-color: #999999;
+  background-color: #555555;
+  padding: 8 8 8 0;
+  border: 8 8 8 0;
   text-color: @fg-focus;
 }
 
@@ -47,22 +49,20 @@ inputbar {
 }
 
 listview {
-  padding: 8 0;
   background-color: @bg-normal;
-  columns: 1;
-  lines: 5;
+  columns: 2;
+  lines: 8;
 }
 
 element {
-  padding: 8 0 8 8;
+  padding: 8;
+  border: 0 8 8 8;
   text-color: @fg-focus;
 }
 
 element selected {
-  border : 0 0 4 0;
-  border-color: @bg-focus;
-  background-color: #444444;
-  text-color: @bg-focus;
+  background-color: @bg-focus;
+  text-color: @bg-normal;
 }
 
 element-text {
