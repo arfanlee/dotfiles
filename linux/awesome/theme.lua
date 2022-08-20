@@ -14,9 +14,9 @@ local theme = {}
 theme.font          = "JetBrains Mono 10"
 
 theme.bg_normal     = "#222222" -- greyish
-theme.bg_focus      = "#789FCC" -- dark blue pastel
+theme.bg_focus      = "#1177AA" -- dark blue pastel
 theme.bg_urgent     = "#C34043"
-theme.bg_minimize   = "#AFC9CF"
+theme.bg_minimize   = "#789FCC"
 theme.bg_systray    = theme.bg_normal
 
 theme.fg_normal     = "#DCD7BA"
@@ -36,7 +36,7 @@ theme.tasklist_plain_task_name = true
 
 -- theme.taglist_bg_empty = "#222222"
 -- theme.taglist_bg_occupied = "#222222"
-theme.taglist_bg_focus = "#444444"
+theme.taglist_bg_focus = theme.bg_normal
 theme.taglist_fg_focus = theme.bg_focus
 
 -- There are other variable sets
@@ -131,7 +131,7 @@ theme.awesome_icon = theme_assets.awesome_icon(
 -- Define the icon theme for application icons. If not set then the icons
 -- from /usr/share/icons and /usr/share/icons/hicolor will be used.
 -- theme.icon_theme = 'Papirus-Dark'
-theme.wallpaper = themes_path.."default/background.png"
+theme.wallpaper = "~/wallpapers/planets.jpg"
 
 return theme
 
