@@ -50,7 +50,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-set guifont=Hack\ NF:h14
+set guifont=JetBrains\ Mono:h12
 set number
 set relativenumber
 set cursorline
@@ -78,21 +78,22 @@ let g:lightline.component_function = {'filetype': 'MyFiletype', 'fileformat': 'M
 let g:lightline.tab = {'active':['filename', 'modified'], 'inactive': ['filename', 'modified'] }
 
 " NERDTRee
-let g:NERDTreeMinimalUI=1
+let g:NERDTreeMinimalUI = 1
+let g:NERDTreeShowHidden = 1
 let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeDirArrowCollapsible = ''
 
 " Built in :nohls macro key = <C-l>
 
 " To open new tab without entering the command
-nnoremap <silent> te :tabedit .<Return>
+nnoremap <silent> <C-t> :tabedit .<Return>
 
 " To change tabs in vim
 nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
 " To close current tab
-nnoremap <silent> tc :tabclose<Return> 
+nnoremap <silent> <C-w> :tabclose<Return> 
 
 " Open buffer
 nnoremap <S-b> :b<Space>
