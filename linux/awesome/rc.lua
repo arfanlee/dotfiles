@@ -254,7 +254,7 @@ awful.screen.connect_for_each_screen(function(s)
 				if focused then -- when tag is selected
 					self:get_children_by_id("underline")[1].bg = beautiful.bg_focus
 				else 
-					self:get_children_by_id("underline")[1].bg = "#00FFFFFF" -- transparent
+					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
 			end,
 			update_callback = function(self, c3, index, objects)
@@ -268,7 +268,7 @@ awful.screen.connect_for_each_screen(function(s)
 				if focused then
 					self:get_children_by_id("underline")[1].bg = beautiful.bg_focus
 				else 
-					self:get_children_by_id("underline")[1].bg = "#00FFFFFF" -- transparent
+					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
 			end
 		},
