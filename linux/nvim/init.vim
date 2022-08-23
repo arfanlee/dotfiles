@@ -63,7 +63,7 @@ set hidden
 set noshowmode
 set mouse=a
 set nowrap
-set clipboard+=unnamedplus
+set clipboard^=unnamed,unnamedplus
 
 " Neovide
 let g:neovide_remember_window_size=v:true
