@@ -42,9 +42,26 @@ Section "ServerLayout"
 EndSection
 ```
 
+## Touchpad
+
+> If you're using a window manager on a laptop, your touchpad might don't have tap-to-click and the two finger scrolling isn't natural (e.g: swipe up to scroll up instead of swipe up to scroll down and vice versa). Paste the script below into `/etc/X11/xorg.conf.d/40-libinput.conf`.
+
+```
+Section "InputClass"
+        Identifier "touchpad"
+        MatchIsTouchpad "on"
+        Driver "libinput"
+		Option "Tapping" "on"
+		Option "NaturalScrolling" "true"
+EndSection
+```
+
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
 
+- alsa
+- alsa-utils
+- pipewire
 - curl *(some distros don't have it pre-installed)*
 - [preload](https://wiki.archlinux.org/title/Preload)
 - neofetch
