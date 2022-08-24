@@ -27,15 +27,38 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-untracked
 
 zstyle ':vcs_info:*' check-for-changes true
 # zstyle ':vcs_info:git:*' formats " %r/%S %b %m%u%c "
-zstyle ':vcs_info:git:*' formats " %{$fg[blue]%}【(%{$fg[red]%}%m%u%c%{$fg[yellow]%}%{$fg[magenta]%} %b%{$fg[blue]%}】)"
+zstyle ':vcs_info:git:*' formats " %F{blue}【(%F{red}%m%u%c%F{yellow}%F{magenta} %b%F{blue}】)"
 
 # format our main prompt for hostname current folder, and permissions.
-#PROMPT="%B%{$fg[blue]%}[%{$fg[white]%}%n%{$fg[red]%}@%{$fg[white]%}%m%{$fg[blue]%}] %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$reset_color%}"
-#PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M %{$fg[magenta]%}%~%{$fg[red]%}]%{$reset_color%}$%b "
-#PROMPT="%B%{$fg[red]%}[%{$fg[yellow]%}%n%{$fg[green]%}@%{$fg[blue]%}%M%{$fg[red]%}]%{$fg[magenta]%}%~%{$reset_color%}$%b"
-PROMPT="%B%{$fg[blue]%}[%{$fg[red]%}%n%{$fg[yellow]%}@%{$fg[white]%}%M %(?:%{$fg_bold[green]%}➜ :%{$fg_bold[red]%}➜ )%{$fg[cyan]%}%c%{$fg[blue]%}]%{$reset_color%}$%b"
 # PROMPT="%{$fg[green]%}%n@%m %~ %{$reset_color%}%#> "
+PROMPT="%B%F{blue}[%F{red}%n%F{yellow}@%F{white}%M %(?:%F{green}➜ :%F{red}➜ )%F{cyan}%c%F{blue}]%{$reset_color%}$%b"
 PROMPT+="\$vcs_info_msg_0_ "
+
+function preexec() {
+	timer=$(date +%s%3N)
+}
+
+function precmd() {
+	if [ $timer ]; then
+		now=$(date +%s%3N)
+		diff_time=$(($now-$timer))
+		if [[ $diff_time -gt 3000 ]] then
+			d_s=$((diff_time / 1000))
+			s=$((d_s % 60))
+			m=$(((d_s / 60) % 60))
+			h=$((d_s / 3600))
+			if ((h > 0)); then elapsed=${h}h${m}m
+			elif ((m > 0)); then elapsed=${m}m${s}s
+			else elapsed=${s}s
+			fi
+			RPROMPT="%B %(?:%F{green} :%F{red} )% %F{yellow}${elapsed}% %F{magenta} at %D{%H:%M:%S}% %b"
+			unset timer
+    	fi
+	else
+		RPROMPT="%B %(?:%F{green} :%F{red} )% %F{magenta}at %D{%H:%M:%S}% %b"
+	fi
+}
+
 # TODO look into this for more colors
 # https://stevelosh.com/blog/2010/02/my-extravagant-zsh-prompt/
 # also ascii escape codes

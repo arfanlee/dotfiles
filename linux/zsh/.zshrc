@@ -1,10 +1,15 @@
 # To make sure zsh does not copy what is selected automatically
 zle_highlight=('paste:none')
 
+# Add new path
 export PATH=$PATH:~/.local/bin
 
 # Need to install the_silver_searcher
 export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g "" --depth 10' 
+
+# Setting default apps
+export EDITOR="nvim"
+export BROWSER="firefox"
 
 # For tabbing box auto-completion
 autoload -Uz compinit
