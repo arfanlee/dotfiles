@@ -22,7 +22,7 @@ fc-cache -vf
 
 ## Display Power Management Signaling
 
->In case you're not using a desktop environment, you're most likely had Xorg [DPMS](https://wiki.archlinux.org/title/Display_Power_Management_Signaling) default settings (if you're using X11) and there is no GUI settings for it. Paste the script below into `/etc/X11/xorg.conf.d/10-monitor.conf` (need root permission), and change the values accordingly.
+> In case you're not using a desktop environment, you're most likely had Xorg [DPMS](https://wiki.archlinux.org/title/Display_Power_Management_Signaling) default settings (if you're using X11) and there is no GUI settings for it. Paste the script below into `/etc/X11/xorg.conf.d/10-monitor.conf` (need root permission), and change the values accordingly.
 
 ```
 Section "Monitor"
@@ -45,6 +45,7 @@ EndSection
 ## Touchpad
 
 > If you're using a window manager on a laptop, your touchpad might don't have tap-to-click and the two finger scrolling isn't natural (e.g: swipe up to scroll up instead of swipe up to scroll down and vice versa). Paste the script below into `/etc/X11/xorg.conf.d/40-libinput.conf`.
+*Make sure `xf86-input-libinput is installed`*
 
 ```
 Section "InputClass"
@@ -62,14 +63,18 @@ Additional applications to install on Linux depending on which distro you're usi
 - [apt-transport-https](https://manpages.ubuntu.com/manpages/bionic/man1/apt-transport-https.1.html) *(if you're on Debian distro)*
 - [preload](https://wiki.archlinux.org/title/Preload)
 - [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
-- alsa
-- alsa-utils
+- alsa *(soundcard driver)*
+- alsa-utils *(alsa's command-line utilizer/controller)*
 - autojump
 - curl *(some distros don't have it pre-installed)*
+- fe (minimal terminal image viewer)
 - fzf
 - gnupg
 - htop
-- neofetch
+- neofetch *(Linux ricer's fav command)*
 - pipewire
-- ranger
+- pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
+- ranger *(terminal file explorer)*
+- ueberzug *(in case w3m doesn't work (need to change the default image preview [ranger config](https://wiki.archlinux.org/title/ranger#Configuration) a bit)*
+- w3m *(needed to have image preview in ranger)*
 - xclip *(needed for clipboard on non DE)*
