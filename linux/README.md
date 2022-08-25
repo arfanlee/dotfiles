@@ -59,14 +59,17 @@ EndSection
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
 
+- [apt-transport-https](https://manpages.ubuntu.com/manpages/bionic/man1/apt-transport-https.1.html) *(if you're on Debian distro)*
+- [preload](https://wiki.archlinux.org/title/Preload)
+- [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
 - alsa
 - alsa-utils
-- pipewire
+- autojump
 - curl *(some distros don't have it pre-installed)*
-- [preload](https://wiki.archlinux.org/title/Preload)
-- neofetch
-- htop
-- gnupg
 - fzf
-- [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
-- [apt-transport-https](https://manpages.ubuntu.com/manpages/bionic/man1/apt-transport-https.1.html) *(if you're on Debian distro)*
+- gnupg
+- htop
+- neofetch
+- pipewire
+- ranger
+- xclip *(needed for clipboard on non DE)*
