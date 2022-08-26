@@ -1,9 +1,24 @@
+Xft.dpi: 96
+Xft.antialias: true
+Xft.hinting: true
+Xft.rgba: rgb
+Xft.autohint: true
+Xft.hintstyle: hintfull
+Xft.lcdfilter: lcdfilter
+
+! Every shell is a login shell by default (for inclusion of all necessary environment variables)
+XTerm*loginshell: true
+
 ! ## Add colour support
 XTerm.termName: xterm-256color
 
 ! ## Font
-XTerm*faceName: Hack Nerd Font
-XTerm*faceSize: 10
+XTerm*renderFont: True
+XTerm*faceName: xft:JetBrains Mono:size=12
+
+XTerm*faceSize: 12
+XTerm*utf8: 2
+XTerm*locale: true
 
 ! VT Font Menu: Unreadable
 XTerm*faceSize1: 8
@@ -45,14 +60,52 @@ XTerm*trimSelection: true
 XTerm*.backarrowKey: false
 
 ! KeyBindings
-XTerm*vt100.translations: #override \n\
-	Ctrl <Key>-: smaller-vt-font \n\
-	Ctrl <Key>+: larger-vt-font \n\
+XTerm.vt100.Translations: #override \n\
+	Ctrl <Key>-: smaller-vt-font() \n\
+	Ctrl <Key>=: larger-vt-font() \n\
 	Ctrl <Key>0: set-vt-font(d) \n\
-	Ctrl <Key>C: copy-selection(CLIPBOARD) \n\
-	Ctrl <Key>V: insert-selection(CLIPBOARD)
+	Ctrl Shift <Key>C: copy-selection(CLIPBOARD) \n\
+	Ctrl Shift <Key>V: insert-selection(CLIPBOARD)
 
 ! Colour themes
 XTerm*title: XTerminal
-XTerm*background: #2b2c34
+XTerm*background: #1e2127
 XTerm*foreground: #abb2bf
+
+! top is bright, below is normal
+! black
+*.color0:       #1e2127
+*.color8:       #5c6370
+
+! red
+*.color1:       #e06c75
+*.color9:       #e06c75
+
+! green
+*.color2:       #98c379
+*.color10:      #98c379
+
+! yellow
+*.color3:       #d19a66
+*.color11:      #d19a66
+
+! blue
+*.color4:       #61afef
+*.color12:      #61afef
+
+! magenta
+*.color5:       #c678dd
+*.color13:      #c678dd
+
+! cyan
+*.color6:       #56b6c2
+*.color14:      #56b6c2
+
+! white
+*.color7:      #828791
+*.color15:     #e6efff
+
+! SXIV configs
+Sxiv.foreground:	#bbc2cf
+Sxiv.background:	#222222
+Sxiv.font:	Ubuntu:style=bold:size=11
