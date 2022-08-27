@@ -182,7 +182,9 @@ ram_widget:buttons(awful.util.table.join(
 -- Date widget
 cal_icon = wibox.widget.textbox("  ")
 date_widget = wibox.widget.textbox()
-vicious.register(date_widget, vicious.widgets.date, " %a %b %d %H:%M ", 1.5)
+vicious.register(date_widget, vicious.widgets.date, " %H:%M:%S", 1)
+date_pop = awful.widget.calendar_popup.month({long_weekdays=true, start_sunday=true, margin=10})
+date_pop:attach(date_widget, "tr")
 
 local function set_wallpaper(s)
     -- Wallpaper
@@ -321,7 +323,6 @@ awful.screen.connect_for_each_screen(function(s)
 
         { -- Right widgets
             layout = wibox.layout.fixed.horizontal,
-            wibox.widget.systray(),
 			{ -- {{ Wi-Fi
 				{
 					wifi_icon,
@@ -362,7 +363,6 @@ awful.screen.connect_for_each_screen(function(s)
 				{
 					vol_widget,
 					fg = "#FDFD97",
-					bg = "#303030",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -411,7 +411,6 @@ awful.screen.connect_for_each_screen(function(s)
 				{
 					ram_widget,
 					fg = "#61AFEF",
-					bg = "#303030",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -444,6 +443,14 @@ awful.screen.connect_for_each_screen(function(s)
 				bottom = 2,
 				layout = wibox.container.margin
 			}, -- }}
+			{
+				wibox.widget.systray(),
+				top = 2,
+				bottom = 2,
+				left = 5,
+				right = 5,
+				layout = wibox.container.margin
+			},
             s.my_layoutbox
         }
     }
@@ -501,6 +508,8 @@ global_keys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({my_modkey}, "b", function() awful.spawn(my_browser) end,
               {description = "open a web browser", group = "launcher"}),
+    awful.key({my_modkey}, "m", function() awful.spawn(my_terminal .. " -e ranger") end,
+              {description = "launch terminal based file manager", group = "launcher"}),
     awful.key({my_modkey, "Control"}, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({my_modkey, "Shift"}, "q", awesome.quit,
@@ -570,7 +579,7 @@ clientkeys = gears.table.join(
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
-    awful.key({my_modkey, "Shift"}, "c", function (c) c:kill() end,
+    awful.key({my_modkey}, "q", function (c) c:kill() end,
               {description = "close", group = "client"}),
     awful.key({my_modkey, "Control"}, "space",  awful.client.floating.toggle,
               {description = "toggle floating", group = "client"}),
@@ -690,7 +699,7 @@ awful.rules.rules = {
                     keys = clientkeys,
                     buttons = clientbuttons,
                     screen = awful.screen.preferred,
-                    placement = awful.placement.no_overlap+awful.placement.no_offscreen,
+                    placement = awful.placement.centered + awful.placement.no_overlap + awful.placement.no_offscreen,
 					size_hints_honor = false
      }
     },
@@ -708,7 +717,7 @@ awful.rules.rules = {
           "Gpick",
           "Kruler",
           "MessageWin",  -- kalarm.
-          "Sxiv",
+		  "Sxiv",
           "Tor Browser", -- Needs a fixed window size to avoid fingerprinting by screen size.
           "Wpa_gui",
           "veromix",
@@ -781,10 +790,7 @@ client.connect_signal("request::titlebars", function(c)
             layout  = wibox.layout.flex.horizontal
         },
         { -- Right
-            awful.titlebar.widget.floatingbutton (c),
             awful.titlebar.widget.maximizedbutton(c),
-            awful.titlebar.widget.stickybutton   (c),
-            awful.titlebar.widget.ontopbutton    (c),
             awful.titlebar.widget.closebutton    (c),
             layout = wibox.layout.fixed.horizontal()
         },
@@ -794,7 +800,7 @@ end)
 
 -- Uncomment for gaps
 beautiful.useless_gap = 5
-beautiful.gap_single_client = false
+beautiful.gap_single_client = true
 
 -- Enable sloppy focus, so that focus follows mouse.
 client.connect_signal("mouse::enter", function(c)
