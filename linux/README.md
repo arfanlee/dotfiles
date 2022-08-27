@@ -10,7 +10,9 @@
 fc-cache -vf
 ```
 
-5. Copy `local.conf` file into `/etc/fonts/` to take for the `JoyPixels` emoji to take affect.
+Extras:
+1. `ttf-vlgothic` for Japanese characters.
+2. `ttf-baekmuk` for Korean characters.
 
 ## X Terminal
 1. Install `xterm`.
@@ -67,7 +69,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - alsa-utils *(alsa's command-line utilizer/controller)*
 - autojump
 - curl *(some distros don't have it pre-installed)*
-- fe (minimal terminal image viewer)
+- feh *(minimal terminal image viewer and background setter)*
 - fzf
 - gnupg
 - htop
@@ -75,6 +77,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - pipewire
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
 - ranger *(terminal file explorer)*
+- sxiv *(less bloated image viewer)*
 - ueberzug *(in case w3m doesn't work (need to change the default image preview [ranger config](https://wiki.archlinux.org/title/ranger#Configuration) a bit)*
 - w3m *(needed to have image preview in ranger)*
 - xclip *(needed for clipboard on non DE)*
