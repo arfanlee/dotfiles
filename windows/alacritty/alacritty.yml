@@ -1,0 +1,107 @@
+env:
+  TERM: xterm-256color
+
+shell:
+  program: "pwsh -nologo"
+
+working_directory: C:\\Users\\User\\
+
+window:
+  title: Alacritty
+
+  position:
+    x: 350
+    y: 150
+
+  dimensions:
+    columns: 105
+    lines: 30
+
+  padding:
+    x: 10
+    y: 10
+  # Startup Mode (changes require restart)
+  startup_mode: Windowed
+  # Values for `startup_mode`:
+  #   - Windowed
+  #   - Maximized
+  #   - Fullscreen
+  decorations: Full
+
+font:
+  normal:
+    family: "JetBrains Mono"
+    style: Regular
+  bold:
+    family: "JetBrains Mono"
+    style: Bold
+  italic:
+    family: "JetBrains Mono"
+    style: Italic
+  bold_italic:
+    family: "JetBrains Mono"
+    style: Bold Italic
+  size: 14.0
+
+# OneDark Theme
+colors:
+  # Default colors
+  primary:
+    background: '0x1e2127'
+    foreground: '0xabb2bf'
+
+  # Normal colors
+  normal:
+    black:   '0x1e2127'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xabb2bf'
+
+  # Bright colors
+  bright:
+    black:   '0x5c6370'
+    red:     '0xe06c75'
+    green:   '0x98c379'
+    yellow:  '0xd19a66'
+    blue:    '0x61afef'
+    magenta: '0xc678dd'
+    cyan:    '0x56b6c2'
+    white:   '0xffffff'
+
+draw_bold_text_with_bright_colors: true
+
+live_config_reload: true
+
+cursor:
+  # Cursor style
+  #
+  # Values for 'style':
+  #   - ▇ Block
+  #   - _ Underline
+  #   - | Beam
+  style:
+    shape: Beam
+    blinking: on
+  # If this is `true`, the cursor will be rendered as a hollow box when the
+  # window is not focused.
+  unfocused_hollow: true
+
+scrolling:
+  history: 10000
+  multiplier: 10
+
+key_bindings:
+  - { key: V,        mods: Control|Shift, action: Paste            }
+  - { key: V,        mods: Control,       action: Paste            }
+  - { key: C,        mods: Control|Shift, action: Copy             }
+  - { key: C,        mods: Control,       action: Copy             }
+  - { key: N,        mods: Command,       action: SpawnNewInstance }
+  - { key: W,        mods: Control|Shift, action: Quit             }
+  - { key: Return,   mods: Alt,           action: ToggleFullscreen }
+  - { key: Plus,     mods: Control,       action: IncreaseFontSize }
+  - { key: Minus,    mods: Control,       action: DecreaseFontSize }
+  - { key: Key0,     mods: Control,       action: ResetFontSize    }
