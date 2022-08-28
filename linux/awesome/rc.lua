@@ -207,9 +207,6 @@ awful.screen.connect_for_each_screen(function(s)
     -- Each screen has its own tag table.
     awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
 
-    -- Create a promptbox for each screen
-    s.my_promptbox = awful.widget.prompt()
-
     -- Create a taglist widget
     s.my_taglist = awful.widget.taglist {
         screen  = s,
@@ -258,6 +255,16 @@ awful.screen.connect_for_each_screen(function(s)
 				else 
 					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
+				self:connect_signal('mouse::enter', function() -- change taglist bg on hover
+					if self.bg ~= beautiful.bg_minimize then
+						self.backup     = self.bg
+						self.has_backup = true
+					end
+					self.bg = beautiful.bg_minimize
+				end)
+				self:connect_signal('mouse::leave', function() -- revert back to normal when mouse left
+					if self.has_backup then self.bg = self.backup end
+				end)
 			end,
 			update_callback = function(self, c3, index, objects)
 				local focused = false
@@ -295,7 +302,7 @@ awful.screen.connect_for_each_screen(function(s)
 
 
     -- Create the wibox
-    s.mywibox = awful.wibar({height = 25, position = "top", screen = s, border_width = 5, border_color = "#00000000"})
+    s.mywibox = awful.wibar({height = 25, position = "top", screen = s})
 
     -- Add widgets to the wibox
     s.mywibox:setup {
@@ -309,7 +316,6 @@ awful.screen.connect_for_each_screen(function(s)
 				right = 5,
 				layout = wibox.container.margin,
 			},
-            s.my_promptbox,
         },
 		{ -- Middle tasklist
             layout = wibox.layout.flex.horizontal,
@@ -558,18 +564,7 @@ global_keys = gears.table.join(
 
     -- Prompt
     awful.key({my_modkey}, "r", function() awful.spawn(my_runner) end,
-              {description = "run rofi", group = "launcher"}),
-
-    awful.key({my_modkey}, "x",
-              function()
-                  awful.prompt.run {
-                    prompt       = "Run Lua code: ",
-                    textbox      = awful.screen.focused().my_promptbox.widget,
-                    exe_callback = awful.util.eval,
-                    history_path = awful.util.get_cache_dir() .. "/history_eval"
-                  }
-              end,
-              {description = "lua execute prompt", group = "awesome"})
+              {description = "run rofi", group = "launcher"})
 )
 
 clientkeys = gears.table.join(
@@ -736,8 +731,8 @@ awful.rules.rules = {
       }, properties = {floating = true}},
 
     -- Add titlebars to normal clients and dialogs
-    {rule_any = {type = {"normal", "dialog"}
-      			}, properties = {titlebars_enabled = false}
+    {rule_any = {type = {"normal", "dialog"}},
+	 properties = {titlebars_enabled = false}
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
