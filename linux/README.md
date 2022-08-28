@@ -62,22 +62,31 @@ EndSection
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
 
-- [apt-transport-https](https://manpages.ubuntu.com/manpages/bionic/man1/apt-transport-https.1.html) *(if you're on Debian distro)*
-- [preload](https://wiki.archlinux.org/title/Preload)
-- [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
 - alsa *(soundcard driver)*
 - alsa-utils *(alsa's command-line utilizer/controller)*
-- autojump
-- curl *(some distros don't have it pre-installed)*
+- [apt-transport-https](https://manpages.ubuntu.com/manpages/bionic/man1/apt-transport-https.1.html) *(if you're on Debian distro)*
+- autojump *(change directory with fewer keystroke)*
+- curl *(to transfer data to/from a web server)*
+- dhcpd *(allows you to be in the internet highway with a plate number (IP))*
 - feh *(minimal terminal image viewer and background setter)*
-- fzf
-- gnupg
-- htop
-- neofetch *(Linux ricer's fav command)*
-- pipewire
+- fuse *(to mount/modify/format securely a virtual filsesystem)*
+- fzf *(to find file you want with just keywords you remember)*
+- gnupg *(encryption for your data and communications)*
+- htop *(command-line task manager)*
+- [iwctl](https://wiki.archlinux.org/title/iwd) *(in case your distro does not support your wifi card)*
+- lightdm *(lightweight display manager)*
+- [ly](https://github.com/fairyglade/ly) *(nerdy minimal display manager)*
+- neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
+- ntfs-3g *(to be able to read/write ntfs file system)*
+- parted *(partition manipulation program)*
+- pipewire *(multimedia handler)*
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
 - ranger *(terminal file explorer)*
 - sxiv *(less bloated image viewer)*
-- ueberzug *(in case w3m doesn't work (need to change the default image preview [ranger config](https://wiki.archlinux.org/title/ranger#Configuration) a bit)*
+- [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
+- timeshift *(if you bricked your Linux system, you can always rollback to your last system backup)*
+- ueberzug *(if w3m doesn't work (need to change the default image preview [ranger config](https://wiki.archlinux.org/title/ranger#Configuration))*
+- unzip *(simple unzipper .zip files)*
 - w3m *(needed to have image preview in ranger)*
 - xclip *(needed for clipboard on non DE)*
+- zip *(simple zipper .zip files)*
