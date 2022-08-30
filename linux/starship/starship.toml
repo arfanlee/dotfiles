@@ -1,0 +1,47 @@
+# Get editor completions based on the config schema
+"$schema" = 'https://starship.rs/config-schema.json'
+
+add_newline = false
+format = """$username$hostname$directory$cmd_duration$fill$all$line_break$character"""
+
+
+# Replace the "❯" symbol in the prompt with "➜"
+[character]
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[➜](bold red)"
+
+[username]
+show_always = true
+style_user = "bold red"
+style_root = "bold blue"
+format =  "[\\[](bold blue)[$user]($style)[@](bold yellow)"
+
+[hostname]
+ssh_only = false
+style = "bold white"
+format =  "[$hostname]($style) "
+
+[directory]
+truncation_length = 1
+style = "bold cyan"
+format = "[$path]($style)[\\]](bold blue) "
+
+[git_branch]
+symbol = "[](bold yellow) "
+
+[cmd_duration]
+format = "took [$duration]($style)"
+
+# create a gap to make left prompt and "right prompt" in one line
+[fill]
+symbol = " "
+
+[aws]
+symbol = "[ ](bold white)"
+
+[python]
+symbol = "[ ](bold green)"
+
+[lua]
+symbol = "[ ](bold purple)"
+
