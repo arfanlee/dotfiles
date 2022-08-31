@@ -9,26 +9,26 @@ configuration {
 @theme "/dev/null"
 
 * {
-  bg-normal: #222222;
-  bg-focus: #1177AA;
+  bg-normal: #1E2127;
+  bg-focus: #7E9CD8;
 
   fg-normal: @bg-focus;
-  fg-focus: #DCD7BA;
+  fg-focus: #ABB2BF;
 
   background-color: @bg-normal;
   
   border: 0;
-  margin: 0;
+  margin: 0 0 2 0;
   padding: 0;
   spacing: 0;
 }
 
 window {
-  width: 30%;
+  width: 35%;
 }
 
 prompt {
-  background-color: #555555;
+  background-color: #2A2A37;
   text-color: @fg-focus;
   enabled: true;
   padding: 8;
@@ -36,9 +36,9 @@ prompt {
 }
 
 entry {
-  placeholder: "Type here...";
+  placeholder: "Search";
   placeholder-color: #999999;
-  background-color: #555555;
+  background-color: #2A2A37;
   padding: 8 8 8 0;
   border: 8 8 8 0;
   text-color: @fg-focus;
@@ -50,13 +50,18 @@ inputbar {
 
 listview {
   background-color: @bg-normal;
-  columns: 2;
+  columns: 1;
   lines: 8;
 }
 
 element {
   padding: 8;
-  border: 0 8 8 8;
+  border: 0 8 0 8;
+  text-color: @fg-focus;
+}
+
+element alternate {
+  background-color: #363646;
   text-color: @fg-focus;
 }
 
