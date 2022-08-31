@@ -140,12 +140,12 @@ local tasklist_buttons = gears.table.join(
 -- vicious.register(widget_name, format/functions, intervals)
 -- Network widget
 wifi_icon = wibox.widget.textbox("  ")
-net_widget = wibox.widget.textbox()
-vicious.cache(vicious.widgets.net)
-vicious.register(net_widget, vicious.widgets.wifiiw, " ${ssid} ", 1.5, "wlan0")
+wifi_widget = wibox.widget.textbox()
+vicious.cache(vicious.widgets.wifiiw)
+vicious.register(wifi_widget, vicious.widgets.wifiiw, " ${ssid} ", 1.5, "wlan0")
 
 -- Sound widget
-sound_icon = wibox.widget.textbox("  ")
+vol_icon = wibox.widget.textbox("  ")
 vol_widget = wibox.widget.textbox()
 vicious.register(vol_widget, vicious.widgets.volume,
         function(widget, args)
@@ -158,7 +158,7 @@ vicious.register(vol_widget, vicious.widgets.volume,
    1, "Master")
 
 -- CPU widget
-tacho_icon = wibox.widget.textbox("  ")
+cpu_icon = wibox.widget.textbox("  ")
 cpu_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
 vicious.register(cpu_widget, vicious.widgets.cpu, " $1% ", 1.5)
@@ -180,7 +180,7 @@ ram_widget:buttons(awful.util.table.join(
 ))
 
 -- Date widget
-cal_icon = wibox.widget.textbox("  ")
+date_icon = wibox.widget.textbox("  ")
 date_widget = wibox.widget.textbox()
 vicious.register(date_widget, vicious.widgets.date, " %H:%M:%S", 1)
 date_pop = awful.widget.calendar_popup.month({long_weekdays=true, start_sunday=true, margin=10})
@@ -256,11 +256,11 @@ awful.screen.connect_for_each_screen(function(s)
 					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
 				self:connect_signal('mouse::enter', function() -- change taglist bg on hover
-					if self.bg ~= beautiful.bg_minimize then
+					if self.bg ~= "#555555" then
 						self.backup     = self.bg
 						self.has_backup = true
 					end
-					self.bg = beautiful.bg_minimize
+					self.bg = "#555555"
 				end)
 				self:connect_signal('mouse::leave', function() -- revert back to normal when mouse left
 					if self.has_backup then self.bg = self.backup end
@@ -332,8 +332,8 @@ awful.screen.connect_for_each_screen(function(s)
 			{ -- {{ Wi-Fi
 				{
 					wifi_icon,
-					fg = "#303030",
-					bg = "#FFB449",
+					fg = beautiful.bg_normal,
+					bg = "#FF9E3B",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -343,8 +343,8 @@ awful.screen.connect_for_each_screen(function(s)
 			},
 			{
 				{
-					net_widget,
-					fg = "#FFB449",
+					wifi_widget,
+					fg = "#FF9E3B",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -356,9 +356,9 @@ awful.screen.connect_for_each_screen(function(s)
 			}, -- }}
 			{ -- {{ Volume
 				{
-					sound_icon,
-					fg = "#303030",
-					bg = "#FDFD97",
+					vol_icon,
+					fg = beautiful.bg_normal,
+					bg = "#E6C384",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -368,7 +368,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				{
 					vol_widget,
-					fg = "#FDFD97",
+					fg = "#E6C384",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -380,9 +380,9 @@ awful.screen.connect_for_each_screen(function(s)
 			}, -- }}
 			{ -- {{ CPU
 				{
-					tacho_icon,
-					fg = "#303030",
-					bg = "#98C379",
+					cpu_icon,
+					fg = beautiful.bg_normal,
+					bg = "#76946A",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -392,7 +392,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				{
 					cpu_widget,
-					fg = "#98C379",
+					fg = "#76946A",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -405,8 +405,8 @@ awful.screen.connect_for_each_screen(function(s)
 			{ -- {{ RAM
 				{
 					ram_icon,
-					fg = "#303030",
-					bg = "#61AFEF",
+					fg = beautiful.bg_normal,
+					bg = "#7E9CD8",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -416,7 +416,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				{
 					ram_widget,
-					fg = "#61AFEF",
+					fg = "#7E9CD8",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -428,9 +428,9 @@ awful.screen.connect_for_each_screen(function(s)
 			}, -- }}
 			{ -- {{ Datetime
 				{
-					cal_icon,
-					fg = "#303030",
-					bg = "#C678DD",
+					date_icon,
+					fg = beautiful.bg_normal,
+					bg = "#957FB8",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -440,7 +440,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				{
 					date_widget,
-					fg = "#C678DD",
+					fg = "#957FB8",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -514,8 +514,9 @@ global_keys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({my_modkey}, "b", function() awful.spawn(my_browser) end,
               {description = "open a web browser", group = "launcher"}),
-    awful.key({my_modkey}, "m", function() awful.spawn(my_terminal .. " -e ranger") end,
-              {description = "launch terminal based file manager", group = "launcher"}),
+    awful.key({my_modkey}, "Print",
+			  function() awful.util.spawn_with_shell("scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png") end,
+              {description = "take a screenshot", group = "launcher"}),
     awful.key({my_modkey, "Control"}, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({my_modkey, "Shift"}, "q", awesome.quit,
