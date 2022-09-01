@@ -13,4 +13,5 @@ New shell: /bin/zsh
 ```
 
 7. Install [lsd](https://github.com/Peltoche/lsd) for lists with icons in terminal.
-8. Restart zsh.
+8. Install [starship](https://starship.rs) to use starship prompt instead of vanilla.
+9. Restart zsh.
