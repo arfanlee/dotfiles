@@ -113,7 +113,7 @@ bindkey '\ew' kill-region                             # [Esc-w] - Kill from the 
 bindkey -s '\el' 'ls\n'                               # [Esc-l] - run command: ls
 bindkey '^r' history-incremental-search-backward      # [Ctrl-r] - Search backward incrementally for a specified string. The string may begin with ^ to anchor the search to the beginning of the line.
 bindkey ' ' magic-space                               # [Space] - don't do history expansion
-
+bindkey -s '^o' 'lfcd\n'  # lfcd quick command
 
 # Edit the current command line in $EDITOR
 autoload -U edit-command-line

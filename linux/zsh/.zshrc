@@ -1,15 +1,7 @@
 # To make sure zsh does not copy what is selected automatically
 zle_highlight=('paste:none')
 
-# Add new path
-export PATH=$PATH:~/.local/bin
-
-# Need to install the_silver_searcher
-export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g "" --depth 10' 
-
-# Setting default apps
-export EDITOR="nvim"
-export BROWSER="firefox"
+source ~/.config/zsh/sources
 
 # For tabbing box auto-completion
 autoload -Uz compinit
@@ -26,11 +18,3 @@ setopt hist_ignore_dups       # ignore duplicated commands history list
 setopt hist_ignore_space      # ignore commands that start with space
 setopt hist_verify            # show command with history expansion to user before running it
 setopt share_history          # share command history data
-
-# Themes/Plugins
-source ~/.config/zsh/completion
-source ~/.config/zsh/key-bindings
-source ~/.config/zsh/prompt
-source ~/.config/zsh/aliases
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh

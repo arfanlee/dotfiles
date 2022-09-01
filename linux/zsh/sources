@@ -1,0 +1,32 @@
+# Themes/Plugins
+source ~/.config/zsh/completion
+source ~/.config/zsh/key-bindings
+source ~/.config/zsh/aliases
+source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/autojump/autojump.zsh
+
+# Uncomment if want to use the vanilla prompt
+#source ~/.config/zsh/prompt
+# Else, use starship prompt
+eval "$(starship init zsh)"
+
+# Add new path
+export PATH=$PATH:~/.local/bin
+
+# Need to install the_silver_searcher
+export FZF_DEFAULT_COMMAND='ag --hidden --ignore .git -f -g "" --depth 10' 
+
+# To avoid ranger from using default configurations
+export RANGER_LOAD_DEFAULT_RC=false
+
+# Setting default apps
+export EDITOR="nvim"
+export BROWSER="firefox"
+export STARSHIP_CONFIG=~/.config/starship/starship.toml
+
+# To change directory using lf
+export LFCD=~/.config/lf/lfcd.sh  #  sourcing lf change dir shell command
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
