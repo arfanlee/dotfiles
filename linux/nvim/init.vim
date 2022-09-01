@@ -1,7 +1,7 @@
 call plug#begin('~/.config/nvim/plugged')
 
 " Icons
-Plug 'ryanoasis/vim-devicons'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " Auto pairs
 Plug 'jiangmiao/auto-pairs'
@@ -17,10 +17,11 @@ Plug 'simrat39/rust-tools.nvim'
 
 " Themes
 Plug 'joshdick/onedark.vim'
-Plug 'projekt0n/github-nvim-theme'
+Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
-Plug 'itchyny/lightline.vim'
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kdheepak/tabline.nvim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf.vim'
@@ -62,26 +63,17 @@ set wildmenu " display menu option with shift/S+shift to select
 set hidden
 set noshowmode
 set mouse=a
-set nowrap
 set clipboard^=unnamed,unnamedplus
 
 " Neovide
 let g:neovide_remember_window_size=v:true
 let g:neovide_cursor_vfx_mode="torpedo"
 
-"Lightline
-let g:lightline = {}
-let g:lightline.colorscheme = 'onedark'
-let g:lightline.separator = {'left': '', 'right': ''}
-let g:lightline.subseparator = {'left': '', 'right': ''}
-let g:lightline.component_function = {'filetype': 'MyFiletype', 'fileformat': 'MyFileformat'}
-let g:lightline.tab = {'active':['filename', 'modified'], 'inactive': ['filename', 'modified'] }
-
 " NERDTRee
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrowExpandable = ' '
+let g:NERDTreeDirArrowCollapsible = ' '
 
 " Built in :nohls macro key = <C-l>
 
@@ -97,6 +89,9 @@ nnoremap <silent> <C-w> :tabclose<Return>
 
 " Open buffer
 nnoremap <S-b> :b<Space>
+" Navigate through buffer
+nnoremap <silent> <C-n> :bn<Return>
+nnoremap <silent> <C-p> :bp<Return>
 
 " Open finder Alt/Meta + f
 nnoremap <silent> <M-f> :Files<Return>
@@ -108,14 +103,7 @@ nnoremap <silent> <C-s> :w<Return>
 " NERDTree Toggle
 nnoremap <silent> <C-f> :NERDTreeToggle<Return>
 
-colorscheme onedark
-
-function! MyFiletype()
-	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
+colorscheme kanagawa
 
 luafile ~/.config/nvim/lua/plugins/cmp-config.lua
+luafile ~/.config/nvim/lua/plugins/theme.lua
