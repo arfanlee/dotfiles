@@ -75,6 +75,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - htop *(command-line task manager)*
 - [iwctl](https://wiki.archlinux.org/title/iwd) *(in case your distro does not support your wifi card)*
 - lightdm *(lightweight display manager)*
+- [lf](https://github.com/gokcehan/lf) *(faster file manager than ranger)*
 - [ly](https://github.com/fairyglade/ly) *(nerdy minimal display manager)*
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
@@ -82,6 +83,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - pipewire *(multimedia handler)*
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
 - ranger *(terminal file explorer)*
+- starship *(cross-platform terminal prompt customizer)*
 - sxiv *(less bloated image viewer)*
 - [the-silver-searcher](https://archlinux.org/packages/community/x86_64/the_silver_searcher/) *(alternative to fzf default command)*
 - timeshift *(if you bricked your Linux system, you can always rollback to your last system backup)*

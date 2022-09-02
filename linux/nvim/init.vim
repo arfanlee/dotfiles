@@ -51,6 +51,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
+colorscheme kanagawa
+
 set guifont=JetBrains\ Mono:h12
 set number
 set relativenumber
@@ -72,10 +74,13 @@ let g:neovide_cursor_vfx_mode="torpedo"
 " NERDTRee
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeDirArrowExpandable = ' '
-let g:NERDTreeDirArrowCollapsible = ' '
+let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = ''
 
 " Built in :nohls macro key = <C-l>
+
+" Delete forward in insert mode
+inoremap <C-d> <Esc>lcw
 
 " To open new tab without entering the command
 nnoremap <silent> <C-t> :tabedit .<Return>
@@ -85,7 +90,7 @@ nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
 " To close current tab
-nnoremap <silent> <C-w> :tabclose<Return> 
+nnoremap <silent> <C-x> :tabclose<Return>
 
 " Open buffer
 nnoremap <S-b> :b<Space>
@@ -102,8 +107,6 @@ nnoremap <silent> <C-s> :w<Return>
 
 " NERDTree Toggle
 nnoremap <silent> <C-f> :NERDTreeToggle<Return>
-
-colorscheme kanagawa
 
 luafile ~/.config/nvim/lua/plugins/cmp-config.lua
 luafile ~/.config/nvim/lua/plugins/theme.lua

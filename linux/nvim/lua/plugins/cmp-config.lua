@@ -108,11 +108,17 @@ cmp.setup.cmdline(':', {
 
 -- Setup lspconfig.
 local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
--- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+-- install pyright via package manager or npm
 require('lspconfig')['pyright'].setup {
 	capabilities = capabilities
 }
+-- install rust-analyzer via package manager or npm
 require('lspconfig')['rust_analyzer'].setup{
 	capabilities = capabilities
 }
+-- install lua-language-server via package manager or npm
+require('lspconfig')['sumneko_lua'].setup{
+	capabilities = capabilities
+}
+-- it's installed via neo(vim) plugin manager in init.vim
 require('rust-tools').setup{}

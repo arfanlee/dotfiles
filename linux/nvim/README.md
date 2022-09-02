@@ -14,10 +14,10 @@ This is a Neo(VIM) configuration of Arfan Lee.
 
 1. Install [neovim](https://github.com/neovim/neovim/) via [package manager](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package) or [build](https://github.com/neovim/neovim/wiki/Installing-Neovim#install-from-package) it yourself.
 2. Put `nvim` folder into `$HOME/.config` (Linux) or into `C:\Users\User\AppData\Local` (Windows).
->(Change the path for vim-plug and lua-config based on the path above or custom.)
+> (Change the path for vim-plug and lua-config based on the path above or custom.)
 3. Install [vim-plug](https://github.com/junegunn/vim-plug).
 `Optional`
->(Check [coc.nvim](https://github.com/neoclide/coc.nvim) for requirements before using it, as it requires [nodejs](https://nodejs.org/en/download/).)
+> (Check [coc.nvim](https://github.com/neoclide/coc.nvim) for requirements before using it, as it requires [nodejs](https://nodejs.org/en/download/).)
 
 Linux
 
