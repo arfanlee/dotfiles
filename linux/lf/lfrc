@@ -1,6 +1,8 @@
 # set colors & icons
 set icons
 
+# to enable border
+set drawbox
 # interpreter for shell commands
 set shell sh
 
@@ -24,6 +26,9 @@ set shellopts '-eu'
 # commands accordingly.
 set ifs "\n"
 
+# mkdir keybind
+map a push %mkdir<space>
+
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
 
@@ -46,7 +51,9 @@ cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
         text/*) $EDITOR $fx;;
-        image/*) setsid -f sxiv-rifle $fx;;
+        image/*) setsid -f sxiv-rifle $f;;
+		video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
+		audio/*) mpv --audio-display=no $f;;
 	*) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -77,6 +84,10 @@ map <delete> delete
 
 # shortcut to folders
 map g/ select /
+map gc cd ~/.config
+
+# set the ctime decrementally
+map sf :{{ set sortby ctime; set reverse; }}
 
 # extract the current file with the right command
 # (xkcd link: https://xkcd.com/1168/)
