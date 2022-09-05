@@ -38,7 +38,15 @@ import XMonad.Util.Run
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "st"
+myTerminal = "st"
+myBrowser = "firefox"
+myScrot = "scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png"
+soundPlayer = "ffplay -nodisp -autoexit"
+shutterSound = " /opt/sys-sounds/cam-shutter.wav"
+
+-- To get number of windows in current workspace
+windowCount :: X (Maybe String)
+windowCount = gets $ Just . show . length . W.integrate' . W.stack . W.workspace . W.current . windowset
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -99,8 +107,8 @@ myBorderWidth   = 2
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#dddddd"
-myFocusedBorderColor = "#ff2357"
+myNormalBorderColor  = "#1F1F28"
+myFocusedBorderColor = "#739CD8"
 
 -- modMask lets you specify which modkey you want to use. The default
 -- is mod1Mask ("left alt").  You may also consider using mod3Mask
@@ -127,6 +135,12 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- launch a terminal
     [ ((modm, xK_Return), spawn $ XMonad.terminal conf),
+
+	-- launch web browser
+    ((modm, xK_b), spawn "firefox"),
+
+	-- screenshot
+    ((modm, xK_Print), spawn (myScrot ++ " && " ++ soundPlayer ++ shutterSound)),
     
     -- volume keys
     ((0, xF86XK_AudioMute), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle"),
@@ -249,7 +263,8 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [className =? "MPlayer"        --> doFloat,
+	[title =? "Mozilla Firefox"     --> doShift ( myWorkspaces !! 1 ),
+     className =? "MPlayer"        --> doFloat,
      className =? "Gimp"           --> doFloat,
      resource  =? "desktop_window" --> doIgnore,
      resource  =? "kdesktop"       --> doIgnore]
@@ -282,19 +297,22 @@ myLogHook = return ()
 --
 -- By default, do nothing.
 myStartupHook = do
-	spawnOnce "~/.fehbg &"  -- set last saved feh wallpaper
+	spawnOnce "$HOME/.fehbg &"  -- set last saved feh wallpaper
 	spawnOnce "greenclip daemon"
 
 ------------------------------------------------------------------------
 -- Command to launch the bar.
 myBar = "xmobar $HOME/.config/xmonad/xmobarrc"
 -- Custom PP, configure it as you like. It determines what is being written to the bar.
-myPP = xmobarPP {ppCurrent = xmobarColor "#429942" "" . wrap "[" "]",
-				 ppVisible = xmobarColor "#429952" "" -- need to set in xmobar
+myPP = xmobarPP {ppCurrent = xmobarColor "#7E9CD8" "" . wrap
+                      ("<box type=Bottom width=2 mb=2 color=#7E9CD8>") "</box>",
+				 ppVisible = xmobarColor "#1F1F28" "",-- need to set in xmobar
+				 ppUrgent = xmobarColor "#C34043" "",
+				 ppExtras  = [windowCount]
 				}
 
 -- Key binding to toggle the gap for the bar.
-toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask, xK_b)
+toggleStrutsKey XConfig {XMonad.modMask = modMask} = (modMask .|. shiftMask, xK_b)
 
 ------------------------------------------------------------------------
 -- Now run xmonad with all the defaults we set up.
