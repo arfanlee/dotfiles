@@ -48,12 +48,16 @@ end
 
 -- {{{ Variable definitions
 -- This is used later as the default terminal, modkey and editor to run.
-my_terminal = "xterm"
-my_browser = "firefox"
-my_runner = "rofi -show drun"
-my_modkey = "Mod4"
-my_editor = os.getenv("EDITOR") or "vim"
-editor_cmd = my_terminal .. " -e " .. my_editor
+local my_terminal = "xterm"
+local my_browser = "firefox"
+local my_clipboard = "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
+local my_runner = "rofi -show drun"
+local my_screencapture = "scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png"
+local my_soundplayer = "ffplay -nodisp -autoexit"
+local shutter_sound = " /opt/sys-sounds/cam-shutter.wav"
+local my_modkey = "Mod4"
+local my_editor = os.getenv("EDITOR") or "nvim"
+local editor_cmd = my_terminal .. " -e " .. my_editor
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 awful.layout.layouts = {
@@ -76,7 +80,7 @@ awful.layout.layouts = {
 }
 
 -- Create a launcher widget and a main menu
-my_awesome_menu = {
+local my_awesome_menu = {
 	{"hotkeys", function() hotkeys_popup.show_help(nil, awful.screen.focused()) end},
     {"manual", my_terminal .. " -e man awesome"},
     {"edit config", editor_cmd .. " " .. awesome.conffile},
@@ -84,12 +88,12 @@ my_awesome_menu = {
     {"quit", function() awesome.quit() end},
 }
  
-my_mainmenu = awful.menu({items = {{"awesome", my_awesome_menu, beautiful.awesome_icon},
+local my_mainmenu = awful.menu({items = {{"awesome", my_awesome_menu, beautiful.awesome_icon},
                                    {"open terminal", my_terminal}
                                   }
                          })
 
-my_launcher = awful.widget.launcher({image = beautiful.awesome_icon,
+local my_launcher = awful.widget.launcher({image = beautiful.awesome_icon,
                                      menu = my_mainmenu})
 
 -- Menubar configuration
@@ -139,27 +143,27 @@ local tasklist_buttons = gears.table.join(
 
 -- vicious.register(widget_name, format/functions, intervals)
 -- Network widget
-wifi_icon = wibox.widget.textbox("  ")
-wifi_widget = wibox.widget.textbox()
+local wifi_icon = wibox.widget.textbox("  ")
+local wifi_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.wifiiw)
 vicious.register(wifi_widget, vicious.widgets.wifiiw, " ${ssid} ", 1.5, "wlan0")
 
 -- Sound widget
-vol_icon = wibox.widget.textbox("  ")
-vol_widget = wibox.widget.textbox()
+local vol_icon = wibox.widget.textbox("  ")
+local vol_widget = wibox.widget.textbox()
 vicious.register(vol_widget, vicious.widgets.volume,
         function(widget, args)
-        if args[2] == "♩" then 
+        if args[2] == "♩" then
             return '<span color="#F2241F"><b> </b>' .. args[2] .. '</span>'
-        else 
+        else
             return " " .. args[1] .. "% "
         end
         end,
    1, "Master")
 
 -- CPU widget
-cpu_icon = wibox.widget.textbox("  ")
-cpu_widget = wibox.widget.textbox()
+local cpu_icon = wibox.widget.textbox("  ")
+local cpu_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
 vicious.register(cpu_widget, vicious.widgets.cpu, " $1% ", 1.5)
 cpu_widget:buttons(awful.util.table.join(
@@ -169,8 +173,8 @@ cpu_widget:buttons(awful.util.table.join(
 ))
 
 -- Memory widget
-ram_icon = wibox.widget.textbox("  ")
-ram_widget = wibox.widget.textbox()
+local ram_icon = wibox.widget.textbox("  ")
+local ram_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.mem)
 vicious.register(ram_widget, vicious.widgets.mem, " $1% ", 1.5)
 ram_widget:buttons(awful.util.table.join(
@@ -180,10 +184,10 @@ ram_widget:buttons(awful.util.table.join(
 ))
 
 -- Date widget
-date_icon = wibox.widget.textbox("  ")
-date_widget = wibox.widget.textbox()
-vicious.register(date_widget, vicious.widgets.date, " %H:%M:%S", 1)
-date_pop = awful.widget.calendar_popup.month({long_weekdays=true, start_sunday=true, margin=10})
+local date_icon = wibox.widget.textbox("  ")
+local date_widget = wibox.widget.textbox()
+vicious.register(date_widget, vicious.widgets.date, " %a, %h %d %H:%M", 1)
+local date_pop = awful.widget.calendar_popup.month({long_weekdays=true, start_sunday=true, margin=10})
 date_pop:attach(date_widget, "tr")
 
 local function set_wallpaper(s)
@@ -205,7 +209,7 @@ awful.screen.connect_for_each_screen(function(s)
     set_wallpaper(s)
 
     -- Each screen has its own tag table.
-    awful.tag({"1", "2", "3", "4", "5", "6", "7", "8", "9"}, s, awful.layout.layouts[1])
+    awful.tag({"1", "2", "3", "4", "5"}, s, awful.layout.layouts[1])
 
     -- Create a taglist widget
     s.my_taglist = awful.widget.taglist {
@@ -239,6 +243,8 @@ awful.screen.connect_for_each_screen(function(s)
 					}
 				}
 			},
+			-- got these underline border hack from
+			-- https://www.reddit.com/r/awesomewm/comments/74a8h2/help_how_to_underline_wibox_widgets/
 			id = 'background_role',
 			widget = wibox.container.background,
 			shape = gears.shape.rectangle,
@@ -252,15 +258,15 @@ awful.screen.connect_for_each_screen(function(s)
 				end
 				if focused then -- when tag is selected
 					self:get_children_by_id("underline")[1].bg = beautiful.bg_focus
-				else 
+				else
 					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
 				self:connect_signal('mouse::enter', function() -- change taglist bg on hover
-					if self.bg ~= "#555555" then
+					if self.bg ~= beautiful.bg_minimize then
 						self.backup     = self.bg
 						self.has_backup = true
 					end
-					self.bg = "#555555"
+					self.bg = beautiful.bg_minimize
 				end)
 				self:connect_signal('mouse::leave', function() -- revert back to normal when mouse left
 					if self.has_backup then self.bg = self.backup end
@@ -276,7 +282,7 @@ awful.screen.connect_for_each_screen(function(s)
 				end
 				if focused then
 					self:get_children_by_id("underline")[1].bg = beautiful.bg_focus
-				else 
+				else
 					self:get_children_by_id("underline")[1].bg = "#FFFFFF00" -- transparent
 				end
 			end
@@ -333,7 +339,7 @@ awful.screen.connect_for_each_screen(function(s)
 				{
 					wifi_icon,
 					fg = beautiful.bg_normal,
-					bg = "#FF9E3B",
+					bg = "#FFA066",
 					widget = wibox.container.background
 				},
 				top = 2,
@@ -344,7 +350,7 @@ awful.screen.connect_for_each_screen(function(s)
 			{
 				{
 					wifi_widget,
-					fg = "#FF9E3B",
+					fg = "#FFA066",
 					color = beautiful.fg_widget,
 					widget = wibox.container.background
 				},
@@ -465,14 +471,15 @@ end)
 
 -- {{{ Mouse bindings
 root.buttons(gears.table.join(
-    awful.button({}, 3, function() my_mainmenu:toggle() end),
-    awful.button({}, 4, awful.tag.viewnext),
-    awful.button({}, 5, awful.tag.viewprev)
+    awful.button({}, 3, function() my_mainmenu:toggle() end)
+	-- mouse scrolling bindings when mouse is not focused on a client
+    -- awful.button({}, 4, awful.tag.viewnext),
+    -- awful.button({}, 5, awful.tag.viewprev)
 ))
 -- }}}
 
 -- {{{ Key bindings
-global_keys = gears.table.join(
+local global_keys = gears.table.join(
     awful.key({my_modkey}, "s", hotkeys_popup.show_help, {description = "show help", group = "awesome"}),
     awful.key({my_modkey}, "Left", awful.tag.viewprev, {description = "view previous", group = "tag"}),
     awful.key({my_modkey}, "Right", awful.tag.viewnext, {description = "view next", group = "tag"}),
@@ -515,8 +522,12 @@ global_keys = gears.table.join(
     awful.key({my_modkey}, "b", function() awful.spawn(my_browser) end,
               {description = "open a web browser", group = "launcher"}),
     awful.key({my_modkey}, "Print",
-			  function() awful.util.spawn_with_shell("scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png") end,
+			  function() awful.util.spawn_with_shell(my_screencapture)
+			  awful.util.spawn_with_shell(my_soundplayer..shutter_sound) end,
               {description = "take a screenshot", group = "launcher"}),
+	awful.key({my_modkey}, "p",
+			   function() awful.util.spawn_with_shell(my_clipboard) end,
+              {description = "launch clipboard manager", group = "launcher"}),
     awful.key({my_modkey, "Control"}, "r", awesome.restart,
               {description = "reload awesome", group = "awesome"}),
     awful.key({my_modkey, "Shift"}, "q", awesome.quit,
@@ -551,15 +562,15 @@ global_keys = gears.table.join(
               {description = "restore minimized", group = "client"}),
 
 	-- Volume
-	awful.key({}, "XF86AudioLowerVolume", 
-              function() 
-                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%") 
+	awful.key({}, "XF86AudioLowerVolume",
+              function()
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%")
               end,{description = "Decrease sound volume", group = "launcher"}),
-    awful.key({}, "XF86AudioRaiseVolume", 
-              function() 
-                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 +5%") 
+    awful.key({}, "XF86AudioRaiseVolume",
+              function()
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 +5%")
               end,{description = "Increase sound volume", group = "launcher"}),
-    awful.key({}, "XF86AudioMute", 
+    awful.key({}, "XF86AudioMute",
               function() awful.util.spawn_with_shell("pactl set-sink-mute 0 toggle")
               end,{description = "Mute sound", group = "launcher"}),
 
@@ -568,7 +579,7 @@ global_keys = gears.table.join(
               {description = "run rofi", group = "launcher"})
 )
 
-clientkeys = gears.table.join(
+local clientkeys = gears.table.join(
     awful.key({my_modkey}, "f",
         function (c)
             c.fullscreen = not c.fullscreen
@@ -662,7 +673,7 @@ for i = 1, 9 do
     )
 end
 
-clientbuttons = gears.table.join(
+local clientbuttons = gears.table.join(
 	-- Left click function
     awful.button({}, 1, function (c)
         c:emit_signal("request::activate", "mouse_click", {raise = true})
@@ -739,6 +750,9 @@ awful.rules.rules = {
     -- Set Firefox to always map on the tag named "2" on screen 1.
     {rule = {class = my_browser},
     properties = {screen = 1, tag = "2"}},
+	-- Set Nemo to map on the named "3" on screen 1
+    {rule = {class = my_browser},
+    properties = {screen = 1, tag = "3"}},
 }
 -- }}}
 
@@ -794,14 +808,17 @@ client.connect_signal("request::titlebars", function(c)
     }
 end)
 
--- Uncomment for gaps
+-- Un/comment for gaps
 beautiful.useless_gap = 5
 beautiful.gap_single_client = true
 
 -- Enable sloppy focus, so that focus follows mouse.
-client.connect_signal("mouse::enter", function(c)
-    c:emit_signal("request::activate", "mouse_enter", {raise = false})
-end)
+--client.connect_signal("mouse::enter", function(c)
+--    c:emit_signal("request::activate", "mouse_enter", {raise = false})
+--end)
+
+-- Start daemons
+awful.util.spawn_with_shell("greenclip daemon")
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
