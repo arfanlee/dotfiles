@@ -77,6 +77,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - lightdm *(lightweight display manager)*
 - [lf](https://github.com/gokcehan/lf) *(faster file manager than ranger)*
 - [ly](https://github.com/fairyglade/ly) *(nerdy minimal display manager)*
+- nemo *(a fork of Nautilus GUI file manager)*
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
 - parted *(partition manipulation program)*
@@ -89,6 +90,8 @@ Additional applications to install on Linux depending on which distro you're usi
 - timeshift *(if you bricked your Linux system, you can always rollback to your last system backup)*
 - ueberzug *(if w3m doesn't work (need to change the default image preview [ranger config](https://wiki.archlinux.org/title/ranger#Configuration))*
 - unzip *(simple unzipper .zip files)*
-- w3m *(needed to have image preview in ranger)*
+- w3m *(optional to have image preview in ranger)*
 - xclip *(needed for clipboard on non DE)*
+- zathura *(vim-like minimal pdf viewer)*
+- zathura-pdf-poppler *(in case zathura needs support)*
 - zip *(simple zipper .zip files)*
