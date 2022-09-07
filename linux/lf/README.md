@@ -23,3 +23,9 @@ You can also bind a key for this command like:
 ```
 bindkey -s '^o' 'lfcd\n'  # zsh
 ```
+
+## Optional dependencies for previwers
+- ueberzug (for images previews)
+- perl-image-exiftool (for music exif previews)
+- poppler (for pdf files previews)
+- zathura (for launching pdf)
