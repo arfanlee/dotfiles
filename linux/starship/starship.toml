@@ -2,13 +2,13 @@
 "$schema" = 'https://starship.rs/config-schema.json'
 
 add_newline = false
-format = """$username$hostname$directory$cmd_duration$fill$all$line_break$character"""
-
+format = """$username$hostname$directory$fill$all$line_break$cmd_duration$character"""
+command_timeout = 1_000
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
-error_symbol = "[➜](bold red)"
+success_symbol = "[❯](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[❯](bold red)"
 
 [username]
 show_always = true
@@ -23,14 +23,15 @@ format =  "[$hostname]($style) "
 
 [directory]
 truncation_length = 1
-style = "bold cyan"
+style = "bold green"
 format = "[$path]($style)[\\]](bold blue) "
 
 [git_branch]
 symbol = "[](bold yellow) "
 
 [cmd_duration]
-format = "took [$duration]($style)"
+# only start printing the took time when a command take longer than 3 seconds
+min_time = 3_000
 
 # create a gap to make left prompt and "right prompt" in one line
 [fill]
