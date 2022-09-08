@@ -14,9 +14,6 @@ local beautiful = require("beautiful")
 local naughty = require("naughty")
 local menubar = require("menubar")
 local hotkeys_popup = require("awful.hotkeys_popup")
--- Enable hotkeys help widget for VIM and other apps
--- when client with a matching name is opened:
-require("awful.hotkeys_popup.keys")
 
 -- Themes define colours, icons, font and wallpapers.
 beautiful.init(gears.filesystem.get_configuration_dir() .. "theme.lua")
@@ -50,6 +47,7 @@ end
 -- This is used later as the default terminal, modkey and editor to run.
 local my_terminal = "xterm"
 local my_browser = "firefox"
+local my_fm = "nemo"
 local my_clipboard = "rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'"
 local my_runner = "rofi -show drun"
 local my_screencapture = "scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png"
@@ -496,6 +494,19 @@ local global_keys = gears.table.join(
         {description = "focus previous by index", group = "client"}),
     awful.key({my_modkey}, "w", function() my_mainmenu:show() end, {description = "show main menu", group = "awesome"}),
 
+	-- Volume
+	awful.key({}, "XF86AudioLowerVolume",
+              function()
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%")
+              end,{description = "Decrease sound volume", group = "awesome"}),
+    awful.key({}, "XF86AudioRaiseVolume",
+              function()
+                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 +5%")
+              end,{description = "Increase sound volume", group = "awesome"}),
+    awful.key({}, "XF86AudioMute",
+              function() awful.util.spawn_with_shell("pactl set-sink-mute 0 toggle")
+              end,{description = "Mute sound", group = "awesome"}),
+
     -- Layout manipulation
     awful.key({my_modkey, "Shift"}, "j", function() awful.client.swap.byidx(1) end,
               {description = "swap with next client by index", group = "client"}),
@@ -521,6 +532,8 @@ local global_keys = gears.table.join(
               {description = "open a terminal", group = "launcher"}),
     awful.key({my_modkey}, "b", function() awful.spawn(my_browser) end,
               {description = "open a web browser", group = "launcher"}),
+    awful.key({my_modkey, "Shift"}, "f", function() awful.spawn(my_fm) end,
+              {description = "open a file manager", group = "launcher"}),
     awful.key({my_modkey}, "Print",
 			  function() awful.util.spawn_with_shell(my_screencapture)
 			  awful.util.spawn_with_shell(my_soundplayer..shutter_sound) end,
@@ -560,19 +573,6 @@ local global_keys = gears.table.join(
                   end
               end,
               {description = "restore minimized", group = "client"}),
-
-	-- Volume
-	awful.key({}, "XF86AudioLowerVolume",
-              function()
-                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 -5%")
-              end,{description = "Decrease sound volume", group = "launcher"}),
-    awful.key({}, "XF86AudioRaiseVolume",
-              function()
-                  awful.util.spawn_with_shell("pactl set-sink-mute 0 false ; pactl -- set-sink-volume 0 +5%")
-              end,{description = "Increase sound volume", group = "launcher"}),
-    awful.key({}, "XF86AudioMute",
-              function() awful.util.spawn_with_shell("pactl set-sink-mute 0 toggle")
-              end,{description = "Mute sound", group = "launcher"}),
 
     -- Prompt
     awful.key({my_modkey}, "r", function() awful.spawn(my_runner) end,
@@ -751,7 +751,7 @@ awful.rules.rules = {
     {rule = {class = my_browser},
     properties = {screen = 1, tag = "2"}},
 	-- Set Nemo to map on the named "3" on screen 1
-    {rule = {class = my_browser},
+    {rule = {class = "Nemo"}, -- lowercase doesn't work
     properties = {screen = 1, tag = "3"}},
 }
 -- }}}
