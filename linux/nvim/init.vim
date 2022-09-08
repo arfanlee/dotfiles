@@ -53,29 +53,30 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 colorscheme kanagawa
 
-set guifont=JetBrains\ Mono:h12
-set number
-set relativenumber
-set cursorline
-set laststatus=2
-set tabstop=4
-set shiftwidth=4
-set path+=** " pathing all files/directories on the machine
-set wildmenu " display menu option with shift/S+shift to select
-set hidden
-set noshowmode
-set mouse=a
 set clipboard^=unnamed,unnamedplus
+set cursorline
+set fsync
+set guifont=JetBrains\ Mono:h12
+set hidden
+set laststatus=2
+set mouse=a
+set noshowmode
+set number
+set path+=** " pathing all files/directories on the machine
+set relativenumber
+set shiftwidth=4
+set tabstop=4
+set wildmenu " display menu option with shift/S+shift to select
 
 " Neovide
 let g:neovide_remember_window_size=v:true
 let g:neovide_cursor_vfx_mode="torpedo"
 
 " NERDTRee
+let g:NERDTreeDirArrowCollapsible = ''
+let g:NERDTreeDirArrowExpandable = ''
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
-let g:NERDTreeDirArrowExpandable = ''
-let g:NERDTreeDirArrowCollapsible = ''
 
 " Built in :nohls macro key = <C-l>
 
