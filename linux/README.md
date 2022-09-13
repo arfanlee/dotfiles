@@ -69,7 +69,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - curl *(to transfer data to/from a web server)*
 - dhcpd *(allows you to be in the internet highway with a plate number (IP))*
 - feh *(minimal terminal image viewer and background setter)*
-- fuse *(to mount/modify/format securely a virtual filsesystem)*
+- fuse2 *(to mount/modify/format securely a virtual filsesystem)*
 - fzf *(to find file you want with just keywords you remember)*
 - gnupg *(encryption for your data and communications)*
 - htop *(command-line task manager)*
@@ -81,7 +81,9 @@ Additional applications to install on Linux depending on which distro you're usi
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
 - parted *(partition manipulation program)*
+- perl-image-exiftool *(music/image exif previewer)*
 - pipewire *(multimedia handler)*
+- polybar *(easy to configure status bar)*
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
 - ranger *(terminal file explorer)*
 - starship *(cross-platform terminal prompt customizer)*
@@ -92,6 +94,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - unzip *(simple unzipper .zip files)*
 - w3m *(optional to have image preview in ranger)*
 - xclip *(needed for clipboard on non DE)*
+- youtube-dl *(download youtube videos)*
 - zathura *(vim-like minimal pdf viewer)*
 - zathura-pdf-poppler *(in case zathura needs support)*
 - zip *(simple zipper .zip files)*
