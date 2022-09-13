@@ -1,0 +1,31 @@
+#! /bin/sh
+
+### AUTOSTART ###
+$HOME/.fehbg
+$HOME/.config/polybar/launch.sh
+greenclip daemon &
+pgrep -x sxhkd > /dev/null || sxhkd &
+
+### MONITOR(S) ###
+bspc monitor -d I II III IV V
+
+### BSPWM CONFIGS ###
+bspc config border_width         2
+bspc config window_gap           5
+
+bspc config split_ratio          0.52
+bspc config borderless_monocle   true
+bspc config gapless_monocle      false
+
+# this is to fix the weird gap between bspwm and polybar
+# since polybar have reserved 4 pixel struts
+bspc config ignore_ewmh_struts 	 true
+bspc config top_padding 		 30
+
+### RULES ###
+bspc rule -a Gimp desktop='^8' state=floating follow=on
+bspc rule -a firefox desktop='^2'
+bspc rule -a mplayer2 state=floating
+bspc rule -a Kupfer.py focus=on
+bspc rule -a Screenkey manage=off
+bspc rule -a Nemo desktop='^3'
