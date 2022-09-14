@@ -1,9 +1,24 @@
 configuration {
   display-drun: "";
-  display-window: "Windows";
+  display-run: "";
+  display-window: "﬿";
+
   drun-display-format: "{name}";
+  run-display-format: "{name}";
+  run-window-format: "{name}";
   font: "JetBrainsMono 10";
-  modi: "window,run,drun,filebrowser";
+  modi: "run,drun";
+
+  /* Adjusted some key functionality*/
+  kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+  kb-row-down: "Down,Control+j";
+  kb-accept-entry: "Control+m,Return,KP_Enter";
+  terminal: "st";
+  kb-remove-to-eol: "Control+Shift+e";
+  kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+  kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+  kb-mode-complete: "";
+  kb-remove-char-back: "BackSpace";
 }
 
 @theme "/dev/null"
