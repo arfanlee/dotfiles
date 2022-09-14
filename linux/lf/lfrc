@@ -1,11 +1,9 @@
 # set colors & icons
 set icons
-
 # to enable border
 set drawbox
 # interpreter for shell commands
 set shell sh
-
 # set file preview
 set cleaner '~/.config/lf/cleaner'
 set previewer '~/.config/lf/previewer'
@@ -26,11 +24,11 @@ set shellopts '-eu'
 # commands accordingly.
 set ifs "\n"
 
-# mkdir keybind
-map a push %mkdir<space>
-
 # leave some space at the top and the bottom of the screen
 set scrolloff 10
+
+# mkdir keybind
+map a push %mkdir<space>
 
 # use enter for shell commands
 map <enter> shell
@@ -50,6 +48,7 @@ map O $mimeopen --ask $f
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
+		application/pdf) setsid -f zathura $fx;;
         text/*) $EDITOR $fx;;
         image/*) setsid -f sxiv-rifle $f;;
 		video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
