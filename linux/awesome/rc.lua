@@ -160,7 +160,7 @@ vicious.register(vol_widget, vicious.widgets.volume,
    1, "Master")
 
 -- CPU widget
-local cpu_icon = wibox.widget.textbox("  ")
+local cpu_icon = wibox.widget.textbox("  ")
 local cpu_widget = wibox.widget.textbox()
 vicious.cache(vicious.widgets.cpu)
 vicious.register(cpu_widget, vicious.widgets.cpu, " $1% ", 1.5)
