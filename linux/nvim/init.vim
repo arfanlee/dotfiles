@@ -91,7 +91,7 @@ nnoremap <Tab> gt
 nnoremap <S-Tab> gT
 
 " To close current tab
-nnoremap <silent> <C-x> :tabclose<Return>
+nnoremap <silent> <C-x> :tabclose<Return> 
 
 " Open buffer
 nnoremap <S-b> :b<Space>
