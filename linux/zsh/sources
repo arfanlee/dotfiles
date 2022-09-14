@@ -1,15 +1,12 @@
 # Themes/Plugins
 source ~/.config/zsh/completion
 source ~/.config/zsh/key-bindings
+source ~/.config/zsh/prompt
+#eval "$(starship init zsh)"
 source ~/.config/zsh/aliases
 source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /usr/share/autojump/autojump.zsh
-
-# Uncomment if want to use the vanilla prompt
-#source ~/.config/zsh/prompt
-# Else, use starship prompt
-eval "$(starship init zsh)"
 
 # Add new path
 export PATH=$PATH:~/.local/bin
@@ -26,7 +23,7 @@ export BROWSER="firefox"
 export STARSHIP_CONFIG=~/.config/starship/starship.toml
 
 # To change directory using lf
-export LFCD=~/.config/lf/lfcd.sh  #  sourcing lf change dir shell command
+export LFCD=~/.config/lf/lfcd.sh  #  pre-built binary, make sure to use absolute path
 if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
