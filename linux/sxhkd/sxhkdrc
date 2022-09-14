@@ -1,6 +1,6 @@
-#
-# wm independent hotkeys
-#
+##############################
+### WM INDEPENDENT HOTKEYS ###
+#############################
 
 # terminal emulator
 super + Return
@@ -14,16 +14,26 @@ super + r
 super + Escape
 	pkill -USR1 -x sxhkd
 
+# browser
 super + b
 	firefox
 
+# GUI file manager
 super + shift + f
 	nemo
 
+# greenclip clipboard manager
 super + p
 	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
 
-# bspwm hotkeys
+# screenshot
+super + Print
+	scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png && \
+	ffplay -nodisp -autoexit /opt/sys-sounds/cam-shutter.wav
+
+#####################
+### BSPWM HOTKEYS ###
+#####################
 
 # quit/restart bspwm
 super + shift + q
@@ -48,9 +58,9 @@ super + y
 super + g
 	bspc node -s biggest.window
 
-#
-# state/flags
-#
+###################
+### STATE/FLAGS ###
+###################
 
 # set the window state
 super + {t,shift + t,s,f}
@@ -60,9 +70,9 @@ super + {t,shift + t,s,f}
 super + ctrl + {m,x,y,z}
 	bspc node -g {marked,locked,sticky,private}
 
-#
-# focus/swap
-#
+##################
+### FOCUS/SWAP ###
+##################
 
 # focus the node in the given direction
 super + {_,shift + }{h,j,k,l}
@@ -94,9 +104,9 @@ super + {o,i}
 super + {_,shift + }{1-9,0}
 	bspc {desktop -f,node -d} '^{1-9,10}'
 
-#
-# preselect
-#
+#################
+### PRESELECT ###
+#################
 
 # preselect the direction
 super + ctrl + {h,j,k,l}
@@ -114,9 +124,9 @@ super + ctrl + space
 super + ctrl + shift + space
 	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
 
-#
-# move/resize
-#
+###################
+### MOVE/RESIZE ###
+###################
 
 # expand a window by moving one of its side outward
 super + alt + {h,j,k,l}
@@ -130,7 +140,10 @@ super + alt + shift + {h,j,k,l}
 super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
-# volume control
+######################
+### VOLUME CONTROL ###
+######################
+
 XF86AudioLowerVolume
 	pactl -- set-sink-volume 0 -5%
 
