@@ -72,6 +72,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - betterlockscreen *(minimal and fast lock screen)*
 - curl *(to transfer data to/from a web server)*
 - dhcpd *(allows you to be in the internet highway with a plate number (IP))*
+- eww *(for customizable widgets and menus in window manager)*
 - feh *(minimal terminal image viewer and background setter)*
 - fuse2 *(to mount/modify/format securely a virtual filsesystem)*
 - fzf *(to find file you want with just keywords you remember)*
