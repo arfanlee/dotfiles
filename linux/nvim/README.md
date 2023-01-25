@@ -33,6 +33,11 @@ iwr -useb https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim |`
     ni $HOME/vimfiles/autoload/plug.vim -Force
 ```
 
+LSPs
+1. Install [pyright](https://github.com/microsoft/pyright).
+2. Install [lua-language-server](https://github.com/sumneko/lua-language-server).
+3. Install [rust-analyzer](https://github.com/rust-lang/rust-analyzer).
+
 ### Vim
 
 1. Install `vim`.
