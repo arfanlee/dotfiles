@@ -1,4 +1,4 @@
-call plug#begin('C:\Users\Blank\AppData\Local\nvim\plugged')
+call plug#begin('C:\Users\Arfan Lee\AppData\Local\nvim\plugged')
 
 " Icons
 Plug 'ryanoasis/vim-devicons'
@@ -16,11 +16,11 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'simrat39/rust-tools.nvim'
 
 " Themes
-Plug 'joshdick/onedark.vim'
-Plug 'projekt0n/github-nvim-theme'
+Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
-Plug 'itchyny/lightline.vim'
+Plug 'kdheepak/tabline.nvim'
+Plug 'nvim-lualine/lualine.nvim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf.vim'
@@ -50,7 +50,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
-set guifont=Hack\ NF:h14
+set guifont=JetBrains\ Mono:h14
 set number
 set relativenumber
 set cursorline
@@ -71,7 +71,7 @@ let g:neovide_cursor_vfx_mode="torpedo"
 
 "Lightline
 let g:lightline = {}
-let g:lightline.colorscheme = 'onedark'
+let g:lightline.colorscheme = 'kanagawa'
 let g:lightline.separator = {'left': '', 'right': ''}
 let g:lightline.subseparator = {'left': '', 'right': ''}
 let g:lightline.component_function = {'filetype': 'MyFiletype', 'fileformat': 'MyFileformat'}
@@ -107,7 +107,7 @@ nnoremap <silent> <C-s> :w<Return>
 " NERDTree Toggle
 nnoremap <silent> <C-f> :NERDTreeToggle<Return>
 
-colorscheme onedark
+colorscheme kanagawa
 
 function! MyFiletype()
 	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
@@ -117,4 +117,5 @@ function! MyFileformat()
 	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
 endfunction
 
-luafile C:\Users\Blank\AppData\Local\nvim\lua\plugins\cmp-config.lua
+luafile C:\Users\Arfan Lee\AppData\Local\nvim\lua\cmp-config.lua
+luafile C:\Users\Arfan Lee\AppData\Local\nvim\lua\theme.lua
