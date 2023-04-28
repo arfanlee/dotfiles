@@ -109,5 +109,5 @@ nnoremap <silent> <C-s> :w<Return>
 " NERDTree Toggle
 nnoremap <silent> <C-f> :NERDTreeToggle<Return>
 
-luafile ~/.config/nvim/lua/plugins/cmp-config.lua
-luafile ~/.config/nvim/lua/plugins/theme.lua
+luafile ~/.config/nvim/lua/cmp-config.lua
+luafile ~/.config/nvim/lua/theme.lua
