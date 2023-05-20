@@ -115,7 +115,7 @@ require('lspconfig')['pyright'].setup {
 require('lspconfig')['rust_analyzer'].setup{
 	capabilities = capabilities
 }
-require('lspconfig')['sumneko_lua'].setup{
+require('lspconfig')['lua_ls'].setup{
 	capabilities = capabilities
 }
 require('rust-tools').setup{}
