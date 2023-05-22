@@ -20,6 +20,11 @@ Extras:
 ## X Terminal
 1. Install `xterm`.
 2. Copy .Xresources file into the `$HOME` directory.
+3. Load the Xresources
+
+```
+xrdb -load ~/.Xresources
+```
 
 ## VIM
 1. Install `vim`.
@@ -51,6 +56,13 @@ EndSection
 
 > If you're using a window manager on a laptop, your touchpad might don't have tap-to-click and the two finger scrolling isn't natural (e.g: swipe up to scroll up instead of swipe up to scroll down and vice versa). Paste the script below into `/etc/X11/xorg.conf.d/40-libinput.conf`.
 *Make sure `xf86-input-libinput is installed`*
+
+*Create and link an existed config file first*
+
+```
+ln -s /usr/share/X11/xorg.conf.d/40-libinput.conf /etc/X11/xorg.conf.d/40-libinput.conf
+```
+*And then add the following script into the config file*
 
 ```
 Section "InputClass"
