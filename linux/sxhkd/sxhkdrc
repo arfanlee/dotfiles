@@ -151,6 +151,7 @@ super + {Left,Down,Up,Right}
 ### VOLUME CONTROL ###
 ######################
 
+# If it doesn't work try XF86_something
 XF86AudioLowerVolume
 	pactl -- set-sink-volume 0 -1%
 
