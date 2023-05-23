@@ -3,6 +3,7 @@
 ### AUTOSTART ###
 $HOME/.fehbg
 $HOME/.config/polybar/launch.sh
+picom -fc &
 greenclip daemon &
 pgrep -x sxhkd > /dev/null || sxhkd &
 
