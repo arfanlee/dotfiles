@@ -16,7 +16,6 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'simrat39/rust-tools.nvim'
 
 " Themes
-Plug 'joshdick/onedark.vim'
 Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
@@ -53,7 +52,7 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 
 colorscheme kanagawa
 
-set clipboard^=unnamed,unnamedplus
+set clipboard+=unnamedplus
 set cursorline
 set fsync
 set guifont=JetBrains\ Mono:h12
@@ -73,8 +72,8 @@ let g:neovide_remember_window_size=v:true
 let g:neovide_cursor_vfx_mode="torpedo"
 
 " NERDTRee
-let g:NERDTreeDirArrowCollapsible = ''
-let g:NERDTreeDirArrowExpandable = ''
+let g:NERDTreeDirArrowCollapsible = '󰁊'
+let g:NERDTreeDirArrowExpandable = '󰁙'
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
 
