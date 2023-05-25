@@ -17,6 +17,10 @@ Extras:
 4. `noto-fonts` for some Latin characters.
 5. `awesome-terminal-fonts` for some more icons.
 
+## Tiling Manager
+1. Install [picom](https://github.com/yshui/picom) for X server compositor.
+2. Copy the `picom`config folder into `$HOME/.config`.
+
 ## X Terminal
 1. Install `xterm`.
 2. Copy .Xresources file into the `$HOME` directory.
