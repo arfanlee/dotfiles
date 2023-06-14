@@ -1,12 +1,20 @@
+
 # set colors & icons
 set icons
+
 # to enable border
 set drawbox
+
 # interpreter for shell commands
 set shell sh
+
 # set file preview
-set cleaner '~/.config/lf/cleaner'
-set previewer '~/.config/lf/previewer'
+# make sure these files are marked as executables `chmod +x ~/.config/lf/lf_kitty_{clean,preview}`
+set previewer '~/.config/lf/lf_kitty_preview'
+set cleaner '~/.config/lf/lf_kitty_clean'
+
+# to change the cursor in the preview pane
+set cursorpreviewfmt "\033[7m"
 
 # set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
@@ -66,16 +74,16 @@ cmd open ${{
 
 # move current file or selected files to trash folder
 # (also see 'man mv' for backup/overwrite options)
-cmd trash %set -f; mv $fx ~/.trash
+# cmd trash %set -f; mv $fx ~/.trash
 
 # define a custom 'delete' command
-# cmd delete ${{
-#     set -f
-#     printf "$fx\n"
-#     printf "delete?[y/n]"
-#     read ans
-#     [ "$ans" = "y" ] && rm -rf $fx
-# }}
+cmd delete ${{
+    set -f
+    printf "$fx\n"
+    printf "delete?[y/n]"
+    read ans
+    [ "$ans" = "y" ] && rm -rf $fx
+}}
 
 # use '<delete>' key for either 'trash' or 'delete' command
 # map <delete> trash
