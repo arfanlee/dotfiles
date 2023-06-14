@@ -6,6 +6,7 @@
 # Otherwise you can use the nuclear option:
 killall -q polybar
 killall -q greenclip
+killall -q dunst
 
 # Launch bar1 and bar2
 echo "---" | tee -a /tmp/polybar1.log /tmp/polybar2.log
