@@ -88,6 +88,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - betterlockscreen *(minimal and fast lock screen)*
 - curl *(to transfer data to/from a web server)*
 - dhcpd *(allows you to be in the internet highway with a plate number (IP))*
+- dunst *(lightweight notification and customizable noti-daemon)*
 - eww *(for customizable widgets and menus in window manager)*
 - feh *(minimal terminal image viewer and background setter)*
 - fuse2 *(to mount/modify/format securely a virtual filsesystem)*
@@ -103,10 +104,12 @@ Additional applications to install on Linux depending on which distro you're usi
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
 - pacman-contrib *(for shell usage to see available updates, i.e: polybar)*
+- pandoc *(conversion between markup formats, mainly for docx preview in txt format)*
 - parted *(partition manipulation program)*
 - perl-image-exiftool *(music/image exif previewer)*
 - pipewire *(multimedia handler)*
 - polybar *(easy to configure status bar)*
+- poppler *(PDF rendering library for terminal-based file manager)*
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
 - ranger *(terminal file explorer)*
 - rofi-emoji *(emoji selection plugin in rofi)*
