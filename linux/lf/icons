@@ -69,7 +69,7 @@ bd 	
 *.lua	
 *.c		
 *.cpp	
-*.cs	
+*.cs	
 *.rs	
 *.yml	
 *.h		
