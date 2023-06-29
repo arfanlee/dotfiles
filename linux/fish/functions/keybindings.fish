@@ -1,4 +1,3 @@
-# Custom keybindings
 # Custom FISh keybindings
 
 # Start typing + Up Arrow Key (default it's like fzf)
@@ -24,4 +23,4 @@ if test -f "$LFCD"
 end
 
 # Use lf to change directory
-bind \co 'lfcd'
+bind \co 'lfcd; commandline -f repaint'
