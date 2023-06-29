@@ -1,3 +1,5 @@
+# Custom script for lf to change pwd when exit
+
 function lfcd
     set tmp (mktemp)
     lf -last-dir-path="$tmp" $argv
