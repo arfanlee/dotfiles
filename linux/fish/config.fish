@@ -4,11 +4,15 @@ if status is-interactive
 	# Sourcing
 	source ~/.config/fish/functions/keybindings.fish
 	source ~/.config/fish/functions/aliases.fish
+	source ~/.config/fish/functions/colors.fish # after source config.fish, need to run set_ls_colors (while in fish shell of course)
+	source /usr/share/autojump/autojump.fish
 
 	export LANG=en_US.UTF-8
 	export LC_ALL=en_US.UTF-8
 	export EDITOR="nvim"
 	export BROWSER="firefox"
+
+	set -x FZF_DEFAULT_COMMAND 'ag --hidden --ignore .git -f -g "" --depth 10'
 
 	# Turn off greeting
 	set -U fish_greeting
