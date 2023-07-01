@@ -3,8 +3,9 @@ call plug#begin('~/.config/nvim/plugged')
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
 
-" Auto pairs
+" Auto/Surrounding pairs
 Plug 'jiangmiao/auto-pairs'
+Plug 'kylechui/nvim-surround'
 
 " Intellisense
 Plug 'neovim/nvim-lspconfig'
@@ -80,7 +81,7 @@ let g:NERDTreeShowHidden = 1
 " Built in :nohls macro key = <C-l>
 
 " Delete forward in insert mode
-inoremap <C-d> <Esc>lcw
+inoremap <C-Del> <Esc>cw
 
 " To open new tab without entering the command
 nnoremap <silent> <C-t> :tabedit .<Return>
@@ -98,7 +99,7 @@ nnoremap <S-b> :b<Space>
 nnoremap <silent> <C-n> :bn<Return>
 nnoremap <silent> <C-p> :bp<Return>
 
-" Open finder Alt/Meta + f
+" Open fzf Alt/Meta + f
 nnoremap <silent> <M-f> :Files<Return>
 
 " Quick command
