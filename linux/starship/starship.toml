@@ -7,8 +7,8 @@ command_timeout = 1_000
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[❯](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
-error_symbol = "[❯](bold red)"
+success_symbol = "[󰄾](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[󰄾](bold red)"
 
 [username]
 show_always = true
@@ -22,9 +22,10 @@ style = "bold white"
 format =  "[$hostname]($style) "
 
 [directory]
-truncation_length = 1
+truncation_length = 5
 style = "bold green"
-format = "[$path]($style)[\\]](bold blue) "
+read_only = " "
+format = "[$read_only]($read_only_style)[$path]($style)[\\]](bold blue) "
 
 [git_branch]
 symbol = "[](bold yellow) "
@@ -39,6 +40,9 @@ symbol = " "
 
 [aws]
 symbol = "[ ](bold white)"
+
+[battery]
+disabled = true
 
 [python]
 symbol = "[ ](bold green)"
