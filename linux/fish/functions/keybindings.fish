@@ -12,10 +12,13 @@ bind \eOB history-prefix-search-forward
 bind \e\[3\;5\~ kill-word
 
 # Delete word backward (default Ctrl+w)
-bind \ch backward-kill-word
+bind \b backward-kill-word
 
 # Delete whole line
 bind \cu kill-whole-line
+
+# Go to $HOME
+bind \eh 'cd; commandline -f repaint'
 
 set LFCD ~/.config/fish/functions/lfcd.fish  # pre-built binary, use absolute path
 if test -f "$LFCD"
