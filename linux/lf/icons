@@ -1,35 +1,31 @@
-di	
-fi	
-tw	
-ow	
-ln	
-or	
-ex	
-pi	
-git	
-bd 	
-*license  
-*LICENSE  
-*makefile 
-*Makefile 
-*README	  
-*.gitignore	
-*.conf  
-*.txt	
-*.png	
-*.webp	
-*.ico	
-*.jpg	
-*.jpe	
-*.jpeg	
-*.gif	
-*.svg	
-*.tiff	
-*.xcf	
+# File types
+ln             # LINK
+or             # ORPHAN
+tw             # STICKY_OTHER_WRITABLE
+ow             # OTHER_WRITABLE
+st            	# STICKY
+di             # DIR
+pi      p       # FIFO
+so      s       # SOCK
+bd      b       # BLK
+cd      c       # CHR
+su             # SETUID
+sg             # SETGID
+ex             # EXEC
+fi             # FILE
+
+# Custom Directories
+~/Desktop	
+~/Desktop	 
+~/Downloads	
+~/Music		
+~/Pictures 	 
+~/Videos	
+
+# File extensions
 *.html	
 *.xml	
 *.css	
-*.pdf	
 *.epub	
 *.csv	
 *.xlsx	
@@ -39,30 +35,7 @@ bd 	
 *.R	    ﳒ
 *.rmd	
 *.Rmd	
-*.mp3	
-*.opus	
-*.ogg	
-*.m4a	
-*.flac	
-*.wav	
-*.mkv	
-*.mp4	
-*.webm	
-*.mpeg	
-*.avi	
-*.mov	
-*.mpg	
-*.wmv	
-*.flv	
-*.zip	
-*.rar	
-*.7z	
-*.tar	
-*.1	    
-*.log	
-*.iso	
-*.img   
-*.torrent 歷
+*.torrent 
 *.jar   
 *.java	
 *.py	
@@ -77,3 +50,133 @@ bd 	
 *.diff	
 *.vimrc 
 *.vim	
+*license  
+*LICENSE  
+*makefile 
+*Makefile 
+*README	  
+*.gitignore	
+*.conf  
+*.txt	
+
+# Audio formats
+*.aac   
+*.au    
+*.flac  
+*.m4a   
+*.mid   
+*.midi  
+*.mka   
+*.mp3   
+*.mpc   
+*.ogg   
+*.ra    
+*.wav   
+*.oga   
+*.opus  
+*.spx   
+*.xspf  
+
+# Images formats
+*.jpg	
+*.jpe	
+*.mjp	
+*.gif	
+*.bmp	
+*.pbm	
+*.pgm	
+*.ppm	
+*.tga	
+*.xbm	
+*.xpm	
+*.tif	
+*.png	
+*.svg	
+*.mng	
+*.pcx	
+*.xcf	
+*.xwd	
+*.yuv	
+*.cgm	
+*.emf	
+
+# Video formats
+*.mpg	
+*.mpe	
+*.m2v	
+*.mkv	
+*.web	
+*.ogm	
+*.mp4	
+*.m4v	
+*.mp4	
+*.vob	
+*.qt	
+*.nuv	
+*.wmv	
+*.asf	
+*.rm	
+*.rmv	
+*.flc	
+*.avi	
+*.fli	
+*.flv	
+*.gl	
+*.dl	
+*.ogv	
+*.ogx	
+
+# Archive/compressed formats
+*.tar   
+*.tgz   
+*.arc   
+*.arj   
+*.taz   
+*.lha   
+*.lz4   
+*.lzh   
+*.lzma  
+*.tlz   
+*.txz   
+*.tzo   
+*.t7z   
+*.zip   
+*.z     
+*.dz    
+*.gz    
+*.lrz   
+*.lz    
+*.lzo   
+*.xz    
+*.zst   
+*.tzst  
+*.bz2   
+*.bz    
+*.tbz   
+*.tbz2  
+*.tz    
+*.deb   
+*.rpm   
+*.jar   
+*.war   
+*.ear   
+*.sar   
+*.rar   
+*.alz   
+*.ace   
+*.zoo   
+*.cpio  
+*.7z    
+*.rz    
+*.cab   
+*.wim   
+*.swm   
+*.dwm   
+*.esd   
+
+# Others
+*.pdf	
+*.1	     # Manual page
+*.log	 # Log file
+*.iso	 # ISO image
+*.img    # Disk image
