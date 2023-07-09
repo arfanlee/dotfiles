@@ -1,13 +1,13 @@
 #! /bin/sh
 
 ### AUTOSTART ###
-$HOME/.fehbg
 $HOME/.config/polybar/launch.sh
+$HOME/.fehbg
+$HOME/.local/bin/check-battery &
+pgrep -x dunst > /dev/null || dunst &
+pgrep -x greenclip daemon > /dev/null || greenclip daemon &
 pgrep -x sxhkd > /dev/null || sxhkd &
 picom -fc &
-dunst &
-$HOME/.local/bin/check-battery &
-greenclip daemon &
 
 ### MONITOR(S) ###
 bspc monitor -d I II III IV V
@@ -20,10 +20,10 @@ bspc config split_ratio          0.52
 bspc config borderless_monocle   true
 bspc config gapless_monocle      false
 
-#bspc config normal_border_color "#484848"
 bspc config focused_border_color "#7FB4CA"
-#bspc config urgent_border_color "#C34043"
-# bspc config presel_border_color "#26E2FF"
+bspc config normal_border_color "#1F1F28"
+bspc config presel_border_color "#294172"
+bspc config urgent_border_color "#C34043"
 
 # this is to fix the weird gap between bspwm and polybar
 # since polybar have reserved 4 pixel struts
