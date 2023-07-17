@@ -14,7 +14,7 @@ XTerm.termName: xterm-256color
 
 ! ## Font
 XTerm*renderFont: True
-XTerm*faceName: xft:JetBrains Mono:size=12
+XTerm*faceName: JetBrains Mono NF:size=12
 
 XTerm*faceSize: 12
 XTerm*utf8: 2
@@ -69,43 +69,47 @@ XTerm.vt100.Translations: #override \n\
 
 ! Colour themes
 XTerm*title: XTerminal
-XTerm*background: #1e2127
-XTerm*foreground: #abb2bf
+XTerm*background: #1F1F28
+XTerm*foreground: #DCD7BA
 
 ! top is bright, below is normal
 ! black
-*.color0:       #1e2127
-*.color8:       #5c6370
+*color0: #090618
+*color8: #727169
 
 ! red
-*.color1:       #e06c75
-*.color9:       #e06c75
+*color1: #C34043
+*color9: #E82424
 
 ! green
-*.color2:       #98c379
-*.color10:      #98c379
+*color2: #76946A
+*color10: #98BB6C
 
 ! yellow
-*.color3:       #d19a66
-*.color11:      #d19a66
+*color3: #C0A36E
+*color11: #E6C384
 
 ! blue
-*.color4:       #61afef
-*.color12:      #61afef
+*color4: #7E9CD8
+*color12: #7FB4CA
 
 ! magenta
-*.color5:       #c678dd
-*.color13:      #c678dd
+*color5: #957FB8
+*color13: #938AA9
 
 ! cyan
-*.color6:       #56b6c2
-*.color14:      #56b6c2
+*color6: #6A9589
+*color14: #7AA89F
 
 ! white
-*.color7:      #828791
-*.color15:     #e6efff
+*color7: #C8C093
+*color15: #DCD7BA
+
 
 ! SXIV configs
 Sxiv.foreground:	#bbc2cf
 Sxiv.background:	#222222
 Sxiv.font:	Ubuntu:style=bold:size=11
+
+! Mouse cursor
+Xcursor.theme: breeze_cursors
