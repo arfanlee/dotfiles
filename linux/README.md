@@ -101,7 +101,7 @@ else
 fi
 ```
 
-*You can replace the light with any program to control backlight controllers. `e.g: xbacklight`. On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system*
+*You can replace the light with any program to control backlight controllers. `e.g: xbacklight`. On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system. Make sure the `/path/to/script` is executable. The rules doesn't have to be.*
 
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
@@ -128,6 +128,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - nemo *(a fork of Nautilus GUI file manager)*
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
+- openh264 *(for ffmpegthumbnailer and firefox H.264 codec library)*
 - pacman-contrib *(for shell usage to see available updates, i.e: polybar)*
 - pandoc *(conversion between markup formats, mainly for docx preview in txt format)*
 - parted *(partition manipulation program)*
