@@ -1,24 +1,18 @@
-" To have VIM jump to last position when reopen file
-au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
-
-set number
-set relativenumber
+set clipboard+=unnamedplus
 set cursorline
-set laststatus=2
-set path+=** " built in fuzzy finders
-set wildmenu " display menu option with shift/S+shift to select
+set fsync
+set guifont=JetBrainsMono\ Nerd\ Font:h12
 set hidden
-set noshowmode
+set laststatus=2
 set mouse=a
-
+set noshowmode
+set number
+set path+=** " pathing all files/directories on the machine
+set relativenumber
+set shiftwidth=4
+set tabstop=4
+set wildmenu " display menu option with shift/S+shift to select
 filetype plugin indent on
-
-let g:lightline = {}
-let g:lightline.colorscheme = 'onedark'
-let g:lightline.separator = {'left': '', 'right': ''}
-let g:lightline.subseparator = {'left': '', 'right': ''}
-let g:lightline.component_function = {'filetype': 'MyFiletype', 'fileformat': 'MyFileformat'}
-let g:lightline.tab = {'active':['filename', 'modified'], 'inactive': ['filename', 'modified'] }
 
 " To open new tab without entering the command
 nnoremap <silent> te :tabedit<Return>:tabm<Return>:e .<Return>
@@ -43,31 +37,5 @@ inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 " To remove highlights
 nnoremap <silent> <Esc>n :nohls<Return>
 
-call plug#begin('/home/xifost/.vim/plugged')
-
-" Icons
-Plug 'ryanoasis/vim-devicons'
-
-" Auto pairs
-Plug 'jiangmiao/auto-pairs'
-
-" Intellisense
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-
-" Themes
-Plug 'joshdick/onedark.vim'
-
-" Statusline theme
-Plug 'itchyny/lightline.vim'
-
-call plug#end()
-
-colorscheme onedark
-
-function! MyFiletype()
-	return winwidth(0) > 70 ? (strlen(&filetype) ? &filetype . ' ' . WebDevIconsGetFileTypeSymbol() : 'no ft') : ''
-endfunction
-
-function! MyFileformat()
-	return winwidth(0) > 70 ? (&fileformat . ' ' . WebDevIconsGetFileFormatSymbol()) : ''
-endfunction
+" To have VIM jump to last position when reopen file
+au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g'\"" | endif
