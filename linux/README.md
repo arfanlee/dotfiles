@@ -125,6 +125,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - lightdm *(lightweight display manager)*
 - [lf](https://github.com/gokcehan/lf) *(faster file manager than ranger)*
 - [ly](https://github.com/fairyglade/ly) *(nerdy minimal display manager)*
+- mpv *(lightweight video and audio player)*
 - nemo *(a fork of Nautilus GUI file manager)*
 - neofetch *(Linux ricer's fav command to show off their distro especially Arch user. I use Arch btw...)*
 - ntfs-3g *(to be able to read/write ntfs file system)*
@@ -137,6 +138,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - polybar *(easy to configure status bar)*
 - poppler *(PDF rendering library for terminal-based file manager)*
 - pulse-pipewire *(for easier transition using pulseaudio tools with pipewire)*
+- qt5ct *(change kde apps or qt5 in general themes, icons etc.)*
 - ranger *(terminal file explorer)*
 - rofi-emoji *(emoji selection plugin in rofi)*
 - rofi-greenclip *(clipboard manager plugin in rofi)*
