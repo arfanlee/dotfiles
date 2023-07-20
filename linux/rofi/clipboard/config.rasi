@@ -1,0 +1,98 @@
+configuration {
+  drun-display-format: "{name}";
+  run-display-format: "{name}";
+  run-window-format: "{name}";
+  font: "JetBrainsMono Nerd Font 10";
+  modi: "run,drun";
+
+  /* Adjusted some key functionality*/
+  kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
+  kb-row-down: "Down,Control+j";
+  kb-accept-entry: "Control+m,Return,KP_Enter";
+  terminal: "kitty";
+  kb-remove-to-eol: "Control+Shift+e";
+  kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+  kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
+  kb-mode-complete: "";
+  kb-remove-char-back: "BackSpace";
+}
+
+@theme "/dev/null"
+
+* {
+  bg-normal: #1E2127;
+  bg-focus: #7E9CD8;
+
+  fg-normal: @bg-focus;
+  fg-focus: #ABB2BF;
+
+  background-color: @bg-normal;
+  
+  border: none;
+  margin: 0 0 2 0;
+  padding: none;
+  spacing: 0;
+}
+
+window {
+  width: 25%;
+}
+
+prompt {
+  background-color: #2A2A37;
+  text-color: @fg-focus;
+  enabled: true;
+  padding: 8 13 8 13;
+  border: 8 0 8 8;
+}
+
+entry {
+  placeholder: "Search";
+  placeholder-color: #999999;
+  background-color: #2A2A37;
+  padding: 8 8 8 0;
+  border: 8 8 8 0;
+  text-color: @fg-focus;
+}
+
+inputbar {
+  children: [prompt, entry];
+}
+
+listview {
+  background-color: @bg-normal;
+  columns: 1;
+  lines: 8;
+}
+
+element {
+  padding: 10;
+  border: 0 8 0 8;
+  text-color: @fg-focus;
+}
+
+element selected {
+  background-color: @bg-focus;
+  text-color: @bg-normal;
+  border-radius: 5px;
+}
+
+element-text {
+  background-color: inherit;
+  text-color: inherit;
+  vertical-align: 0.5;
+}
+
+element-icon {
+  size: 30;
+  padding: none;
+  margin: 0 8 0 0;
+  background-color: #FFFFFF00;
+}
+
+mainbox {
+  background-color: @bg-normal;
+  children: [inputbar, listview];
+}
+
+/* vim: ft=sass
