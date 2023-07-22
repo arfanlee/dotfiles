@@ -1,6 +1,6 @@
 ### Variables
 
-set $xcursor_theme breeze_dark 24
+seat seat0 xcursor_theme breeze_cursors 24
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -13,6 +13,9 @@ set $right l
 
 # Your preferred terminal emulator
 set $term kitty
+
+# Set emacsclient
+set $emacs emacsclient -c -a 'emacs'
 
 # Browser
 set $browser firefox
@@ -32,7 +35,13 @@ default_border pixel 2
 
 # Add gaps all around any window, not just gaps around waybar and screen
 gaps inner 10
-gaps outer 10
+
+# Focus on click/keybinding instead of mouse hover
+focus_follows_mouse no
+
+# Focus when urgent hinted (useful when click on notification daemon)
+focus_on_window_activation focus
+force_display_urgency_hint 1000
 
 #
 # Example configuration:
@@ -74,6 +83,9 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 #
     # Start a terminal
     bindsym $mod+Return exec $term
+
+    # Launch Emacs
+    bindsym $mod+x exec $emacs
 	
 	# Start a browser
     bindsym $mod+b exec $browser
@@ -98,12 +110,12 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
     bindsym $mod+Ctrl+r reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-	bindsym $mod+Shift+Escape exec "rofi-power"
+    # bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
+	bindsym $mod+Shift+q exec "rofi-power"
 
 	# Volume/Mic Keys
-	bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
-	bindsym XF86AudioRaiseVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"
+	bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && noti-vol"
+	bindsym XF86AudioRaiseVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && noti-vol"
 	bindsym XF86AudioMute exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
 	bindsym XF86AudioMicMute exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
 
@@ -113,6 +125,10 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 #
 # Moving around:
 #
+    # Focus next container in current workspace
+    bindsym $mod+w focus next
+    bindsym $mod+Shift+w focus prev
+
     # Move your focus around
     bindsym $mod+$left focus left
     bindsym $mod+$down focus down
@@ -139,6 +155,10 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 #
 # Workspaces:
 #
+
+    # Previous workspace
+    bindsym $mod+Tab workspace back_and_forth
+
     # Switch to workspace
     bindsym $mod+1 workspace number 1
     bindsym $mod+2 workspace number 2
@@ -197,16 +217,12 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 #
 # Scratchpad:
 #
-	#for_window [window_type="__i3_scratch"] floating enable
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
     # Move the currently focused window to the scratchpad
-	# Assign a keybinding to toggle the scratchpad
 	bindsym $mod+Shift+minus move scratchpad
 
     # Show the next scratchpad window or hide the focused scratchpad window.
     # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
+    bindsym $mod+minus scratchpad show, resize set width 65 ppt height 75 ppt
 
 # Resizing containers:
 
@@ -235,11 +251,14 @@ bindsym $mod+Shift+r mode "resize"
 
 # Client rules
 
-assign [class="firefox"] -> 1
-assign [class="discord"] -> 2
+assign [app_id="firefox"] 1
+assign [class="discord"] 2
+for_window [app_id="mpv"] floating enable
+for_window [class="Sxiv"] floating enable
 
-exec --no-startup-id pgrep -x dunst > /dev/null || dunst &
-exec --no-startup-id wl-paste -t text --watch clipman store &
+exec emacs --daemon
+exec_always --no-startup-id pgrep -x dunst > /dev/null || dunst &
+exec_always --no-startup-id wl-paste -t text --watch clipman store &
 # exec --no-startup-id pgrep -x $HOME/.local/bin/check-battery > /dev/null || $HOME/.local/bin/check-battery &
 
 
