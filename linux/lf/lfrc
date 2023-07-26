@@ -58,6 +58,7 @@ cmd open ${{
     case $(file --mime-type $f -b) in
 		application/pdf) setsid -f zathura $fx;;
         text/*) $EDITOR $fx;;
+        image/gif) setsid -f mpv --loop $f -quiet >/dev/null 2>&1;;
         image/*) setsid -f sxiv-rifle $f;;
 		video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
 		audio/*) mpv --audio-display=no $f;;
@@ -83,6 +84,7 @@ map <delete> delete
 # shortcut to folders
 map g/ select /
 map gc cd ~/.config
+map gl cd ~/.local
 
 # set the ctime decrementally
 map sf :{{ set sortby ctime; set reverse; }}
