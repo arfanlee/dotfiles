@@ -1,18 +1,18 @@
 # File types
-ln             # LINK
-or             # ORPHAN
-tw             # STICKY_OTHER_WRITABLE
-ow             # OTHER_WRITABLE
-st            	# STICKY
-di             # DIR
-pi      p       # FIFO
-so      s       # SOCK
 bd      b       # BLK
 cd      c       # CHR
-su             # SETUID
-sg             # SETGID
+di             # DIR
 ex             # EXEC
 fi             # FILE
+ln             # LINK
+or             # ORPHAN
+ow             # OTHER_WRITABLE
+pi      p       # FIFO
+sg             # SETGID
+so      s       # SOCK
+st            	# STICKY
+su             # SETUID
+tw             # STICKY_OTHER_WRITABLE
 
 # Custom Directories
 ~/Desktop	
@@ -22,42 +22,50 @@ fi             # FILE
 ~/Pictures 	 
 ~/Videos	
 
+# File names
+*config	
+*LICENSE  
+*license  
+*Makefile 
+*makefile 
+*README	  
+
 # File extensions
-*.html	
-*.xml	
-*.css	
-*.epub	
-*.csv	
-*.xlsx	
-*.tex	
-*.md	
-*.r	    ﳒ
-*.R	    ﳒ
-*.rmd	
-*.Rmd	
-*.torrent 
-*.jar   
-*.java	
-*.py	
-*.lua	
 *.c		
+*.conf  
 *.cpp	
 *.cs	
-*.rs	
-*.yml	
-*.h		
-*.o		
+*.css	
+*.csv	
+*.db	
+*.desktop 
 *.diff	
-*.vimrc 
-*.vim	
-*license  
-*LICENSE  
-*makefile 
-*Makefile 
-*README	  
+*.epub	
 *.gitignore	
-*.conf  
+*.h		
+*.html	
+*.ini	
+*.jar   
+*.java	
+*.json	
+*.lua	
+*.md	
+*.o		
+*.py	
+*.R	    ﳒ
+*.r	    ﳒ
+*.Rmd	
+*.rmd	
+*.rs	
+*.tex	
+*.toml	
+*.torrent 
 *.txt	
+*.vim	
+*.vimrc 
+*.xlsx	
+*.xml	
+*.yml	
 
 # Audio formats
 *.aac   
@@ -69,114 +77,114 @@ fi             # FILE
 *.mka   
 *.mp3   
 *.mpc   
-*.ogg   
-*.ra    
-*.wav   
 *.oga   
+*.ogg   
 *.opus  
+*.ra    
 *.spx   
+*.wav   
 *.xspf  
 
 # Images formats
-*.jpg	
-*.jpe	
-*.mjp	
-*.gif	
 *.bmp	
-*.pbm	
-*.pgm	
-*.ppm	
-*.tga	
-*.xbm	
-*.xpm	
-*.tif	
-*.png	
-*.svg	
-*.mng	
-*.pcx	
-*.xcf	
-*.xwd	
-*.yuv	
 *.cgm	
 *.emf	
+*.gif	
+*.jpe	
+*.jpg	
+*.mjp	
+*.mng	
+*.pbm	
+*.pcx	
+*.pgm	
+*.png	
+*.ppm	
+*.svg	
+*.tga	
+*.tif	
+*.xbm	
+*.xcf	
+*.xpm	
+*.xwd	
+*.yuv	
 
 # Video formats
-*.mpg	
-*.mpe	
-*.m2v	
-*.mkv	
-*.web	
-*.ogm	
-*.mp4	
-*.m4v	
-*.mp4	
-*.vob	
-*.qt	
-*.nuv	
-*.wmv	
 *.asf	
-*.rm	
-*.rmv	
-*.flc	
 *.avi	
+*.dl	
+*.flc	
 *.fli	
 *.flv	
 *.gl	
-*.dl	
+*.m2v	
+*.m4v	
+*.mkv	
+*.mp4	
+*.mp4	
+*.mpe	
+*.mpg	
+*.nuv	
+*.ogm	
 *.ogv	
 *.ogx	
+*.qt	
+*.rm	
+*.rmv	
+*.vob	
+*.web	
+*.wmv	
 
 # Archive/compressed formats
-*.tar   
-*.tgz   
+*.7z    
+*.ace   
+*.alz   
 *.arc   
 *.arj   
-*.taz   
+*.bz    
+*.bz2   
+*.cab   
+*.cpio  
+*.deb   
+*.dwm   
+*.dz    
+*.ear   
+*.esd   
+*.gz    
+*.jar   
 *.lha   
+*.lrz   
+*.lz    
 *.lz4   
 *.lzh   
 *.lzma  
-*.tlz   
-*.txz   
-*.tzo   
-*.t7z   
-*.zip   
-*.z     
-*.dz    
-*.gz    
-*.lrz   
-*.lz    
 *.lzo   
-*.xz    
-*.zst   
-*.tzst  
-*.bz2   
-*.bz    
+*.rar   
+*.rpm   
+*.rz    
+*.sar   
+*.swm   
+*.t7z   
+*.tar   
+*.taz   
 *.tbz   
 *.tbz2  
+*.tgz   
+*.tlz   
+*.txz   
 *.tz    
-*.deb   
-*.rpm   
-*.jar   
+*.tzo   
+*.tzst  
 *.war   
-*.ear   
-*.sar   
-*.rar   
-*.alz   
-*.ace   
-*.zoo   
-*.cpio  
-*.7z    
-*.rz    
-*.cab   
 *.wim   
-*.swm   
-*.dwm   
-*.esd   
+*.xz    
+*.z     
+*.zip   
+*.zoo   
+*.zst   
 
 # Others
-*.pdf	
 *.1	     # Manual page
-*.log	 # Log file
-*.iso	 # ISO image
 *.img    # Disk image
+*.iso	 # ISO image
+*.log	 # Log file
+*.pdf	
