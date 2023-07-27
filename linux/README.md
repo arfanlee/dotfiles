@@ -1,7 +1,7 @@
 # Arfan's Linux configuration.
 
 ## Fonts
-1. Download any [Nerd Fonts](https://github.com/ryanoasis/nerd-fonts).
+1. Download any [Nerd Fonts](https://www.nerdfonts.com).
 2. Move the folder to `/usr/share/fonts` for the system or `~/.local/share/fonts` for the user only.
 3. Install font `JoyPixels` from your package manager for emoji support.
 4. Refresh the font cache.
@@ -101,7 +101,7 @@ else
 fi
 ```
 
-*You can replace the light with any program to control backlight controllers. `e.g: xbacklight`. On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system. Make sure the `/path/to/script` is executable. The rules doesn't have to be.*
+*You can replace the light with any program to control backlight controllers. `e.g: xbacklight`. On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system. Make sure the script is executable. The rules doesn't have to be.*
 
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
@@ -121,6 +121,7 @@ Additional applications to install on Linux depending on which distro you're usi
 - gnupg *(encryption for your data and communications)*
 - htop *(command-line task manager)*
 - imagemagick *(terminal based simple image manipulator and viewer)*
+- imv *(image viewer in X11 and Wayland)*
 - [iwctl](https://wiki.archlinux.org/title/iwd) *(in case your distro does not support your wifi card)*
 - lightdm *(lightweight display manager)*
 - [lf](https://github.com/gokcehan/lf) *(faster file manager than ranger)*
