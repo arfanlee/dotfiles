@@ -12,8 +12,8 @@ configuration {
   icon-theme: "Papirus-Dark";
 
   /* Adjusted some key functionality*/
-  kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
-  kb-row-down: "Down,Control+j";
+  kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
+  kb-row-down: "Down,Control+n";
   kb-accept-entry: "Control+m,Return,KP_Enter";
   terminal: "kitty";
   kb-remove-to-eol: "Control+Shift+e";
