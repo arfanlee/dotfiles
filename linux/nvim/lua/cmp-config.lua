@@ -118,5 +118,4 @@ require('lspconfig')['rust_analyzer'].setup{
 require('lspconfig')['lua_ls'].setup{
 	capabilities = capabilities
 }
-require('rust-tools').setup{}
 require('nvim-surround').setup()

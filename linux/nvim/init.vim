@@ -3,7 +3,7 @@ call plug#begin('~/.config/nvim/plugged')
 " Icons
 Plug 'kyazdani42/nvim-web-devicons'
 
-" Auto/Surrounding pairs
+" Surrounding pairs
 Plug 'jiangmiao/auto-pairs'
 Plug 'kylechui/nvim-surround'
 
@@ -50,6 +50,8 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists('s:std_in
     \ execute 'NERDTree' argv()[0] | wincmd p | enew | execute 'cd '.argv()[0] | wincmd p | endif
 " Exit Vim if NERDTree is the only window remaining in the only tab.
 autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
+" Close the tab if NERDTree is the only window remaining in it.
+autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
 colorscheme kanagawa
 
@@ -67,6 +69,7 @@ set relativenumber
 set shiftwidth=4
 set tabstop=4
 set wildmenu " display menu option with shift/S+shift to select
+setlocal scrolloff=999 " set the cursor always in center unless it's the start/begging of a file/buffer
 
 " Neovide
 let g:neovide_remember_window_size=v:true
@@ -81,7 +84,7 @@ let g:NERDTreeShowHidden = 1
 " Built in :nohls macro key = <C-l>
 
 " Delete forward in insert mode
-inoremap <C-Del> <Esc>cw
+inoremap <C-Del> <C-o>dw
 
 " To open new tab without entering the command
 nnoremap <silent> <C-t> :tabedit .<Return>
