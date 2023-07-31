@@ -1,4 +1,4 @@
-/*****----- Power Menu Configuration -----*****/
+/*****----- Configuration -----*****/
 configuration {
     show-icons:      false;
     me-select-entry: "MousePrimary";
@@ -7,85 +7,53 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    /* Resolution : 1920x1080 */
-    mainbox-spacing:             100px;
-    mainbox-margin:              150px 400px;
-    message-margin:              0px 350px;
-    message-padding:             15px;
-    message-border-radius:       15px;
-    listview-spacing:            50px;
-    element-padding:             35px 40px;
-    element-border-radius:       20px;
+    background:     #1F1F28;
+    background-alt: #393552;
+    foreground:     #e0def4;
+    selected:       #7E9CD8;
 
-    prompt-font:                 "JetBrainsMono Nerd Font 72";
-    textbox-font:                "JetBrainsMono Nerd Font 12";
-    element-text-font:           "Symbols Nerd Font Mono 64";
-
-    background-window:           black/50%;
-    background-normal:           white/5%;
-    background-selected:         white/15%;
-    foreground-normal:           white;
-    foreground-selected:         white;
+    font: "JetBrainsMono Nerd Font Mono 16";
 }
 
 /*****----- Main Window -----*****/
 window {
-    transparency:                "real";
     location:                    center;
     anchor:                      center;
-    fullscreen:                  true;
+    fullscreen:                  false;
+    width:                       650px;
+    border-radius:               3px;
     cursor:                      "default";
-    background-color:            var(background-window);
+    background-color:            @background;
 }
 
 /*****----- Main Box -----*****/
 mainbox {
-    enabled:                     true;
-    spacing:                     var(mainbox-spacing);
-    margin:                      var(mainbox-margin);
+    spacing:                     15px;
+    padding:                     15px;
     background-color:            transparent;
-    children:                    [ "dummy", "inputbar", "listview", "message", "dummy" ];
-}
-
-/*****----- Inputbar -----*****/
-inputbar {
-    enabled:                     true;
-    background-color:            transparent;
-    children:                    [ "dummy", "prompt", "dummy"];
-}
-
-dummy {
-    background-color:            transparent;
-}
-
-prompt {
-    enabled:                     true;
-    font:                        var(prompt-font);
-    background-color:            transparent;
-    text-color:                  var(foreground-normal);
+    children:                    [ "listview", "message" ];
 }
 
 /*****----- Message -----*****/
 message {
-    enabled:                     true;
-    margin:                      var(message-margin);
-    padding:                     var(message-padding);
-    border-radius:               var(message-border-radius);
-    background-color:            var(background-normal);
-    text-color:                  var(foreground-normal);
+    margin:                      0px;
+    padding:                     10px;
+    border-radius:               3px;
+    background-color:            transparent;
+    text-color:                  @foreground;
 }
 textbox {
-    font:                        var(textbox-font);
-    background-color:            transparent;
+    background-color:            inherit;
     text-color:                  inherit;
     vertical-align:              0.5;
     horizontal-align:            0.5;
+    placeholder-color:           @foreground;
+    blink:                       true;
+    markup:                      true;
 }
 
 /*****----- Listview -----*****/
 listview {
-    enabled:                     true;
-    expand:                      false;
     columns:                     5;
     lines:                       1;
     cycle:                       true;
@@ -96,22 +64,22 @@ listview {
     fixed-height:                true;
     fixed-columns:               true;
 
-    spacing:                     var(listview-spacing);
+    spacing:                     15px;
     background-color:            transparent;
+    text-color:                  @foreground;
     cursor:                      "default";
 }
 
 /*****----- Elements -----*****/
 element {
-    enabled:                     true;
-    padding:                     var(element-padding);
-    border-radius:               var(element-border-radius);
-    background-color:            var(background-normal);
-    text-color:                  var(foreground-normal);
+    padding:                     10px;
+    border-radius:               3px;
+    background-color:            @background-alt;
+    text-color:                  @foreground;
     cursor:                      pointer;
 }
 element-text {
-    font:                        var(element-text-font);
+    font:                        "Symbols Nerd Font Mono 48";
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
@@ -119,8 +87,8 @@ element-text {
     horizontal-align:            0.5;
 }
 element selected.normal {
-    background-color:            var(background-selected);
-    text-color:                  var(foreground-selected);
+    background-color:            var(selected);
+    text-color:                  var(background);
 }
 
 /* vim: ft=css
