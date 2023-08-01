@@ -4,7 +4,7 @@
 
 # terminal emulator
 super + Return
-	st
+	kitty
 
 # program launcher
 super + r
@@ -20,20 +20,20 @@ super + b
 
 # GUI file manager
 super + shift + f
-	nemo
+	dolphin
 
 # greenclip clipboard manager
 super + p
-	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}'
+	rofi -modi "clipboard:greenclip print" -show clipboard -run-command '{cmd}' -config ~/.config/rofi/clipboard/config.rasi
 
 # screenshot
 super + Print
 	scrot ~/Pictures/Screenshots/%Y-%m-%d_%H-%M-%S.png && \
 	ffplay -nodisp -autoexit /opt/sys-sounds/cam-shutter.wav
 
-# lockscreen
+# emacs
 super + x
-	betterlockscreen -l dimblur
+	emacsclient -c -a 'emacs'
 
 super + e
 	rofi -modi emoji -show emoji
@@ -44,7 +44,8 @@ super + e
 
 # quit/restart bspwm
 super + shift + q
-	bspc quit
+	rofi-power
+	# bspc quit
 
 super + ctrl + r
 	bspc wm -r
@@ -148,15 +149,22 @@ super + {Left,Down,Up,Right}
 	bspc node -v {-20 0,0 20,0 -20,20 0}
 
 ######################
-### VOLUME CONTROL ###
+###   CONTROLLER   ###
 ######################
 
-# If it doesn't work try XF86_something
 XF86AudioLowerVolume
-	pactl -- set-sink-volume 0 -1%
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && noti-vol
 
 XF86AudioRaiseVolume
-	pactl -- set-sink-volume 0 +1%
+	wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+ && noti-vol
 
 XF86AudioMute
-	pactl set-sink-mute 0 toggle
+	wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle
+
+# Decrease brightness
+XF86MonBrightnessDown
+    light -U 10
+
+# Increase brightness
+XF86MonBrightnessUp
+    light -A 10
