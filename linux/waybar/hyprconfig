@@ -1,0 +1,200 @@
+{
+    "layer": "top",
+    "position": "top", // Waybar position (top|bottom|left|right)
+    "height": 40, // Waybar height (to be removed for auto height)
+    // "width": 1280, // Waybar width
+    "spacing": 4, // Gaps between modules in pixels
+
+    // Choose the order of the modules
+    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-center": ["hyprland/window"],
+    "modules-right": ["tray", "idle_inhibitor", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock"],
+
+    // Modules configuration
+    "hyprland/workspaces": {
+		"format": "{icon}",
+		"format-icons": {
+			"1": "一",
+			"2": "二",
+			"3": "三",
+			"4": "四",
+            "5": "五",
+            "6": "六",
+            "7": "七",
+            "8": "八",
+            "9": "九",
+            "10": "十",
+			"urgent": "",
+			"focused": "",
+			"default": ""
+		}
+    },
+
+    "hyprland/window": {
+    	"max-length": 30
+    },
+
+    "hyprland/submap": {
+        "format": "{}",
+        "max-length": 8,
+        "tooltip": false
+    },
+
+    "keyboard-state": {
+        "capslock": true,
+        "format": "{icon}",
+	    "format": {
+	       "capslock": "{icon}"                                                                                                                                                       
+	    },
+        "format-icons": {
+            "locked": "",
+            "unlocked": ""
+        }
+    },
+
+    "mpd": {
+        "format": "{stateIcon} {consumeIcon}{randomIcon}{repeatIcon}{singleIcon}{artist} - {album} - {title} ({elapsedTime:%M:%S}/{totalTime:%M:%S}) ⸨{songPosition}|{queueLength}⸩ {volume}% ",
+        "format-disconnected": "Disconnected ",
+        "format-stopped": "{consumeIcon}{randomIcon}{repeatIcon}{singleIcon}Stopped ",
+        "unknown-tag": "N/A",
+        "interval": 2,
+        "consume-icons": {
+            "on": " "
+        },
+        "random-icons": {
+            "off": "<span color=\"#f53c3c\"></span> ",
+            "on": " "
+        },
+        "repeat-icons": {
+            "on": " "
+        },
+        "single-icons": {
+            "on": "1 "
+        },
+        "state-icons": {
+            "paused": "",
+            "playing": ""
+        },
+        "tooltip-format": "MPD (connected)",
+        "tooltip-format-disconnected": "MPD (disconnected)"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+
+    "tray": {
+        "spacing": 10
+    },
+
+    "clock": {
+		"format": " {:%a, %d %b %H:%M}"
+    },
+
+    "cpu": {
+        "format": " {usage}%",
+        "tooltip": false
+    },
+
+    "memory": {
+        "format": " {}%"
+    },
+
+	"bluetooth": {
+		"format-on": "",
+		"format-off": "󰂲",
+		"format-disabled": "", // an empty format will hide the module
+		"format-connected": "󰂱",
+		"on-click": "/home/arfan/.local/bin/blue-check",
+		"on-click-right": "bluetoothctl connect 41:42:48:26:C7:7A",
+		"format-connected-battery": "󰂱 {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"tooltip-format-connected": "{device_enumerate}",
+		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
+		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+	},
+
+    "temperature": {
+        // "thermal-zone": 2,
+        // "hwmon-path": "/sys/class/hwmon/hwmon2/temp1_input",
+        "critical-threshold": 80,
+        // "format-critical": "{temperatureC}°C {icon}",
+        "format": "{temperatureC}°C {icon}",
+        "format-icons": ["", "", ""]
+    },
+
+    "backlight": {
+        // "device": "acpi_video1",
+        "format": "{icon} {percent}%",
+        "format-icons": ["", "", "", "", "", "", "", "", ""],
+		"tooltip": false
+    },
+
+    "battery": {
+        "states": {
+            "critical": 20
+        },
+        "format": "{icon} {capacity}%",
+        "format-charging": "󰂄 {capacity}%",
+        "format-plugged": " {capacity}%",
+		"format-critical": "󰂃 {capacity}%",
+        "format-icons": ["󰁻", "󰁽", "󰁿", "󰂁", "󰁹"]
+    },
+
+    "network": {
+        // "interface": "wlp2*", // (Optional) To force the use of this interface
+        "format-wifi": " {essid}",
+        "format-ethernet": "󰈁 {ipaddr}/{cidr}",
+        "tooltip-format": "󰀂 {ifname} via {gwaddr} ({signalStrength}%)",
+        "format-linked": "󰩟 {ifname} (No IP)",
+        "format-disconnected": " 󰤮 ",
+        "format-alt": "󰁝 {bandwidthUpBits} 󰁅 {bandwidthDownBits}"
+    },
+
+	"custom/notification": {
+		"tooltip": false,
+		"format": "{icon}",
+		"format-icons": {
+   			"none": "󰂚",
+			"notification": "󱅫",
+			"dnd-notification": "󰂛",
+			"dnd-none": "󰂛",
+			"inhibited-notification": "󱅫",
+			"inhibited-none": "󰂚",
+			"dnd-inhibited-notification": "󰪑",
+		  	"dnd-inhibited-none": "󰪑"
+		},
+		"return-type": "json",
+		"exec-if": "which swaync-client",
+		"exec": "swaync-client -swb",
+		"on-click": "sh -c 'sleep 0.1s; swaync-client -t -sw &'",
+		"on-click-right": "sh -c 'sleep 0.1s; swaync-client -d -sw &'",
+		"escape": true
+	},
+
+    "pulseaudio": {
+        "scroll-step": 5, // %, can be a float
+        "format": "{icon} {format_source} {volume}%",
+        "format-bluetooth": " {icon} {volume}% {format_source}",
+        "format-bluetooth-muted": " {icon}  {format_source}",
+        "format-muted": " {format_source}",
+        "format-source": " {volume}%",
+        "format-source-muted": "",
+        "format-icons": {
+            "headphone": "",
+            "hands-free": "󰥰",
+            "headset": "󰋎",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", "", ""]
+        },
+        "on-click": "pavucontrol"
+    }
+}
+
+// vim: ft=json
+// -*- mode: json -*-
