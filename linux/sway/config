@@ -92,7 +92,7 @@ bindsym $mod+Ctrl+r reload
 
 # Exit sway (logs you out of your Wayland session)
 # bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-bindsym $mod+Shift+q exec "rofi-power"
+bindsym $mod+Shift+q exec $HOME/.local/bin/rofi-power
 
 # Volume/Mic Keys
 bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
