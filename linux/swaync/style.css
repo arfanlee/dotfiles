@@ -10,7 +10,7 @@
 @define-color text-color rgb(255, 255, 255);
 @define-color text-color-disabled rgb(150, 150, 150);
 
-@define-color bg-selected rgb(152, 187, 108);
+@define-color bg-selected rgb(126, 156, 216);
 
 /* In CC around notification */
 .notification-row {
@@ -24,7 +24,7 @@
 }
 
 .notification {
-    border: 1px solid white;
+    border: none;
 	border-radius: 2px;
 	margin: 6px;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
@@ -38,19 +38,16 @@
 	padding: 6px;
 	border-radius: 12px;
 }
-
+*/
 .normal {
-	background: green;
-	padding: 6px;
-	border-radius: 12px;
+    border-left: 5px solid green;
+    border-bottom-left-radius: 5px;
 }
 
 .critical {
-	background: red;
-	padding: 6px;
-	border-radius: 12px;
+	border-left: 5px solid red;
+    border-bottom-left-radius: 5px;
 }
-*/
 
 .notification-content {
 	background: @noti-bg;
@@ -64,8 +61,8 @@
 	text-shadow: none;
 	padding: 0;
 	border-radius: 100%;
-	margin-top: 10px;
-	margin-right: 16px;
+	margin-top: 14px;
+	margin-right: 9px;
 	box-shadow: none;
 	border: none;
 	min-width: 12px;
@@ -233,7 +230,6 @@
 .widget-dnd > switch {
 	font-size: initial;
 	border-radius: 12px;
-/*	background: @bg-unselect;*/
 	border: 1px solid @noti-border-color;
 	box-shadow: none;
 }
