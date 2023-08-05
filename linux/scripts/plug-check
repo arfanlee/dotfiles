@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Check if the laptop is unplugged
+if [[ $(cat /sys/class/power_supply/ADP0/online) == "0" ]]; then
+    # Laptop is unplugged
+    light -S 10  # Set brightness to 10%
+else
+    # Laptop is plugged in
+    light -S 100  # Set brightness to 100%
+fi
