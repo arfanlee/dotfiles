@@ -21,15 +21,20 @@ set $emacs emacsclient -c -a 'emacs'
 # Browser
 set $browser firefox
 
-# Your preferred application launcher
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu rofi -show drun | xargs swaymsg exec --
+
+# Clipman using rofi with custom config
 set $clip clipman pick --tool=CUSTOM -T 'rofi -dmenu -p '󰨸' -config ~/.config/rofi/clipboard/config.rasi'
+
+# Controller script for volume and brightness that work with wob
+set $controller $HOME/.local/bin/controller.sh
+
 ### Output configuration
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/arfan/Pictures/wallpaper/someone-staring-at-starry-skies.png fill
+output * bg $HOME/Pictures/wallpaper/someone-staring-at-starry-skies.png fill
 
 # Disable window titlebar
 default_border pixel 2
@@ -85,6 +90,7 @@ bindsym $mod+x exec $emacs      # Launch Emacs
 bindsym $mod+b exec $browser    # Launch a browser
 bindsym $mod+r exec $menu       # Start your launcher
 bindsym $mod+p exec $clip 		# Clipman
+
 bindsym $mod+q kill             # Kill focused window
 
 # Reload the configuration file
@@ -95,14 +101,14 @@ bindsym $mod+Ctrl+r reload
 bindsym $mod+Shift+q exec $HOME/.local/bin/rofi-power
 
 # Volume/Mic Keys
-bindsym XF86AudioLowerVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%-"
-bindsym XF86AudioRaiseVolume exec "wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%+"
-bindsym XF86AudioMute exec "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle"
-bindsym XF86AudioMicMute exec "wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle"
+bindsym XF86AudioLowerVolume exec $controller "lv"
+bindsym XF86AudioRaiseVolume exec $controller "rv"
+bindsym XF86AudioMute exec $controller "ms"
+bindsym XF86AudioMicMute exec $controller "mm"
 
 # Brightness Keys
-bindsym XF86MonBrightnessUp exec "light -A 10"
-bindsym XF86MonBrightnessDown exec "light -U 10"
+bindsym XF86MonBrightnessUp exec $controller "bu"
+bindsym XF86MonBrightnessDown exec $controller "bd"
 
 ## Moving around:
 
@@ -244,4 +250,3 @@ for_window [class="Sxiv"] floating enable
 for_window [app_id="imv"] floating enable
 
 exec_always $HOME/.local/bin/autostart.sh
-# exec --no-startup-id pgrep -x $HOME/.local/bin/check-battery > /dev/null || $HOME/.local/bin/check-battery &
