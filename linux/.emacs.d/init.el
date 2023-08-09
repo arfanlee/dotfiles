@@ -109,6 +109,22 @@
   (:map global-map
         ("C-x C-f"   .   counsel-find-file)))
 
+(use-package org-roam
+  :ensure t
+  :custom
+  (org-roam-directory (file-truename "~/.emacs.d/kasten"))
+  :bind (("C-c n l" . org-roam-buffer-toggle)
+         ("C-c n f" . org-roam-node-find)
+         ("C-c n g" . org-roam-graph)
+         ("C-c n i" . org-roam-node-insert)
+         ("C-c n c" . org-roam-capture)
+         ;; Dailies
+         ("C-c n j" . org-roam-dailies-capture-today))
+  :config
+  ;; If you're using a vertical completion framework, you might want a more informative completion interface
+  (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  (org-roam-db-autosync-mode))
+
 ;; Hooks
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))) ; will only display on normal/programming. in org mode, it's gone
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))) ; will turn the mode automatically on org mode
@@ -140,6 +156,8 @@
 (load-theme 'kanagawa t)
 ;; (load-theme 'doom-one t)
 
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120)
+
 (put 'upcase-region 'disabled nil)
 
 (custom-set-variables
@@ -148,10 +166,10 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(treemacs counsel ivy org-superstar evil centered-cursor-mode markdown-mode projectile dashboard doom-modeline-now-playing autothemer all-the-icons doom-modeline doom-themes which-key use-package)))
+   '(org-roam treemacs counsel ivy org-superstar evil centered-cursor-mode markdown-mode projectile dashboard doom-modeline-now-playing autothemer all-the-icons doom-modeline doom-themes which-key use-package)))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120))
+ )
