@@ -69,7 +69,12 @@
   (setq org-indent-mode-turns-on-hiding-stars nil))
 
 (use-package evil
-  :ensure t)
+  :ensure t
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-redo)
+  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-before-cursor-after)
+  (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-visual-line))
 
 ;; keep the cursor centered to avoid sudden scroll jumps
 (use-package centered-cursor-mode
@@ -156,7 +161,7 @@
 (load-theme 'kanagawa t)
 ;; (load-theme 'doom-one t)
 
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120)
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 120)
 
 (put 'upcase-region 'disabled nil)
 
