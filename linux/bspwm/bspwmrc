@@ -1,13 +1,7 @@
 #! /bin/sh
 
 ### AUTOSTART ###
-$HOME/.config/polybar/launch.sh
-$HOME/.fehbg
-$HOME/.local/bin/check-battery &
-pgrep -x dunst > /dev/null || dunst &
-pgrep -x greenclip daemon > /dev/null || greenclip daemon &
-pgrep -x sxhkd > /dev/null || sxhkd &
-picom -fc &
+$HOME/.local/bin/autostart.sh &
 
 ### MONITOR(S) ###
 bspc monitor -d I II III IV V
@@ -28,8 +22,13 @@ bspc config urgent_border_color "#C34043"
 # this is to fix the weird gap between bspwm and polybar
 # since polybar have reserved 4 pixel struts
 bspc config ignore_ewmh_struts 	 true
-bspc config top_padding 		 39
+bspc config top_padding 		 54
 
 ### RULES ###
 bspc rule -a firefox desktop='^1' focus=on
-bspc rule -a Discord desktop='^2'
+bspc rule -a discord desktop='^2'
+bspc rule -a kitty desktop='^3'
+bspc rule -a dolphin desktop='^4'
+bspc rule -a Emacs state=tiled
+bspc rule -a Sxiv state=float
+bspc rule -a mpv state=float
