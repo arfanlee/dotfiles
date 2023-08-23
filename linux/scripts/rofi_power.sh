@@ -4,7 +4,9 @@
 dir="~/.config/rofi/powermenu/"
 theme='config'
 # CMDs
+lastlogin="`last $USER | head -n1 | tr -s ' ' | cut -d' ' -f4,5,6`"
 uptime="`uptime -p | sed -e 's/up //g'`"
+host=`hostname`
 
 # Options
 shutdown=''
@@ -20,7 +22,8 @@ no=''
 
 rofi_cmd() {
     rofi -dmenu \
-        -mesg "Uptime: $uptime" \
+        -p " $USER@$host" \
+        -mesg  "󰍹 Last Login: $lastlogin |  Uptime: $uptime" \
         -theme ${dir}/${theme}.rasi
     }
 
@@ -80,6 +83,8 @@ case ${chosen} in
             betterlockscreen -l dim
         elif [[ -x '/usr/bin/i3lock' ]]; then
             i3lock
+		elif [[ -x '/usr/bin/swaylock' ]]; then
+			swaylock -i ~/Pictures/wallpaper/someone-staring-at-starry-skies.png -s fill
         fi
         ;;
     $suspend)
