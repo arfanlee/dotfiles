@@ -59,9 +59,9 @@ cmd open ${{
 		application/pdf) setsid -f zathura $fx;;
         text/*) $EDITOR $fx;;
         image/gif) setsid -f mpv --loop $f -quiet >/dev/null 2>&1;;
-        image/*) setsid -f sxiv-rifle $f;;
-		video/*) setsid -f mpv $f -quiet >/dev/null 2>&1;;
-		audio/*) mpv --audio-display=no $f;;
+        image/*) setsid -f imv . -n $f;;
+		video/*) setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1;;
+		audio/*) setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1;;
 	*) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
@@ -85,6 +85,7 @@ map <delete> delete
 map g/ select /
 map gc cd ~/.config
 map gl cd ~/.local
+map g. cd ~/repos/dotfiles/linux
 
 # set the ctime decrementally
 map sf :{{ set sortby ctime; set reverse; }}
