@@ -19,10 +19,12 @@ while true; do
 
     # show notification if battery low, file doesn't exists and it's discharging
     if [ $BATTERY_LEVEL -le 20 ] && [ $BATTERY_DISCHARGING -eq 1 ] && [ ! -f $LOW_FILE ]; then
+        setsid -f ffplay -nodisp -autoexit /usr/share/sounds/Oxygen-Sys-Warning.ogg >/dev/null 2>&1
         notify-send -i ~/.local/share/icons/Custom/low-battery.png -u critical "Battery Low" "Battery level is ${BATTERY_LEVEL}%. Please charge."
         touch $LOW_FILE
     # Send a notification on low battery
     elif [ $BATTERY_LEVEL -ge 95 ] && [ $BATTERY_DISCHARGING -eq 0 ] && [ ! -f $FULL_FILE ]; then
+        setsid -f ffplay -nodisp -autoexit /usr/share/sounds/Oxygen-Sys-App-Positive.ogg >/dev/null 2>&1
         notify-send -i ~/.local/share/icons/Custom/full-battery.png -u critical "Battery Full" "Battery level is ${BATTERY_LEVEL}%. You may unplug your charger."
         touch $FULL_FILE
     fi
