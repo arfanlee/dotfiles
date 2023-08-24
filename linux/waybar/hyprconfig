@@ -108,7 +108,7 @@
 		"format-off": "󰂲",
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": "󰂱",
-		"on-click": "/home/arfan/.local/bin/blue-check",
+		"on-click": "/home/arfan/.local/bin/blue_check.sh",
 		"on-click-right": "bluetoothctl connect 41:42:48:26:C7:7A",
 		"format-connected-battery": "󰂱 {device_battery_percentage}%",
 		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",

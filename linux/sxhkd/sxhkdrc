@@ -44,8 +44,7 @@ super + e
 
 # quit/restart bspwm
 super + shift + q
-	rofi-power
-	# bspc quit
+	~/.local/bin/rofi_power.sh
 
 super + ctrl + r
 	bspc wm -r

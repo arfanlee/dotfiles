@@ -30,11 +30,12 @@ set $clip clipman pick --tool=CUSTOM -T 'rofi -dmenu -p '󰨸' -config ~/.config
 
 # Controller script for volume and brightness that work with wob
 set $controller $HOME/.local/bin/controller.sh
+set $powermenu $HOME/.local/bin/rofi_power.sh
 
 ### Output configuration
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $HOME/Pictures/wallpaper/someone-staring-at-starry-skies.png fill
+output * bg $HOME/Pictures/Wallpapers/pastel-samurai.png fill
 
 # Disable window titlebar
 default_border pixel 2
@@ -98,7 +99,7 @@ bindsym $mod+Ctrl+r reload
 
 # Exit sway (logs you out of your Wayland session)
 # bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
-bindsym $mod+Shift+q exec $HOME/.local/bin/rofi-power
+bindsym $mod+Shift+q exec $powermenu
 
 # Volume/Mic Keys
 bindsym XF86AudioLowerVolume exec $controller "lv"
@@ -109,6 +110,9 @@ bindsym XF86AudioMicMute exec $controller "mm"
 # Brightness Keys
 bindsym XF86MonBrightnessUp exec $controller "bu"
 bindsym XF86MonBrightnessDown exec $controller "bd"
+
+# Screenshot
+bindsym Print exec $HOME/.local/bin/custom_grim.sh
 
 ## Moving around:
 
