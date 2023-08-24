@@ -1,80 +1,19 @@
+; PACKAGE INSTALLER (melpa)
 (require 'package)
-;; Add the theme directory to the Emacs load path
-(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
-(add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
-;;(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
+;; (add-to-list 'package-archives '("melpa" . "https://melpa.org/packages/") t)
+(add-to-list 'package-archives '("melpa-stable" . "https://stable.melpa.org/packages/") t)
 (package-initialize)
 
 (unless (package-installed-p 'use-package)
   (package-refresh-contents)
   (package-install 'use-package))
 
-(use-package which-key
-  :ensure t
-  :config (which-key-mode))
-
-(use-package doom-themes
-  :ensure t
-  :config
-  (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
-        doom-themes-enable-italic t) ; if nil, italics is universally disabled
-  (doom-themes-visual-bell-config)
-  (doom-themes-org-config))
-
-(use-package doom-modeline
-  :ensure t
-  :hook (after-init . doom-modeline-mode))
-
-(use-package markdown-mode
-  :ensure t)
-
+; PACKAGES
 (use-package all-the-icons              ; Needed by doom-modeline
   :ensure t)
 
 (use-package autothemer                 ; Needed by kanagawa.el
   :ensure t)
-
-(use-package projectile
-  :ensure t
-  :config
-  (define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
-  (projectile-mode +1))
-
-(use-package dashboard
-  :ensure t
-  :init
-  (progn
-    (setq dashboard-startup-banner 'logo)
-    (setq dashboard-set-heading-icons t)
-    (setq dashboard-show-shortcuts nil)
-;;    (setq dashboard-banner-logo-title "Any sufficiently advanced technology is indistinguishable from magic.")
-    (setq dashboard-set-file-icons t)
-    (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
-						       :height 1.1
-						       :v-adjust -0.05
-						       :face 'font-lock-keyword-face))
-    (setq dashboard-items '((recents  . 3)
-			                (bookmarks . 3)
-			                (projects . 3)
-                            (agenda . 3))))
-  :config
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
-  (dashboard-setup-startup-hook))
-
-(use-package org-superstar
-  :ensure t
-  :config
-  (setq org-hide-leading-stars nil)
-  (setq org-superstar-leading-bullet ?\s)
-  (setq org-indent-mode-turns-on-hiding-stars nil))
-
-(use-package evil
-  :ensure t
-  :config
-  (evil-mode 1)
-  (evil-set-undo-system 'undo-redo)
-  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-before-cursor-after)
-  (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-visual-line))
 
 ;; keep the cursor centered to avoid sudden scroll jumps
 (use-package centered-cursor-mode
@@ -89,17 +28,51 @@
         (centered-cursor-mode))))
   (my-global-centered-cursor-mode 1))
 
-(use-package treemacs
+(use-package counsel
   :ensure t
   :bind
   (:map global-map
-        ([f8]        . treemacs)
-        ("C-x t d"   . treemacs-select-directory)
-        ("C-x t B"   . treemacs-bookmark)
-        ("C-x t C-t" . treemacs-find-file)
-        ("C-x t M-t" . treemacs-find-tag))
+        ("C-x C-f"   .   counsel-find-file)))
+
+(use-package dashboard
+  :ensure t
+  :init
+  (progn
+    (setq dashboard-startup-banner 'logo)
+    (setq dashboard-set-heading-icons t)
+    (setq dashboard-show-shortcuts nil)
+    (setq dashboard-set-file-icons t)
+    (setq dashboard-footer-icon (all-the-icons-octicon "dashboard"
+                                                       :height 1.1
+                                                       :v-adjust -0.05
+                                                       :face 'font-lock-keyword-face))
+    (setq dashboard-items '((recents  . 3)
+                            (bookmarks . 3)
+                            (projects . 3)
+                            (agenda . 3))))
   :config
-  (setq treemacs-is-never-other-window t))
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))
+  (dashboard-setup-startup-hook))
+
+(use-package doom-modeline
+  :ensure t
+  :hook (after-init . doom-modeline-mode))
+
+(use-package doom-themes
+  :ensure t
+  :config
+  (setq doom-themes-enable-bold t ; if nil, bold is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
+  (doom-themes-visual-bell-config)
+  (doom-themes-org-config))
+
+(use-package evil
+  :ensure t
+  :config
+  (evil-mode 1)
+  (evil-set-undo-system 'undo-redo)
+  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-before-cursor-after)
+  (define-key evil-normal-state-map (kbd "C-e") 'evil-end-of-visual-line))
 
 (use-package ivy
   :ensure t
@@ -108,11 +81,8 @@
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
 
-(use-package counsel
-  :ensure t
-  :bind
-  (:map global-map
-        ("C-x C-f"   .   counsel-find-file)))
+(use-package markdown-mode
+  :ensure t)
 
 (use-package org-roam
   :ensure t
@@ -130,26 +100,44 @@
   (setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
   (org-roam-db-autosync-mode))
 
-;; Hooks
+(use-package org-superstar
+  :ensure t
+  :config
+  (setq org-hide-leading-stars nil)
+  (setq org-superstar-leading-bullet ?\s)
+  (setq org-indent-mode-turns-on-hiding-stars nil))
+
+(use-package projectile
+  :ensure t
+  :config
+  (define-key projectile-mode-map (kbd "C-x p") 'projectile-command-map)
+  (projectile-mode +1))
+
+(use-package rainbow-delimiters
+  :ensure t)
+
+(use-package treemacs
+  :ensure t
+  :bind
+  (:map global-map
+        ([f8]        . treemacs)
+        ("C-x t d"   . treemacs-select-directory)
+        ("C-x t B"   . treemacs-bookmark)
+        ("C-x t C-t" . treemacs-find-file)
+        ("C-x t M-t" . treemacs-find-tag))
+  :config
+  (setq treemacs-is-never-other-window t))
+
+(use-package which-key
+  :ensure t
+  :config (which-key-mode))
+
+;; HOOKS
 (add-hook 'prog-mode-hook (lambda () (setq display-line-numbers 'relative))) ; will only display on normal/programming. in org mode, it's gone
 (add-hook 'org-mode-hook (lambda () (org-superstar-mode 1))) ; will turn the mode automatically on org mode
+(add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
 
-(setq-default indent-tabs-mode nil)
-(setq-default tab-width 4)
-(setq indent-line-function 'insert-tab)
-
-(setq backup-directory-alist '(("." . "~/.emacs.d/saves"))) ; Redirect backup buffers
-(setq initial-scratch-message nil)                          ; No messages in scratch buffer
-(setq inhibit-startup-message t)   ; no startup message
-(setq visible-bell t)              ; no sound, only visual in modeline
-(setq ido-everywhere t)
-(setq ido-enable-flex-matching t)       ; kinda like fzf
-
-;; To fix the gap on fullscreen in DE
-(setq frame-resize-pixelwise t)
-(dotimes (n 3)
-  (toggle-frame-maximized))
-
+;; MODES
 (tool-bar-mode -1)			; disable toolbar
 (menu-bar-mode -1)			; disable menubar
 (scroll-bar-mode -1)        ; disable scroll bar
@@ -157,24 +145,44 @@
 (set-fringe-mode 10)        ; Give some breathing room
 (global-hl-line-mode +1)    ; Highlight line for easier to find cursor
 (delete-selection-mode 1)   ; Replace select
+(save-place-mode 1)         ; Remember last cursor position in a file
+(global-auto-revert-mode 1) ; Refresh buffers when there is changes outside of Emacs
 
+;; FIXES
+(put 'upcase-region 'disabled nil)      ; Upcase region bypass
+
+; To fix the gap on fullscreen in DE
+(setq frame-resize-pixelwise t)
+(dotimes (n 3)
+  (toggle-frame-maximized))
+
+; Set custom set in here instead of in init.el
+(setq custom-file (locate-user-emacs-file "custom_sets.el"))
+(load custom-file 'noerror 'nomessage)
+
+; Set tab to 4 spaces
+(setq-default indent-tabs-mode nil)
+(setq-default tab-width 4)
+(setq indent-line-function 'insert-tab)
+
+(setq backup-directory-alist '(("." . "~/.emacs.d/saves"))) ; Redirect backup buffers
+
+(setq initial-scratch-message nil)                          ; No messages in scratch buffer
+(setq inhibit-startup-message t)   ; no startup message
+
+; IDO
+(setq ido-everywhere t)
+(setq ido-enable-flex-matching t)       ; kinda like fzf
+;; (ido-mode t)
+
+; No sound, only visual in modeline
+(setq visible-bell t)
+
+; THEMES
+;; Add the theme directory to the Emacs load path
+(add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'kanagawa t)
-;; (load-theme 'doom-one t)
+; (load-theme 'doom-one t)
 
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 120)
-
-(put 'upcase-region 'disabled nil)
-
-(custom-set-variables
- ;; custom-set-variables was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- '(package-selected-packages
-   '(org-roam treemacs counsel ivy org-superstar evil centered-cursor-mode markdown-mode projectile dashboard doom-modeline-now-playing autothemer all-the-icons doom-modeline doom-themes which-key use-package)))
-(custom-set-faces
- ;; custom-set-faces was added by Custom.
- ;; If you edit it by hand, you could mess it up, so be careful.
- ;; Your init file should contain only one such instance.
- ;; If there is more than one, they won't work right.
- )
+; FONTS
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120)
