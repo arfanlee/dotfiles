@@ -19,6 +19,7 @@ bind \cu kill-whole-line
 
 # Go to $HOME
 bind \eh 'cd; commandline -f repaint'
+bind \eb 'cd ..; commandline -f repaint'
 
 set LFCD ~/.config/fish/functions/lfcd.fish  # pre-built binary, use absolute path
 if test -f "$LFCD"
