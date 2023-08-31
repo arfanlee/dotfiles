@@ -1,3 +1,9 @@
 require('lualine').setup {}
-require('tabline').setup {options = {show_tabs_always = true,
-						  show_tabs_only = true, show_filename_only = true}}
+require("bufferline").setup{options = 
+	{separator_style = 'slant',
+	 hover = {
+            enabled = true,
+            delay = 200,
+            reveal = {'close'}
+        }
+	}}
