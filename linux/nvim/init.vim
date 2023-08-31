@@ -21,7 +21,7 @@ Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
 Plug 'nvim-lualine/lualine.nvim'
-Plug 'kdheepak/tabline.nvim'
+Plug 'akinsho/bufferline.nvim'
 
 " Fuzzy finder
 Plug 'junegunn/fzf.vim'
@@ -55,6 +55,7 @@ autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTa
 
 colorscheme kanagawa
 
+set mousemoveevent
 set clipboard+=unnamedplus
 set cursorline
 set fsync
