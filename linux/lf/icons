@@ -7,9 +7,9 @@ fi             # FILE
 ln             # LINK
 or             # ORPHAN
 ow             # OTHER_WRITABLE
-pi      p       # FIFO
+pi      󰟥       # FIFO
 sg             # SETGID
-so      s       # SOCK
+so      󰟧       # SOCK
 st            	# STICKY
 su             # SETUID
 tw             # STICKY_OTHER_WRITABLE
