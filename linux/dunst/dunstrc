@@ -5,9 +5,9 @@
 	follow = mouse
     width =  400
 	height = 350
-    origin = top-right
-    offset = 10x50
-	indicate_hiddent = yes
+    origin = top-center
+    offset = 0x10
+	indicate_hidden = yes
 	shrink = yes
 
     transparency = 0
@@ -24,7 +24,7 @@
     markup = full
     format = "<span weight="bold">[%a]</span>\n<span font_desc='JetBrainsMono Nerd Font Mono' size='medium' weight='bold'>%s</span>\n<span font_desc='JetBrainsMono Nerd Font Mono' size='small'>%b</span>"
     alignment = left
-    transparency = 20
+    transparency = 10
 	gap_size = 10
 
 	idle_threshold = 120
@@ -55,7 +55,7 @@
     progress_bar_min_width = 150
     progress_bar_max_width = 300
     indicate_hidden = yes
-    text_icon_padding = 0
+    text_icon_padding = 10
     vertical_alignment = center
     ellipsize = end
     ignore_dbusclose = false
@@ -65,7 +65,7 @@
 [urgency_low]
     background = "#1F1F28"
     foreground = "#DCD7BA"
-    timeout = 10
+    timeout = 3
 
 [urgency_normal]
     background = "#1F1F28"
