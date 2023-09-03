@@ -21,7 +21,7 @@ window {
     anchor:                      center;
     fullscreen:                  false;
     width:                       290px;
-    border-radius:               3px;
+    border-radius:               100%;
     cursor:                      "default";
     background-color:            @background;
 }
@@ -43,6 +43,7 @@ message {
     text-color:                  @foreground;
 }
 textbox {
+    font:                        "Symbols Nerd Font Mono 48";
     background-color:            inherit;
     text-color:                  inherit;
     vertical-align:              0.5;
@@ -73,7 +74,7 @@ listview {
 /*****----- Elements -----*****/
 element {
     padding:                     15px;
-    border-radius:               3px;
+    border-radius:               100%;
     background-color:            @background-alt;
     text-color:                  @foreground;
     cursor:                      pointer;
