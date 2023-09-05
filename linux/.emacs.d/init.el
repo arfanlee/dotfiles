@@ -32,7 +32,10 @@
   :ensure t
   :bind
   (:map global-map
-        ("C-x C-f"   .   counsel-find-file)))
+        ("C-x C-f"   .   counsel-find-file))
+  :config
+   (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (t . ivy--regex-fuzzy))))
 
 (use-package dashboard
   :ensure t
@@ -80,6 +83,20 @@
   (ivy-mode 1)
   (setq ivy-use-virtual-buffers t)
   (setq enable-recursive-minibuffers t))
+
+;; LSP
+(use-package lsp-mode
+  :ensure t
+  :commands (lsp lsp-deferred)
+  :init
+  (setq lsp-keymap-prefix "C-c l")
+  :config
+  (lsp-enable-which-key-integration t))
+
+(use-package rust-mode
+  :ensure t
+  :mode "\\.rs\\'"
+  :hook (rust-mode-hook . lsp-deferred))
 
 (use-package markdown-mode
   :ensure t)
@@ -170,11 +187,6 @@
 (setq initial-scratch-message nil)                          ; No messages in scratch buffer
 (setq inhibit-startup-message t)   ; no startup message
 
-; IDO
-(setq ido-everywhere t)
-(setq ido-enable-flex-matching t)       ; kinda like fzf
-;; (ido-mode t)
-
 ; No sound, only visual in modeline
 (setq visible-bell t)
 
@@ -182,7 +194,6 @@
 ;; Add the theme directory to the Emacs load path
 (add-to-list 'custom-theme-load-path "~/.emacs.d/themes")
 (load-theme 'kanagawa t)
-; (load-theme 'doom-one t)
 
-; FONTS
+;; FONTS
 (set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120)
