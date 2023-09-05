@@ -86,6 +86,7 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 
 ### Key bindings
 
+bindsym $mod+Shift+f exec dolphin 		# Clipman
 bindsym $mod+Return exec $term  # Launch terminal
 bindsym $mod+x exec $emacs      # Launch Emacs
 bindsym $mod+b exec $browser    # Launch a browser
@@ -252,5 +253,6 @@ assign [app_id="org.kde.dolphin"] 4
 for_window [app_id="mpv"] floating enable
 for_window [class="Sxiv"] floating enable
 for_window [app_id="imv"] floating enable
+for_window [app_id="feh"] floating enable
 
 exec_always $HOME/.local/bin/autostart.sh
