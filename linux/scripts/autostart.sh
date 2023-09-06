@@ -25,7 +25,7 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
 	fi
 else
     # Running in Xorg
-    pgrep -x greenclip > /dev/null || greenclip --daemon &
+    pgrep -x greenclip > /dev/null || greenclip daemon &
     pgrep -x picom > /dev/null || picom -fc &
     pgrep -x dunst > /dev/null || dunst &
     $HOME/.fehbg
