@@ -5,12 +5,13 @@
 @define-color noti-bg-darker rgb(38, 38, 38);
 @define-color noti-bg-hover rgb(56, 56, 56);
 @define-color noti-bg-focus rgba(68, 68, 68, 0.6);
-@define-color noti-close-bg-hover rgb(195, 64, 67);
 
 @define-color text-color rgb(255, 255, 255);
 @define-color text-color-disabled rgb(150, 150, 150);
 
 @define-color bg-selected rgb(126, 156, 216);
+@define-color normal-green rgb(152, 187, 108);
+@define-color reddish rgb(195, 64, 67);
 
 /* In CC around notification */
 .notification-row {
@@ -40,13 +41,11 @@
 }
 */
 .normal {
-    border-left: 5px solid green;
-    border-bottom-left-radius: 5px;
+    border-left: 4px solid @normal-green;
 }
 
 .critical {
-	border-left: 5px solid red;
-    border-bottom-left-radius: 5px;
+	border-left: 4px solid @reddish;
 }
 
 .notification-content {
@@ -71,7 +70,7 @@
 
 .close-button:hover {
 	box-shadow: none;
-	background: @noti-close-bg-hover;
+	background: @reddish;
 	transition: all 0.15s ease-in-out;
 	border: none;
 }
@@ -82,7 +81,7 @@
 	margin: 0;
 	box-shadow: none;
 	background: @noti-bg;
-	border: 1px solid @noti-border-color;
+	border: 1px solid @reddish;
 	color: @text-color;
 	transition: all 0.15s ease-in-out;
 }
