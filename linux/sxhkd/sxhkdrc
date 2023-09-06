@@ -38,6 +38,13 @@ super + x
 super + e
 	rofi -modi emoji -show emoji
 
+# scratchpad
+super + minus
+    ~/.local/bin/bspscratchpad.sh --toggle
+
+super + shift + minus
+    ~/.local/bin/bspscratchpad.sh --cycle
+
 #####################
 ### BSPWM HOTKEYS ###
 #####################
