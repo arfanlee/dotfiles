@@ -67,7 +67,7 @@
 
   ;; Customize faces
   (
-  (default                                       (:background sumiInk-1b :foreground fujiWhite))
+  (default                                       (:background sumiInk-1 :foreground fujiWhite))
   (border                                        (:background sumiInk-1b :foreground sumiInk-0))
   (button                                        (:foreground waveAqua2))
   (child-frame                                   (:background sumiInk-0 :foreground sumiInk-0))
@@ -77,7 +77,7 @@
   (fringe                                        (:foreground sumiInk-3))
   (glyph-face                                    (:background sumiInk-4))
   (glyphless-char                                (:foreground sumiInk-4))
-  (header-line                                   (:background sumiInk-0))
+  (header-line                                   (:background sumiInk-0)) ;; idk
   (highlight                                     (:background comet :foreground springViolet1))
   (hl-line                                       (:background sumiInk-2))
   (homoglyph                                     (:foreground lightBlue))
@@ -95,7 +95,8 @@
   (numbers                                       (:background sakuraPink))
   (region                                        (:background waveBlue-2))
   (separator-line                                (:background sumiInk-0))
-  (shadow                                        (:background sumiInk-0))
+  ;;(shadow                                        (:background sumiInk-0)) ;default
+  (shadow                                        (:foreground sumiInk-4))
   (success                                       (:foreground waveAqua2))
   (vertical-border                               (:foreground sumiInk-4))
   (warning                                       (:foreground roninYellow))
@@ -174,29 +175,32 @@
   (link                                          (:foreground crystalBlue))
 
   ;; org-mode
-  (org-done                                      (:foreground dragonBlue))
-  (org-code                                      (:background sumiInk-0))
-  (org-meta-line                                 (:background winterGreen :foreground springGreen))
-  (org-block                                     (:background sumiInk-0 :foreground sumiInk-4))
+  (org-done                                      (:foreground springGreen :bold t))
+  (org-code                                      (:background sumiInk-1b :foreground roninYellow))
+  (org-verbatim                                  (:foreground springGreen))
+  (org-meta-line                                 (:background winterGreen :foreground springGreen)) ; e.g. taglist
+  (org-block                                     (:background sumiInk-1b :foreground sumiInk-4)) ; code block
   (org-block-begin-line                          (:background winterBlue :foreground springBlue))
   (org-block-end-line	                         (:background winterRed :foreground peachRed))
-  (org-headline-done                             (:foreground dragonBlue :strike-through t))
+  (org-headline-done                             (:foreground springGreen :strike-through t))
   (org-todo                                      (:foreground surimiOrange :bold t))
   (org-headline-todo                             (:foreground sumiInk-2))
   (org-upcoming-deadline                         (:foreground peachRed))
   (org-footnote                                  (:foreground waveAqua2))
   (org-indent                                    (:background sumiInk-1b :foreground sumiInk-1b))
   (org-hide                                      (:background sumiInk-1b :foreground sumiInk-1b))
-  (org-date                                      (:foreground waveBlue-2))
+  (org-date                                      (:foreground lightBlue))
   (org-ellipsis                                  (:foreground waveBlue-2 :bold t))
-  (org-level-1                                   (:foreground peachRed :height 1.3 :bold t))
-  (org-level-2                                   (:foreground springViolet2 :height 1.15 :bold t))
-  (org-level-3                                   (:foreground boatYellow2 :height 1.05))
-  (org-level-4                                   (:foreground fujiWhite))
-  (org-level-5                                   (:foreground fujiWhite))
-  (org-level-6                                   (:foreground carpYellow))
-  (org-level-7                                   (:foreground surimiOrange))
-  (org-level-8                                   (:foreground springGreen))
+  (org-property-value                            (:foreground sumiInk-4))
+  (org-list-dt                                   (:foreground springViolet2)) ; lists e.g. -, 1., 1) >
+  (org-level-1                                   (:foreground peachRed :height 1.5 :bold t))
+  (org-level-2                                   (:foreground surimiOrange :height 1.25 :bold t))
+  (org-level-3                                   (:foreground carpYellow :height 1.05 :bold t))
+  (org-level-4                                   (:foreground springGreen :bold t))
+  (org-level-5                                   (:foreground springBlue :bold t))
+  (org-level-6                                   (:foreground springViolet1 :bold t))
+  (org-level-7                                   (:foreground oniViolet :bold t))
+  (org-level-8                                   (:foreground waveRed :bold t))
 
   ;; which-key
   (which-key-key-face                            (:inherit 'font-lock-variable-name-face))
@@ -415,21 +419,23 @@
 
   ;; centaur-tabs
   (centaur-tabs-active-bar-face                  (:background springBlue :foreground fujiWhite))
-  (centaur-tabs-selected                         (:background sumiInk-1b :foreground fujiWhite :bold t))
-  (centaur-tabs-selected-modified                (:background sumiInk-1b :foreground fujiWhite))
-  (centaur-tabs-modified-marker-selected         (:background sumiInk-1b :foreground autumnYellow))
+  (centaur-tabs-selected                         (:background sumiInk-1 :foreground fujiWhite :bold t))
+  (centaur-tabs-selected-modified                (:background sumiInk-1 :foreground autumnYellow))
+  (centaur-tabs-modified-marker-selected         (:foreground autumnYellow :inherit 'centaur-tabs-selected))
   (centaur-tabs-close-selected                   (:inherit 'centaur-tabs-selected))
   (tab-line                                      (:background sumiInk-0))
 
   (centaur-tabs-unselected                       (:background sumiInk-0 :foreground sumiInk-4))
   (centaur-tabs-default                          (:background sumiInk-0 :foreground sumiInk-4))
+  ;; (centaur-tabs-unselected-modified              (:background sumiInk-0 :foreground peachRed))
   (centaur-tabs-unselected-modified              (:background sumiInk-0 :foreground peachRed))
-  (centaur-tabs-modified-marker-unselected       (:background sumiInk-0 :foreground sumiInk-4))
+  ;; (centaur-tabs-modified-marker-unselected       (:background sumiInk-0 :foreground sumiInk-4))
+  (centaur-tabs-modified-marker-unselected       (:foreground sumiInk-4 :inherit 'centaur-tabs-unselected))
   (centaur-tabs-close-unselected                 (:background sumiInk-0 :foreground sumiInk-4))
 
   (centaur-tabs-close-mouse-face                 (:background nil :foreground peachRed))
   (centaur-tabs-default                          (:background roninYellow ))
-  (centaur-tabs-name-mouse-face                  (:foreground springBlue :bold t))
+  (centaur-tabs-name-mouse-face                  (:foreground crystalBlue :bold t))
 
   (git-gutter:added                              (:foreground autumnGreen))
   (git-gutter:deleted                            (:foreground waveRed))
