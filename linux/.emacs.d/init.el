@@ -235,17 +235,23 @@
   :config
   (general-evil-setup t)
 
-  (general-create-definer my-leader-def
+  (general-create-definer al/leader-key-def
     :keymaps '(normal insert visual emacs)
     :prefix "SPC"
     :global-prefix "M-SPC")
 
-  (my-leader-def
-    :keymaps 'normal
-    "o a" 'org-agenda
+  (al/leader-key-def
+    "o a" 'org-agenda :wk "Agenda")
+    
+  (al/leader-key-def
+    "f f" 'counsel-find-file :wk "Find file")
+  
+  (al/leader-key-def
     "b b" 'counsel-switch-buffer
     "b h" 'previous-buffer
-    "b l" 'next-buffer
+    "b l" 'next-buffer)
+
+  (al/leader-key-def
     "n c" 'org-roam-capture
     "n t" 'org-roam-dailies-capture-today
     "n f" 'org-roam-node-find
@@ -263,7 +269,7 @@
   (setq enable-recursive-minibuffers t)
 
   ;; Use different regex strats per completion command
-  (push '(swiper . ivy--regex-ignore-order) ivy-re-builders-alist)
+  (push '(swiper . ivy--regex-plus) ivy-re-builders-alist)
   (push '(counsel-find-file . ivy--regex-fuzzy) ivy-re-builders-alist)
   (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist))
 
@@ -319,16 +325,20 @@
 
 (use-package markdown-mode
   :ensure t
-  :mode "\\.rs\\'")
-
-(use-package org-appear
-  :ensure t
-  :hook (org-mode . org-appear-mode))
+  :mode ("README\\.md\\'" . gfm-mode)
+  ;; Need to install multimarkdown with Linux package manager, e.g. dnf/pacman/apt
+  ;; It will show preview in browser, not in Emacs itself
+  :init (setq markdown-command "multimarkdown"))
 
 (use-package org
   :ensure t
   :config
+  (require 'org-tempo)                  ; quicker way to start source code, quote, etc.
   (setq org-startup-folded 'overview))
+
+(use-package org-appear
+  :ensure t
+  :hook (org-mode . org-appear-mode))
 
 (use-package org-roam
   :ensure t
