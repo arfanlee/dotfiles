@@ -1,5 +1,5 @@
 # File types
-bd      b       # BLK
+bd             # BLK
 cd      c       # CHR
 di             # DIR
 ex             # EXEC
@@ -23,7 +23,7 @@ tw             # STICKY_OTHER_WRITABLE
 ~/Videos	
 
 # File names
-*config	
+*config   
 *LICENSE  
 *license  
 *Makefile 
@@ -51,9 +51,10 @@ tw             # STICKY_OTHER_WRITABLE
 *.lua	
 *.md	
 *.o		
+*.org	
 *.py	
-*.R	    ﳒ
-*.r	    ﳒ
+*.R	    
+*.r	    
 *.Rmd	
 *.rmd	
 *.rs	
@@ -119,6 +120,7 @@ tw             # STICKY_OTHER_WRITABLE
 *.m2v	
 *.m4v	
 *.mkv	
+*.mov   
 *.mp4	
 *.mp4	
 *.mpe	
