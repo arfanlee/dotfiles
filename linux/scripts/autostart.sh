@@ -19,6 +19,7 @@ if [ -n "$WAYLAND_DISPLAY" ]; then
     pgrep -f $WOBSOCK > /dev/null || { rm -f $WOBSOCK; mkfifo $WOBSOCK; tail -f $WOBSOCK | wob & }
 
 	if [[ "$DESKTOP_SESSION" == "hyprland" ]]; then
+        pgrep -x swaybg > /dev/null || swaybg -i $HOME/Pictures/Wallpapers/pastel-samurai.png -m fill
 		pgrep -x waybar > /dev/null || waybar -c $HOME/.config/waybar/hyprconfig &
 	else
 		pgrep -x waybar > /dev/null || waybar -c $HOME/.config/waybar/swayconfig &
