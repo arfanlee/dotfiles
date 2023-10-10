@@ -10,6 +10,7 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 (column-number-mode)
 
+;; GLOBAL KEYBIND
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
 ;; MODES
@@ -60,7 +61,7 @@
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))) ; Redirect backup buffers
 
 (setq initial-scratch-message nil)     ; No messages in scratch buffer
-(setq inhibit-startup-message t)   ; no startup message
+(setq inhibit-startup-message t)       ; No startup message
 
 ;; No sound, only visual in modeline
 (setq visible-bell t)
@@ -113,7 +114,7 @@
   (define-global-minor-mode my-global-centered-cursor-mode centered-cursor-mode
     (lambda ()
       (when (not (memq major-mode
-                       (list 'Info-mode 'term-mode 'eshell-mode 'shell-mode 'erc-mode)))
+                       (list 'Info-mode 'term-mode 'eshell-mode 'shell-mode 'erc-mode 'vterm-mode)))
         (centered-cursor-mode))))
   (my-global-centered-cursor-mode 1))
 
@@ -137,22 +138,25 @@
   (centaur-tabs-enable-buffer-reordering)
   (centaur-tabs-mode t)
   :hook
-                                        ; Turns off tab in this modes
+  ;; Turns off tab in this modes
   (dashboard-mode . centaur-tabs-local-mode)
   (org-agenda-mode . centaur-tabs-local-mode)
   (vterm-mode . centaur-tabs-local-mode)
   :bind
   (:map evil-normal-state-map
-        ("C-c t" . centaur-tabs--create-new-tab)
-        ("C-c w" . kill-this-buffer)
         ("C-<tab>" . centaur-tabs-forward)
         ("C-<iso-lefttab>" . centaur-tabs-backward)))
+
+;; (use-package company
+;;   :ensure t
+;;   :init (company-mode))
 
 (use-package counsel
   :ensure t
   :bind
   (:map evil-normal-state-map
-        ("C-x C-f" . counsel-find-file)))
+        ("C-x C-f" . counsel-find-file)
+        ("M-x" . counsel-M-x)))
 
 (use-package dashboard
   :ensure t
@@ -242,14 +246,23 @@
 
   (al/leader-key-def
     "o a" 'org-agenda :wk "Agenda")
-    
+
   (al/leader-key-def
     "f f" 'counsel-find-file :wk "Find file")
-  
+
   (al/leader-key-def
     "b b" 'counsel-switch-buffer
     "b h" 'previous-buffer
     "b l" 'next-buffer)
+
+  (al/leader-key-def
+    "r b" 'bookmark-jump
+    "r m" 'bookmark-set)
+
+  (al/leader-key-def
+    "t n" 'centaur-tabs--create-new-tab
+    "t j" 'centaur-tabs-ace-jump
+    "t k" 'kill-this-buffer)
 
   (al/leader-key-def
     "n c" 'org-roam-capture
@@ -265,13 +278,13 @@
   :config
   (setq ivy-use-virtual-buffers t)
   (setq ivy-wrap t)
+  (setq ivy-initial-inputs-alist nil)
   (setq ivy-count-format "(%d/%d) ")
   (setq enable-recursive-minibuffers t)
-
   ;; Use different regex strats per completion command
-  (push '(swiper . ivy--regex-plus) ivy-re-builders-alist)
-  (push '(counsel-find-file . ivy--regex-fuzzy) ivy-re-builders-alist)
-  (push '(counsel-M-x . ivy--regex-ignore-order) ivy-re-builders-alist))
+  (setq ivy-re-builders-alist '((swiper . ivy--regex-plus)
+                                (counsel-find-file . ivy--regex-fuzzy)
+                                (counsel-M-x . ivy--regex-ignore-order))))
 
 (use-package ivy-rich
   :ensure t
