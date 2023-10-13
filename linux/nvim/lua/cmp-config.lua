@@ -2,31 +2,31 @@
 local cmp = require'cmp'
 
 local kind_icons = {
-	Text = "",
-	Method = "",
-	Function = "",
+	Text = "󰊄",
+	Method = "",
+	Function = "󰊕",
 	Constructor = "",
 	Field = "",
-	Variable = "",
-	Class = "",
+	Variable = "",
+	Class = "",
 	Interface = "",
 	Module = "",
 	Property = "",
 	Unit = "",
-	Value = "",
+	Value = "󰎠",
 	Enum = "",
-	Keyword = "",
+	Keyword = "󰌋",
 	Snippet = "",
-	Color = "",
-	File = "",
+	Color = "󰏘",
+	File = "󰈙",
 	Reference = "",
-	Folder = "",
+	Folder = "󰉋",
 	EnumMember = "",
-	Constant = "",
+	Constant = "󰇽",
 	Struct = "",
 	Event = "",
-	Operator = "",
-	TypeParameter = "",
+	Operator = "󰆕",
+	TypeParameter = "󰊄",
 }
 
 cmp.setup({
@@ -74,10 +74,10 @@ cmp.setup({
 			-- vim_item.kind = string.format('%s %s', kind_icons[vim_item.kind], vim_item.kind) -- This concatonates the icons with the name of the item kind
       -- NOTE: order matters
 			vim_item.menu = ({
-				nvim_lsp = "ﲳ",
+				nvim_lsp = "󰞵",
 				vsnip = "",
-				buffer = "﬘",
-				path = "ﱮ",
+				buffer = "",
+				path = "󰝰",
 			})[entry.source.name]
 			return vim_item
 		end,

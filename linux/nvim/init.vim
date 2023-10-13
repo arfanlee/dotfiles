@@ -21,6 +21,7 @@ Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
 Plug 'nvim-lualine/lualine.nvim'
+" Plug 'kdheepak/tabline.nvim'
 Plug 'akinsho/bufferline.nvim'
 
 " Fuzzy finder
@@ -29,6 +30,7 @@ Plug 'junegunn/fzf'
 
 " Git plugin
 Plug 'tpope/vim-fugitive'
+Plug 'gabrielelana/vim-markdown'
 
 " Python indent fix
 Plug 'Vimjas/vim-python-pep8-indent'
@@ -82,6 +84,7 @@ let g:NERDTreeDirArrowExpandable = '󰁙'
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
 
+let g:markdown_mapping_switch_status = '<C-m>'
 " Built in :nohls macro key = <C-l>
 
 " Delete forward in insert mode
