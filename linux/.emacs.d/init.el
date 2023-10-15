@@ -37,8 +37,8 @@
   (toggle-frame-maximized))
 
 ;; Org-mode stuff
-(setq org-adapt-indentation t)          ; to indent contents under headings
-(setq org-hide-emphasis-markers t)      ; to hide markup symbols. e.g: /italics/ *bold*
+(setq org-adapt-indentation t)     ; to indent contents under headings
+(setq org-hide-emphasis-markers t) ; to hide markup symbols. e.g: /italics/ *bold*
 
 ;; For org code block
 (org-babel-do-load-languages
@@ -124,11 +124,11 @@
   :init
   (setq centaur-tabs-enable-key-keybindings t)
   :config
-  (setq centaur-tabs-set-icons t)       ; For prefix icon according to file type(s)
+  (setq centaur-tabs-set-icons t) ; For prefix icon according to file type(s)
   (setq centaur-tabs-style "bar")
   (setq centaur-tabs-height 35)
-  (setq centaur-tabs-set-bar 'under)    ; The little line under focused tab
-  (setq x-underline-at-descent-line t)  ; The little line display fix for non-Spacemacs
+  (setq centaur-tabs-set-bar 'under) ; The little line under focused tab
+  (setq x-underline-at-descent-line t) ; The little line display fix for non-Spacemacs
   (setq centaur-tabs-gray-out-icons 'buffer)
   (setq centaur-tabs-set-modified-marker t) ; For the modified marker on close button
   (setq centaur-tabs-modified-marker "")
@@ -147,9 +147,40 @@
         ("C-<tab>" . centaur-tabs-forward)
         ("C-<iso-lefttab>" . centaur-tabs-backward)))
 
-;; (use-package company
-;;   :ensure t
-;;   :init (company-mode))
+(use-package corfu
+  :ensure t
+  :custom
+  (corfu-cycle t)
+  (corfu-auto t)
+  (corfu-preselect 'prompt)
+  (corfu-auto-prefix 2)
+  (corfu-auto-delay 0.0)
+  :bind
+  (:map corfu-map
+        ("TAB" . corfu-next)
+        ([tab] . corfu-next)
+        ("S-TAB" . corfu-prev)
+        ([backtab] . corfu-previous))
+  :init
+  (corfu-history-mode)
+  (global-corfu-mode))
+
+(use-package kind-icon
+  :ensure t
+  :after corfu
+  :custom
+  (kind-icon-default-face 'corfu-default) ; to compute blended backgrounds correctly
+  :config
+  (add-to-list 'corfu-margin-formatters #'kind-icon-margin-formatter))
+
+(use-package orderless
+  :ensure t
+  :init
+  ;; Tune the global completion style settings to your liking!
+  ;; This affects the minibuffer and non-lsp completion at point.
+  (setq completion-styles '(orderless)
+        completion-category-defaults nil
+        completion-category-overrides '((file (styles . (partial-completion))))))
 
 (use-package counsel
   :ensure t
@@ -319,7 +350,8 @@
   (setq lsp-keymap-prefix "C-c l")
   :hook
   (lsp-enable-which-key-integration t)
-  (rust-mode . lsp))
+  (rust-mode . lsp)
+  (python-mode . lsp))
 
 (use-package lsp-ui
   :ensure t
@@ -333,20 +365,27 @@
 (use-package rust-mode
   :ensure t
   :mode "\\.rs\\'"
-  :init (setq rust-format-on-save t)
+  :init (setq rust-format-on-save t) ; 'rustfmt' needed to be installed
   :hook (rust-mode-hook . lsp-mode))
+
+(use-package python-mode
+  :ensure t
+  :mode "\\.py'"
+  :hook (python-mode . (lambda ()
+                         (require 'lsp-pyright) ; install it first
+                         (lsp))))
 
 (use-package markdown-mode
   :ensure t
   :mode ("README\\.md\\'" . gfm-mode)
-  ;; Need to install multimarkdown with Linux package manager, e.g. dnf/pacman/apt
+  ;; Need to install 'multimarkdown' with Linux package manager, e.g. dnf/pacman/apt
   ;; It will show preview in browser, not in Emacs itself
   :init (setq markdown-command "multimarkdown"))
 
 (use-package org
   :ensure t
   :config
-  (require 'org-tempo)                  ; quicker way to start source code, quote, etc.
+  (require 'org-tempo) ; A quicker way to start source code, quote, etc.
   (setq org-startup-folded 'overview))
 
 (use-package org-appear
@@ -440,6 +479,12 @@
   :after (treemacs evil)
   :config
   (evil-set-initial-state 'treemacs-mode 'normal))
+
+(use-package vterm
+  :ensure t
+  :bind
+  (:map evil-insert-state-map
+        ("C-v" . vterm-yank)))
 
 (use-package which-key
   :ensure t
