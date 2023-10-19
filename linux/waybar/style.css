@@ -1,12 +1,30 @@
+/* Waybar style.css */
+
+@define-color autumnGreen #76946A;
+@define-color autumnRed #C34043;
+@define-color autumnYellow #DCA561;
+@define-color carpYellow #E6C384;
+@define-color crystalBlue #7E9CD8;
+@define-color fujiWhite #DCD7BA;
+@define-color oniViolet #957FB8;
+@define-color peachRed #FF5D62;
+@define-color roninYellow #FF9E3B;
+@define-color springBlue #7FB4CA;
+@define-color springGreen #98BB6C;
+@define-color springViolet1 #938AA9;
+@define-color sumiInk1 #1F1F28;
+@define-color sumiInk3 #393552;
+@define-color surimiOrange #FFA066;
+@define-color waveBlue1 #223249;
+
 * {
-    /* `otf-font-awesome` is required to be installed for icons */
     font-family: Symbols Nerd Font Mono, JetBrainsMono Nerd Font;
     font-size: 14px;
 }
 
 window#waybar {
-    background-color: rgba(43, 48, 59, 10);
-    color: #FFFFFF;
+    background-color: @sumiInk1;
+    color: @fujiWhite;
     /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     transition-property: background-color;
     transition-duration: .5s;
@@ -26,7 +44,7 @@ window#waybar.solo {
 */
 
 window#waybar.chromium {
-    background-color: #000000;
+    background-color: @sumiInk1;
     border: none;
 }
 
@@ -41,42 +59,43 @@ button {
 /* https://github.com/Alexays/Waybar/wiki/FAQ#the-workspace-buttons-have-a-strange-hover-effect */
 button:hover {
     background: inherit;
-    box-shadow: inset 0 -3px #FFFFFF;
+    box-shadow: inset 0 -3px @fujiWhite;
 }
 
 #workspaces button {
     padding: 0 8px;
-    background-color: #7E9CD8;
+    background-color: @sumiInk3;
     border: none;
-    border-radius: 3px;
-    color: #343434;
+	border-radius: 3px;
+    color: @sumiInk1;
 	box-shadow: inset 0 -3px transparent;
     margin: 4px;
 }
 
 #workspaces button:hover {
-    background: rgba(0, 0, 0, 0.2);
+    background: @sumiInk3;
+    color: @crystalBlue;
 }
 
 #workspaces button.focused {
-    background-color: #4974C8;
-    color: #343434;
-    /*box-shadow: inset 0 -3px #7E9CD8;*/  /*Bottom underline*/
+    background-color: @crystalBlue;
+    color: @sumiInk3;
+    /*box-shadow: inset 0 -3px @crystalBlue;*/  /*Bottom underline*/
 }
 
 #workspaces button.active {
-    background-color: #4974C8;
-    color: #343434;
-    /*box-shadow: inset 0 -3px #7E9CD8;*/  /*Bottom underline*/
+    background-color: @crystalBlue;
+    color: @sumiInk3;
+    /*box-shadow: inset 0 -3px @crystalBlue;*/  /*Bottom underline*/
 }
 
 #workspaces button.urgent {
-    background-color: #C34043;
+    background-color: @autumnRed;
 }
 
 #mode {
     background-color: #64727D;
-    border-bottom: 3px solid #FFFFFF;
+    border-bottom: 3px solid @fujiWhite;
 }
 
 #backlight,
@@ -98,7 +117,7 @@ button:hover {
 #wireplumber,
 #mpd {
     padding: 0 10px;
-    color: #FFFFFF;
+    color: @fujiWhite;
 }
 
 #window,
@@ -117,40 +136,40 @@ button:hover {
 }
 
 #clock {
-    color: #333333;
-    background-color: #957FB8;
+    color: @sumiInk3;
+    background: @oniViolet;
 	padding: 0 10px;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #battery {
-    background-color: #98BB6C;
-    color: #333333;
+    color: @springGreen;
+    background: @sumiInk3;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #battery.charging, #battery.plugged {
-    color: #98BB6C;
-	background-color: #333333;
+    color: @roninYellow;
+	background: @sumiInk3;
 }
 
 #battery.critical {
-    color: #FFFFFF;
-	background-color: #C34043;
+    color: @fujiWhite;
+	background: @autumnRed;
 }
 
 @keyframes blink {
     to {
-        background-color: #FFFFFF;
-        color: #000000;
+        background-color: @fujiWhite;
+        color: @sumiInk3;
     }
 }
 
 #battery.critical:not(.charging) {
-    background-color: #F53C3C;
-    color: #FFFFFF;
+    background-color: @autumRed;
+    color: @fujiWhite;
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -159,109 +178,110 @@ button:hover {
 }
 
 label:focus {
-    background-color: #000000;
+    background-color: @sumiInk3;
 }
 
 #cpu {
-    color: #333333;
-    background-color: #6A9589;
+    color: @sumiInk3;
+    background: @autumnGreen;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #memory {
-    color: #333333;
-    background-color: #957FB8;
+    color: @sumiInk3;
+    background-color: @oniViolet;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #custom-notification {
-    background-color: #CCB433;
-	border-radius: 3px;
+    background: #C0A36E;
+    color: @sumiInk3;
+	border-radius: 50px;
 	margin: 6px 2px;
-    color: #343434;
 }
 
 #custom-notification.notification {
-    color: #C34043;
+    color: @autumnRed;
 }
 
 custom-notification.dnd-notification {
-    color: #C34043;
+    color: @autumnRed;
 }
 
 custom-notification.inhibited-notification {
-    color: #C34043;
+    color: @autumnRed;
 }
 
 #disk {
     background-color: #964B00;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #backlight {
-    color: #333333;
-    background-color: #E6C384;
+    color: @sumiInk3;
+    background-color: @carpYellow;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #network {
-    color: #333333;
-    background-color: #7FB4CA;
+    color: @springBlue;
+    background: @sumiInk3;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #network.disconnected {
-    color: #C34043;
+    color: @autumnRed;
 }
 
 #pulseaudio {
-    color: #333333;
-    background-color: #6A9589;
+    color: @autumnYellow;
+    background: @sumiInk3;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #pulseaudio.muted {
-    color: #2A5C45;
+    color: @autumnRed;
 }
 
 #wireplumber {
-    background-color: #FFF0F5;
-    color: #000000;
-	border-radius: 3px;
+    color: @sumiInk3;
+    background-color: @autumnYellow;
+	border-radius: 50px;
 }
 
 #wireplumber.muted {
-    background-color: #F53C3C;
+    background-color: @autumRed;
 }
 
 #custom-media {
-    background-color: #66CC99;
-    color: #2A5C45;
+    background-color: @autumnGreen;
+    color: @sumiInk3;
     min-width: 100px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #custom-media.custom-spotify {
-    background-color: #66CC99;
+    background-color: @autumnGreen;
 }
 
 #custom-media.custom-vlc {
-    background-color: #FFA000;
+    background-color: @roninYellow;
 }
 
 #temperature {
-    background-color: #F0932B;
-	border-radius: 3px;
+    color: @roninYellow;
+    background-color: @springBlue;
+	border-radius: 50px;
 }
 
 #temperature.critical {
-    background-color: #EB4D4B;
-	border-radius: 3px;
+    background-color: @autumnRed;
+	border-radius: 50px;
 }
 
 #tray {
@@ -269,11 +289,11 @@ custom-notification.inhibited-notification {
 }
 
 #bluetooth {
-    color: #FFFFFF;
-    background-color: #294172;
+    color: @fujiWhite;
+    background-color: @waveBlue1;
 	/*padding: 0 10px;*/
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #tray > .passive {
@@ -282,67 +302,68 @@ custom-notification.inhibited-notification {
 
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
-    background-color: #EB4D4B;
+    background-color: @autumnRed;
 }
 
 #idle_inhibitor {
-    background-color: #2D3436;
+    background-color: @sumiInk3;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ECF0F1;
-    color: #2D3436;
+    background-color: @fujiWhite;
+    color: @sumiInk3;
 }
 
 #mpd {
-    background-color: #66CC99;
-    color: #2A5C45;
-	border-radius: 3px;
+    background-color: @autumnGreen;
+    color: @sumiInk3;
+	border-radius: 50px;
 }
 
 #mpd.disconnected {
-    background-color: #F53C3C;
+    color: @autumnRed;
 }
 
 #mpd.stopped {
-    background-color: #90B1B1;
+    background-color: @roninYellow;
 }
 
 #mpd.paused {
-    background-color: #51A37A;
+    background-color: @peachRed;
 }
 
 #language {
-    background: #00B093;
-    color: #740864;
+    background: @springViolet1;
+    color: @sumiInk3;
     padding: 0 5px;
 	margin: 6px 2px;
     min-width: 16px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #keyboard-state {
     background: #97E1AD;
-    color: #000000;
+    color: @sumiInk3;
     padding: 0 0px;
 	margin: 6px 2px;
     min-width: 16px;
 }
 
 #keyboard-state > label {
+    color: @peachRed;
     padding: 0 5px;
 }
 
 #keyboard-state > label.locked {
-    background: rgba(0, 0, 0, 0.2);
+    background: @sumiInk3;
 }
 
 #scratchpad {
-    background: rgba(0, 0, 0, 0.2);
+    background: @sumiInk3;
 	margin: 6px 2px;
-	border-radius: 3px;
+	border-radius: 50px;
 }
 
 #scratchpad.empty {
