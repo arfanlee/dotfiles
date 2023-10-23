@@ -3,8 +3,9 @@
 # Launch applications on startup on any server when executed by window manager
 pgrep -x emacs > /dev/null || emacs --daemon &
 
-# Check if power adapter is plugged in or not (this will run and done automatically, doesn't run in the background)
-$HOME/.local/bin/plug_check.sh
+# Check if power adapter is plugged in or not, without sound
+$HOME/.local/bin/plug_check.sh &
+
 # A script to notify when battery is low or full (use -f flag, or else it won't find it eventhough it's running)
 pgrep -f 'check_battery.sh' > /dev/null || $HOME/.local/bin/check_battery.sh &
 
