@@ -1,0 +1,2 @@
+# This rule only applies when it is in non-desktop environment (bspwm, sway)
+SUBSYSTEM=="power_supply", ATTR{type}=="Mains", KERNEL=="ADP0", ENV{XDG_SESSION_DESKTOP}=="", RUN+="/home/arfan/.local/bin/plug_check.sh 'play'"
