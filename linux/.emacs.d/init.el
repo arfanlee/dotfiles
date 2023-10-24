@@ -317,6 +317,13 @@
                                 (counsel-find-file . ivy--regex-fuzzy)
                                 (counsel-M-x . ivy--regex-ignore-order))))
 
+(use-package ivy-prescient
+  :ensure t
+  :after counsel
+  :config
+  (ivy-prescient-mode 1)
+  (prescient-persist-mode 1))
+
 (use-package ivy-rich
   :ensure t
   :init
