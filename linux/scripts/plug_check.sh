@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# You can replace the light with any program to control backlight controllers. `e.g: xbacklight`.
+# On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system.
+
 # Get all users active on the machine
 print_logged_users()
 {
