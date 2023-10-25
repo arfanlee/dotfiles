@@ -80,28 +80,8 @@ EndSection
 
 ## Change brightness automatically when on battery/charging (in window manager/wayland compositor)
 
-Create a file in `/etc/udev/rules.d/`, for example `plug-check.rules` *(.rules extension is important)*. And insert the following line
-
-```
-# This rule only applies when it is in non-desktop environment like GNOME, KDE, etc.
-ACTION=="change", SUBSYSTEM=="power_supply", ENV{XDG_SESSION_DESKTOP}=="", RUN+="/path/to/script"
-```
-Replace the `/path/to/script/` to wherever you want to put the script below.
-
-```
-#!/bin/bash
-
-# Check if the laptop is unplugged
-if [[ $(cat /sys/class/power_supply/ADP0/online) == "0" ]]; then
-    # Laptop is unplugged
-    light -S 10  # Set brightness to 10%
-else
-    # Laptop is plugged in
-    light -S 100  # Set brightness to 100%
-fi
-```
-
-*You can replace the light with any program to control backlight controllers. `e.g: xbacklight`. On your machine `/sys/class/power_supply/ADP0/` might use different name and/or location on other devices and distro/init system. Make sure the script is executable. The rules doesn't have to be.*
+1. Copy the file `plug_check.rules` in `scripts/udev_rules` into `/etc/udev/rules.d/`.
+2. Replace the `/path/to/script/` to wherever you want to put the script `plug_check.rules`.
 
 ## Additionals
 Additional applications to install on Linux depending on which distro you're using.
