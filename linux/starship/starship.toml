@@ -7,23 +7,23 @@ command_timeout = 1_000
 
 # Replace the "❯" symbol in the prompt with "➜"
 [character]
-success_symbol = "[󰄾](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
-error_symbol = "[󰄾](bold red)"
+success_symbol = "[➜](bold green)" # The "success_symbol" segment is being set to "➜" with the color "bold green"
+error_symbol = "[➜](bold red)"
 
 [username]
 show_always = true
-style_user = "bold red"
-style_root = "bold blue"
-format =  "[\\[](bold blue)[$user]($style)[@](bold yellow)"
+style_user = "red"
+style_root = "blue"
+format =  "[\\[](blue)[$user]($style)[@](bold yellow)"
 
 [hostname]
 ssh_only = false
-style = "bold white"
+style = "white"
 format =  "[$hostname]($style) "
 
 [directory]
 truncation_length = 5
-style = "bold green"
+style = "green"
 read_only = " "
 format = "[$read_only]($read_only_style)[$path]($style)[\\]](bold blue) "
 
