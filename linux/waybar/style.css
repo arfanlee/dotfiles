@@ -5,10 +5,13 @@
 @define-color autumnYellow #DCA561;
 @define-color carpYellow #E6C384;
 @define-color crystalBlue #7E9CD8;
+@define-color dragonBlue #658594;
 @define-color fujiWhite #DCD7BA;
+@define-color lightBlue #A3D4D5;
 @define-color oniViolet #957FB8;
 @define-color peachRed #FF5D62;
 @define-color roninYellow #FF9E3B;
+@define-color sakuraPink #D27E99;
 @define-color springBlue #7FB4CA;
 @define-color springGreen #98BB6C;
 @define-color springViolet1 #938AA9;
@@ -16,6 +19,7 @@
 @define-color sumiInk3 #393552;
 @define-color surimiOrange #FFA066;
 @define-color waveBlue1 #223249;
+@define-color waveBlue2 #2D4F67;
 
 * {
     font-family: Symbols Nerd Font Mono, JetBrainsMono Nerd Font;
@@ -93,6 +97,10 @@ button:hover {
     background-color: @autumnRed;
 }
 
+#workspaces button.urgent {
+    background-color: @autumnRed;
+}
+
 #mode {
     background-color: #64727D;
     border-bottom: 3px solid @fujiWhite;
@@ -103,7 +111,6 @@ button:hover {
 #bluetooth,
 #clock,
 #cpu,
-#custom-media,
 #disk,
 #idle_inhibitor,
 #memory,
@@ -112,7 +119,6 @@ button:hover {
 #custom-notification,
 #pulseaudio,
 #scratchpad,
-#temperature,
 #tray,
 #wireplumber,
 #mpd {
@@ -150,9 +156,21 @@ button:hover {
 	border-radius: 50px;
 }
 
+@keyframes charging {
+    to {
+        background: @springGreen;
+        color: @sumiInk1;
+    }
+}
+
 #battery.charging, #battery.plugged {
-    color: @roninYellow;
+    color: @springGreen;
 	background: @sumiInk3;
+    animation-name: charging;
+    animation-duration: 3s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
 }
 
 #battery.critical {
@@ -160,7 +178,7 @@ button:hover {
 	background: @autumnRed;
 }
 
-@keyframes blink {
+@keyframes alert {
     to {
         background-color: @fujiWhite;
         color: @sumiInk3;
@@ -170,7 +188,7 @@ button:hover {
 #battery.critical:not(.charging) {
     background-color: @autumnRed;
     color: @fujiWhite;
-    animation-name: blink;
+    animation-name: alert;
     animation-duration: 0.5s;
     animation-timing-function: linear;
     animation-iteration-count: infinite;
@@ -196,8 +214,8 @@ label:focus {
 }
 
 #custom-notification {
-    background: #C0A36E;
-    color: @sumiInk3;
+    background: @lightBlue;
+    color: @sumiInk1;
 	border-radius: 50px;
 	margin: 6px 2px;
 }
@@ -215,7 +233,7 @@ custom-notification.inhibited-notification {
 }
 
 #disk {
-    background-color: #964B00;
+    background-color: @dragonBlue;
 	border-radius: 50px;
 }
 
@@ -238,7 +256,7 @@ custom-notification.inhibited-notification {
 }
 
 #pulseaudio {
-    color: @autumnYellow;
+    color: @sakuraPink;
     background: @sumiInk3;
 	margin: 6px 2px;
 	border-radius: 50px;
@@ -344,7 +362,7 @@ custom-notification.inhibited-notification {
 }
 
 #keyboard-state {
-    background: #97E1AD;
+    background: @waveBlue2;
     color: @sumiInk3;
     padding: 0 0px;
 	margin: 6px 2px;
