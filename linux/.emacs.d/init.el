@@ -187,13 +187,16 @@
   :bind
   (:map evil-normal-state-map
         ("C-x C-f" . counsel-find-file)
-        ("M-x" . counsel-M-x)))
+        ("M-x" . counsel-M-x))
+  :hook (after-init . counsel-mode))    ; To make sure ivy-prescient started immediately
 
 (use-package dashboard
   :ensure t
   :init
   (progn
     (setq dashboard-startup-banner 'logo)
+    (setq dashboard-display-icons-p t)
+    (setq dashboard-icon-type 'nerd-icons)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-file-icons t)
@@ -206,8 +209,8 @@
                             (projects . 5)
                             (agenda . 5))))
   :config
-  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*"))) ; when open new frame, show dashboard
-  :hook (after-init . dashboard-setup-startup-hook))
+  (dashboard-setup-startup-hook)
+  (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))) ; when open new frame, show dashboard
 
 (use-package doom-modeline
   :ensure t
