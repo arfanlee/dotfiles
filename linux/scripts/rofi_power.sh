@@ -48,13 +48,13 @@ run_cmd() {
     selected="$(confirm_exit)"
     if [[ "$selected" == "$yes" ]]; then
         if [[ $1 == '--shutdown' ]]; then
-            systemctl poweroff
+            poweroff
         elif [[ $1 == '--reboot' ]]; then
-            systemctl reboot
+            reboot
         elif [[ $1 == '--suspend' ]]; then
             systemctl suspend
         elif [[ $1 == '--hibernate' ]]; then
-            systemctl hibernate
+            hibernate
         elif [[ $1 == '--logout' ]]; then
             if [[ "$DESKTOP_SESSION" == 'bspwm' ]]; then
                 bspc quit
@@ -84,7 +84,7 @@ case ${chosen} in
         elif [[ -x '/usr/bin/i3lock' ]]; then
             i3lock
 		elif [[ -x '/usr/bin/swaylock' ]]; then
-			swaylock -i ~/Pictures/wallpaper/someone-staring-at-starry-skies.png -s fill
+			swaylock -i ~/Pictures/Wallpapers/someone-staring-at-starry-skies.png -s fill
         fi
         ;;
     $suspend)
