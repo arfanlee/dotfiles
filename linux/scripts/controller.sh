@@ -1,17 +1,9 @@
 #!/bin/bash
 
-# Check if an argument is provided
-if [ -z "$1" ]; then
-    echo "No input value provided."
-    exit 1
-fi
-
-# Use the argument (input_value) directly in the script
-
 WOBSOCK=$XDG_RUNTIME_DIR/wob.sock
 
 # Lower Volume
-if [[ "$1" == "lv" ]]; then
+if [[ "$1" == "lv" ]]; then     # Value from when using the script
     wpctl set-volume @DEFAULT_AUDIO_SINK@ 2%- && wpctl get-volume @DEFAULT_AUDIO_SINK@ | awk '{print $2*100}' > $WOBSOCK
 # Raise Volume
 elif [[ "$1" == "rv" ]]; then
