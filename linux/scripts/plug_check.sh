@@ -13,7 +13,7 @@ print_logged_users()
 
 declare -a logged_users=($(print_logged_users))
 
-if [[ $(echo $XDG_SESSION_DESKTOP) != "" ]]; then
+if [[ $(echo $XDG_SESSION_DESKTOP) != "KDE" && $(whoami) != "root" ]]; then
     # Check if the laptop is unplugged
     if [[ $(cat /sys/class/power_supply/ADP0/online) == "0" ]]; then
         if [[ "$1" == "play" ]]; then # Only play the sound when a value is given
