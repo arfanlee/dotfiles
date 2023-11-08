@@ -12,16 +12,14 @@ while true; do
     # delete the tmp fullbattery when it's discharging
     if [ $BATTERY_DISCHARGING -eq 1 ] && [ -f $FULL_FILE ]; then
         rm $FULL_FILE
-    # delete the tmp lowbattery when it's charging
-    elif [ $BATTERY_DISCHARGING -eq 0 ] && [ -f $LOW_FILE ]; then
-        rm $LOW_FILE
     fi
 
     # show notification if battery low, file doesn't exists and it's discharging
     if [ $BATTERY_LEVEL -le 20 ] && [ $BATTERY_DISCHARGING -eq 1 ] && [ ! -f $LOW_FILE ]; then
         setsid -f ffplay -nodisp -autoexit /usr/share/sounds/Oxygen-Sys-Warning.ogg >/dev/null 2>&1
-        notify-send -i ~/.local/share/icons/Custom/low-battery.png -u critical "Battery Low" "Battery level is ${BATTERY_LEVEL}%. Please charge."
-        touch $LOW_FILE
+        # Send the notification ID into the path given
+        notify-send -i ~/.local/share/icons/Custom/low-battery.png -u critical "Battery Low" "Battery level is ${BATTERY_LEVEL}%. Please charge." -p > $LOW_FILE
+
     # Send a notification on low battery
     elif [ $BATTERY_LEVEL -eq 100 ] && [ $BATTERY_DISCHARGING -eq 0 ] && [ ! -f $FULL_FILE ]; then
         setsid -f ffplay -nodisp -autoexit /usr/share/sounds/Oxygen-Sys-App-Positive.ogg >/dev/null 2>&1
