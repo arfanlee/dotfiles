@@ -30,7 +30,11 @@ for (( i=0; i<${#logged_users[@]}; i=($i + 1) )); do
         else
             if [[ "$1" == "play" ]]; then
                 # Execute the delete notification script and pass the value
-                /home/$CURRENT_USER/.local/bin/del_noti.sh $(cat $LOW_FILE)
+                su $CURRENT_USER -c "/usr/bin/gdbus call --session \
+                      --dest org.freedesktop.Notifications \
+                      --object-path /org/freedesktop/Notifications \
+                      --method org.freedesktop.Notifications.CloseNotification \
+                      '$(cat $LOW_FILE)'"
                 su $CURRENT_USER -c "setsid -f ffplay -nodisp -autoexit /usr/share/sounds/Oxygen-Sys-App-Positive.ogg >/dev/null 2>&1" &
                 rm $LOW_FILE
             fi
