@@ -47,6 +47,10 @@
    (java . t)
    (python . t)))
 
+;; C stuff
+(setq c-default-style "linux"
+      c-basic-offset 4)
+
 ;; Set custom set in here instead of in init.el
 (setq custom-file (locate-user-emacs-file "custom_sets.el"))
 (load custom-file 'noerror 'nomessage)
@@ -54,6 +58,7 @@
 ;; Set tab to 4 spaces
 (setq-default tab-width 4)
 (setq-default evil-shift-width tab-width)
+(setq indent-line-function 'insert-tab)
 
 ;; Use spaces instead of tabs for indentation
 (setq-default indent-tabs-mode nil)
@@ -149,6 +154,8 @@
 
 (use-package corfu
   :ensure t
+  ;; :after lsp-mode
+  ;; :hook (lsp-mode . corfu-mode)
   :custom
   (corfu-cycle t)
   (corfu-auto t)
@@ -209,6 +216,7 @@
                             (projects . 5)
                             (agenda . 5))))
   :config
+  (recentf-load-list)
   (dashboard-setup-startup-hook)
   (setq initial-buffer-choice (lambda () (get-buffer-create "*dashboard*")))) ; when open new frame, show dashboard
 
@@ -353,37 +361,54 @@
 ;; LSP
 (use-package lsp-mode
   :ensure t
-  :commands lsp
-  :bind (:map lsp-mode-map
-              ("TAB" . completion-cycling))
+  :commands (lsp lsp-deferred)
+  :hook (lsp-mode-hook . corfu-mode)
   :init
   (setq lsp-keymap-prefix "C-c l")
-  :hook
-  (lsp-enable-which-key-integration t)
-  (rust-mode . lsp)
-  (python-mode . lsp))
-
-(use-package lsp-ui
-  :ensure t
-  :hook (lsp-mode . lsp-ui-mode)
   :config
-  (setq lsp-ui-sideline-enable t
-        lsp-ui-sideline-show-hover nil
-        lsp-ui-doc-position 'bottom)
-  (lsp-ui-doc-show))
+  (lsp-enable-which-key-integration t)
+  (electric-pair-mode))
+  ;; (c-mode . lsp-mode))
 
-(use-package rust-mode
+(use-package c-mode
+  :mode "\\.c\\'")
+
+;; (use-package lsp-ui ;; replaced by corfu
+;;   :ensure t
+;;   :hook (lsp-mode . lsp-ui-mode)
+;;   :config
+;;   (setq lsp-ui-sideline-enable nil
+;;         lsp-ui-sideline-show-hover nil
+;;         lsp-ui-doc-position 'top)
+;;   (lsp-ui-doc-show))
+
+(use-package rustic
   :ensure t
-  :mode "\\.rs\\'"
-  :init (setq rust-format-on-save t) ; 'rustfmt' needed to be installed
-  :hook (rust-mode-hook . lsp-mode))
+  :custom (rustic-format-trigger 'on-save))
+
+;; (use-package rust-mode
+;;   :ensure t
+;;   :mode "\\.rs\\'"
+;;   :init (setq rust-format-on-save t) ; 'rustfmt' needed to be installed
+;;   :hook (rust-mode-hook . lsp-deferred))
+
 
 (use-package python-mode
   :ensure t
-  :mode "\\.py'"
+  :mode "\\.py\\'"
   :hook (python-mode . (lambda ()
-                         (require 'lsp-pyright) ; install it first
-                         (lsp))))
+                         (require 'lsp-pyright)
+                         (lsp-deferred)))  ; or lsp-deferred
+  (python-mode-hook . (lambda () 
+                        (setq python-indent-guess-indent-offset nil)))
+  :bind (("C-s" . python-indent-dedent-line)) ; Remove the keymap
+  :custom
+  (python-shell-interpreter "python3")
+  (lsp-pyright-typechecking-mode "off") ; lsp-pyright default is "standard"
+  :config
+  (setq python-indent 4))
+  ;; (setq lsp-pyright-use-library-code-for-types t) ; set this to nil if getting too many false positive type errors
+  ;; (setq lsp-pyright-stub-path (concat (getenv "HOME") "/src/python-type-stubs")))
 
 (use-package markdown-mode
   :ensure t
@@ -506,3 +531,8 @@
         which-key-idle-delay 10000
         which-key-idle-secondary-delay 0.05)
   (which-key-mode))
+
+(use-package yasnippet
+  :ensure t
+  :config
+  (yas-global-mode))
