@@ -47,10 +47,6 @@
    (java . t)
    (python . t)))
 
-;; C stuff
-(setq c-default-style "linux"
-      c-basic-offset 4)
-
 ;; Set custom set in here instead of in init.el
 (setq custom-file (locate-user-emacs-file "custom_sets.el"))
 (load custom-file 'noerror 'nomessage)
@@ -244,7 +240,7 @@
   (define-key evil-insert-state-map (kbd "C-e") 'evil-end-of-visual-line)
   (define-key evil-insert-state-map (kbd "C-n") 'evil-next-line)
   (define-key evil-insert-state-map (kbd "C-p") 'evil-previous-line)
-  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-before-cursor-after)
+  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-after-cursor-after)
   (evil-mode 1))
 
 (use-package evil-nerd-commenter
@@ -371,27 +367,15 @@
   ;; (c-mode . lsp-mode))
 
 (use-package c-mode
-  :mode "\\.c\\'")
-
-;; (use-package lsp-ui ;; replaced by corfu
-;;   :ensure t
-;;   :hook (lsp-mode . lsp-ui-mode)
-;;   :config
-;;   (setq lsp-ui-sideline-enable nil
-;;         lsp-ui-sideline-show-hover nil
-;;         lsp-ui-doc-position 'top)
-;;   (lsp-ui-doc-show))
+  :mode "\\.c\\'"
+  :hook (c-mode . lsp-deferred)
+  :custom
+  (c-default-style "linux")
+  (c-basic-offset 4))
 
 (use-package rustic
   :ensure t
   :custom (rustic-format-trigger 'on-save))
-
-;; (use-package rust-mode
-;;   :ensure t
-;;   :mode "\\.rs\\'"
-;;   :init (setq rust-format-on-save t) ; 'rustfmt' needed to be installed
-;;   :hook (rust-mode-hook . lsp-deferred))
-
 
 (use-package python-mode
   :ensure t
@@ -407,8 +391,6 @@
   (lsp-pyright-typechecking-mode "off") ; lsp-pyright default is "standard"
   :config
   (setq python-indent 4))
-  ;; (setq lsp-pyright-use-library-code-for-types t) ; set this to nil if getting too many false positive type errors
-  ;; (setq lsp-pyright-stub-path (concat (getenv "HOME") "/src/python-type-stubs")))
 
 (use-package markdown-mode
   :ensure t
