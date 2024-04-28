@@ -110,7 +110,13 @@ cmp.setup.cmdline(':', {
 local capabilities = require('cmp_nvim_lsp').default_capabilities(vim.lsp.protocol.make_client_capabilities())
 -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
 require('lspconfig')['pyright'].setup {
-	capabilities = capabilities
+	settings = {
+		python = {
+			analysis = {
+				typeCheckingMode = "off" -- Would still have Python syntax and semantic errors reported
+			}
+		}
+	}
 }
 require('lspconfig')['rust_analyzer'].setup{
 	capabilities = capabilities
