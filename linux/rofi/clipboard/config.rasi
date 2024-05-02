@@ -1,98 +1,94 @@
 configuration {
-  drun-display-format: "{name}";
-  run-display-format: "{name}";
-  run-window-format: "{name}";
-  font: "JetBrainsMono Nerd Font 10";
-  modi: "run,drun";
+    font: "JetBrainsMono Nerd Font 11";
+    me-select-entry: "MousePrimary";
+    me-accept-entry: "!MousePrimary";
 
-  /* Adjusted some key functionality*/
-  kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
-  kb-row-down: "Down,Control+n";
-  kb-accept-entry: "Return,KP_Enter";
-  terminal: "kitty";
-  kb-remove-to-eol: "Control+Shift+e";
-  kb-mode-next: "Shift+Right,Control+Tab";
-  kb-mode-previous: "Shift+Left,Control+Shift+Tab";
-  kb-mode-complete: "";
-  kb-remove-char-back: "BackSpace";
+    /* Adjusted some key functionality*/
+    kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+n";
+    kb-accept-entry: "Return,KP_Enter";
+    terminal: "kitty";
+    kb-remove-to-eol: "Control+Shift+e";
+    kb-mode-complete: "";
+    kb-remove-char-back: "BackSpace";
 }
 
 @theme "/dev/null"
 
 * {
-  bg-normal: #1E2127;
-  bg-focus: #7E9CD8;
+    bg-normal: #1E2127;
+    bg-focus: #7E9CD8;
 
-  fg-normal: @bg-focus;
-  fg-focus: #ABB2BF;
+    fg-normal: #2A2A37;
+    fg-focus: #ABB2BF;
+    sumiInk3: #393552;
 
-  background-color: @bg-normal;
-  
-  border: none;
-  margin: 0 0 2 0;
-  padding: none;
-  spacing: 0;
+    background-color: @bg-normal;
+
+    border: none;
+    margin: 0 0 2px 0;
+    padding: none;
+    spacing: 0;
 }
 
 window {
-  width: 25%;
+    width: 25%;
+    border-radius: 10px;
 }
 
 prompt {
-  background-color: #2A2A37;
-  text-color: @fg-focus;
-  enabled: true;
-  padding: 8 13 8 13;
-  border: 8 0 8 8;
+    background-color: @bg-focus;
+    text-color: @bg-normal;
+    enabled: true;
+    border-radius: 5px 0 0 5px;
+    padding: 12px 18px 12px 18px;
 }
 
 entry {
-  placeholder: "Search";
-  placeholder-color: #999999;
-  background-color: #2A2A37;
-  padding: 8 8 8 0;
-  border: 8 8 8 0;
-  text-color: @fg-focus;
+    placeholder: "Search";
+    placeholder-color: @fg-focus;
+    background-color: @fg-normal;
+    padding: 12px;
+    border-radius: 0 5px 5px 0;
+    text-color: @fg-focus;
 }
 
 inputbar {
-  children: [prompt, entry];
+    margin: 10px 10px 0 10px;
+    children: [prompt, entry];
 }
 
 listview {
-  background-color: @bg-normal;
-  columns: 1;
-  lines: 8;
+    padding: 7px;
+    background-color: @bg-normal;
+    columns: 1;
+    lines: 6;
 }
 
 element {
-  padding: 10;
-  border: 0 8 0 8;
-  text-color: @fg-focus;
+    padding: 10px;
+    text-color: @fg-focus;
+    border: 1px;
+    border-radius: 5px;
+    border-color: @sumiInk3;
+    margin: 3px;
 }
 
 element selected {
-  background-color: @bg-focus;
-  text-color: @bg-normal;
-  border-radius: 5px;
+    background-color: @bg-focus;
+    text-color: @bg-normal;
+    border-radius: 5px;
 }
 
 element-text {
-  background-color: inherit;
-  text-color: inherit;
-  vertical-align: 0.5;
-}
-
-element-icon {
-  size: 30;
-  padding: none;
-  margin: 0 8 0 0;
-  background-color: #FFFFFF00;
+    background-color: inherit;
+    text-color: inherit;
+    vertical-align: 0.5;
 }
 
 mainbox {
-  background-color: @bg-normal;
-  children: [inputbar, listview];
+    background-color: @bg-normal;
+    children: [inputbar, listview];
 }
 
 /* vim: ft=sass

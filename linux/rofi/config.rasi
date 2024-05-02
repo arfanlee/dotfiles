@@ -1,26 +1,26 @@
 configuration {
-    display-drun: "";
-    display-run: "";
-    display-window: "";
+    display-drun: "󱓞";
+    display-window: "";
 
     drun-display-format: "{name}";
-    run-display-format: "{name}";
-    run-window-format: "{name}";
+    window-format: "{title}";
     font: "JetBrainsMono Nerd Font Bold 12";
-    modi: "run,drun";
+    modi: "drun,window";
     show-icons: true;
     icon-theme: "Papirus-Dark";
 
     /* Adjusted some key functionality*/
-    kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
-    kb-row-down: "Down,Control+n";
     kb-accept-entry: "Return,KP_Enter";
-    terminal: "kitty";
-    kb-remove-to-eol: "Control+Shift+e";
+    kb-mode-complete: "";
     kb-mode-next: "Shift+Right,Control+Tab,Control+l";
     kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
-    kb-mode-complete: "";
     kb-remove-char-back: "BackSpace";
+    kb-remove-to-eol: "Control+Shift+e";
+    kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+n";
+    me-accept-entry: "!MousePrimary";
+    me-select-entry: "MousePrimary";
+    terminal: "kitty";
 }
 
 @theme "/dev/null"
@@ -29,14 +29,14 @@ configuration {
     bg-normal: #1E2127;
     bg-focus: #7E9CD8;
 
-    fg-normal: @bg-focus;
+    fg-normal: #2A2A37;
     fg-focus: #ABB2BF;
     sumiInk3: #393552;
 
     background-color: @bg-normal;
 
     border: none;
-    margin: 0 0 2 0;
+    margin: 0 0 2px 0;
     padding: none;
     spacing: 0;
 }
@@ -47,31 +47,31 @@ window {
 }
 
 prompt {
-    background-color: #2A2A37;
+    background-color: @fg-normal;
     text-color: @fg-focus;
     enabled: true;
-    padding: 15;
-    border: 8 0 8 8;
+    border-radius: 10px 0 0 10px;
+    padding: 15px;
 }
 
 entry {
     placeholder: "Search";
-    placeholder-color: #999999;
-    background-color: #2A2A37;
-    padding: 15 15 15 0;
-    border: 8 8 8 0;
+    placeholder-color: @fg-focus;
+    background-color: @fg-normal;
+    padding: 15px 15px 15px 0;
+    border-radius: 0 10px 10px 0;
     text-color: @fg-focus;
 }
 
 inputbar {
     background-color:            transparent;
-    background-image:            url("~/Pictures/Wallpapers/starlike-rose.jpg", width);
-    padding:                     50px 10px 10px 10px;
+    background-image:            url("path/to/image.jpg", width);
+    padding:                     150px 10px 10px 10px;
     children: [prompt, entry];
 }
 
 listview {
-    padding: 7px;
+    padding: 5px;
     background-color: @bg-normal;
     columns: 1;
     lines: 6;
@@ -111,4 +111,4 @@ mainbox {
     children: [inputbar, listview];
 }
 
-/* vim: ft=sass */
+/* vim: ft=sass
