@@ -1,13 +1,20 @@
+/*****----- Configuration -----*****/
 configuration {
-    display-drun: "󱓞";
-    display-window: "";
+    display-drun: "󱓞 Apps";
+    display-window: " Windows";
+    display-filebrowser: " Files";
+
+    filebrowser {
+        sorting-method: "atime";
+        cancel-returns-1: true;
+    }
 
     drun-display-format: "{name}";
     window-format: "{title}";
-    font: "JetBrainsMono Nerd Font Bold 12";
-    modi: "drun,window";
+    modi: "drun,window,filebrowser";
     show-icons: true;
     icon-theme: "Papirus-Dark";
+    sidebar-mode: true;
 
     /* Adjusted some key functionality*/
     kb-accept-entry: "Return,KP_Enter";
@@ -25,7 +32,10 @@ configuration {
 
 @theme "/dev/null"
 
+/*****----- Global Properties -----*****/
 * {
+    font: "JetBrainsMono Nerd Font Bold 12";
+
     bg-normal: #1E2127;
     bg-focus: #7E9CD8;
 
@@ -41,14 +51,30 @@ configuration {
     spacing: 0;
 }
 
+/*****----- Main Window -----*****/
 window {
     width: 30%;
     border-radius: 10px;
+    cursor: "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    background-color: @bg-normal;
+    children: [inputbar, listview, mode-switcher];
+}
+
+/*****----- Input Bar -----*****/
+inputbar {
+    background-color:            transparent;
+    background-image:            url("path/to/timage.jpg", width);
+    padding:                     150px 10px 10px 10px;
+    children: [prompt, entry];
 }
 
 prompt {
-    background-color: @fg-normal;
-    text-color: @fg-focus;
+    background-color: @bg-focus;
+    text-color: @fg-normal;
     enabled: true;
     border-radius: 10px 0 0 10px;
     padding: 15px;
@@ -58,25 +84,21 @@ entry {
     placeholder: "Search";
     placeholder-color: @fg-focus;
     background-color: @fg-normal;
-    padding: 15px 15px 15px 0;
+    padding: 15px;
     border-radius: 0 10px 10px 0;
     text-color: @fg-focus;
 }
 
-inputbar {
-    background-color:            transparent;
-    background-image:            url("path/to/image.jpg", width);
-    padding:                     150px 10px 10px 10px;
-    children: [prompt, entry];
-}
-
+/*****----- Listview -----*****/
 listview {
     padding: 5px;
     background-color: @bg-normal;
     columns: 1;
     lines: 6;
+    cursor: "default";
 }
 
+/*****----- Elements -----*****/
 element {
     padding: 10px;
     border: 1px;
@@ -84,7 +106,7 @@ element {
     text-color: @fg-focus;
     border-color: @sumiInk3;
     border-radius: 5px;
-    margin: 3px;
+    margin: 5px;
 }
 
 element selected {
@@ -98,6 +120,7 @@ element-text {
     background-color: inherit;
     text-color: inherit;
     vertical-align: 0.5;
+    cursor: pointer;
 }
 
 element-icon {
@@ -106,9 +129,26 @@ element-icon {
     background-color: transparent;
 }
 
-mainbox {
+/*****----- Mode Switcher -----*****/
+mode-switcher {
     background-color: @bg-normal;
-    children: [inputbar, listview];
+    padding: 0 5px 5px 5px;
+}
+
+button {
+    padding: 12px;
+    margin: 5px;
+    background-color: @bg-normal;
+    text-color: @fg-focus;
+    border-radius: 5px;
+    border: 1px;
+    border-color: @sumiInk3;
+}
+
+button selected {
+    background-color: @bg-focus;
+    text-color: @fg-normal;
+    border-radius: 5px;
 }
 
 /* vim: ft=sass
