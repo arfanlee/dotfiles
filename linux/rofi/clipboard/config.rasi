@@ -1,21 +1,25 @@
+/*****----- Configuration -----*****/
 configuration {
-    font: "JetBrainsMono Nerd Font 11";
-    me-select-entry: "MousePrimary";
-    me-accept-entry: "!MousePrimary";
-
     /* Adjusted some key functionality*/
-    kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
-    kb-row-down: "Down,Control+n";
     kb-accept-entry: "Return,KP_Enter";
-    terminal: "kitty";
-    kb-remove-to-eol: "Control+Shift+e";
     kb-mode-complete: "";
     kb-remove-char-back: "BackSpace";
+    kb-remove-to-eol: "Control+Shift+e";
+    kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
+    kb-row-down: "Down,Control+n";
+    me-accept-entry: "!MousePrimary";
+    me-select-entry: "MousePrimary";
+    terminal: "kitty";
+    matching: "fuzzy";
+    case-sensitive: false;
 }
 
 @theme "/dev/null"
 
+/*****----- Global Properties -----*****/
 * {
+    font: "JetBrainsMono Nerd Font 10";
+
     bg-normal: #1E2127;
     bg-focus: #7E9CD8;
 
@@ -31,9 +35,23 @@ configuration {
     spacing: 0;
 }
 
+/*****----- Main Window -----*****/
 window {
-    width: 25%;
+    width: 30%;
     border-radius: 10px;
+    cursor: "default";
+}
+
+/*****----- Main Box -----*****/
+mainbox {
+    background-color: @bg-normal;
+    children: [inputbar, listview];
+}
+
+/*****----- Input Bar -----*****/
+inputbar {
+    margin: 10px 10px 0 10px;
+    children: [prompt, entry];
 }
 
 prompt {
@@ -53,18 +71,16 @@ entry {
     text-color: @fg-focus;
 }
 
-inputbar {
-    margin: 10px 10px 0 10px;
-    children: [prompt, entry];
-}
-
+/*****----- Listview -----*****/
 listview {
     padding: 7px;
     background-color: @bg-normal;
     columns: 1;
     lines: 6;
+    cursor: "default";
 }
 
+/*****----- Elements -----*****/
 element {
     padding: 10px;
     text-color: @fg-focus;
@@ -84,11 +100,7 @@ element-text {
     background-color: inherit;
     text-color: inherit;
     vertical-align: 0.5;
-}
-
-mainbox {
-    background-color: @bg-normal;
-    children: [inputbar, listview];
+    cursor: pointer;
 }
 
 /* vim: ft=sass
