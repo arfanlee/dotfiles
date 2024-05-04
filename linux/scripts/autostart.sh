@@ -12,7 +12,9 @@ pgrep -f 'check_battery.sh' > /dev/null || $HOME/.local/bin/check_battery.sh &
 # Launch the application based on what server is on WAYLAND or Xorg
 # Running in Wayland
 if [ -n "$WAYLAND_DISPLAY" ]; then
-    pgrep -x wl-paste > /dev/null || wl-paste -t text --watch clipman store &
+    # pgrep -x wl-paste > /dev/null || wl-paste -t text --watch clipman store -P --histpath="~/.local/share/clipman.json" &
+    pgrep -x wl-paste > /dev/null || wl-paste -t text --watch cliphist store &
+    pgrep -x wl-paste > /dev/null || wl-paste -t image --watch cliphist store &
     pgrep -x swaync > /dev/null || swaync &
 
     # Wayland Overlay Bar setup
