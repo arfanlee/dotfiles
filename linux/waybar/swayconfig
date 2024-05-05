@@ -7,7 +7,7 @@
     // Choose the order of the modules
     "modules-left": ["sway/workspaces", "sway/mode", "sway/scratchpad"],
     "modules-center": ["sway/window"],
-    "modules-right": ["tray", "idle_inhibitor", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock"],
+    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock", "custom/menu"],
 
     // Modules configuration
     "sway/workspaces": {
@@ -24,6 +24,7 @@
             "8": "八",
             "9": "九",
             "10": "十",
+			// "focused": "",
 			"urgent": "",
 			"default": ""
 		}
@@ -31,7 +32,6 @@
 
     "sway/mode": {
         "format": "<span style=\"italic\">{}</span>"
-
     },
 
     "sway/scratchpad": {
@@ -89,7 +89,8 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "timeout": 1;
     },
 
     "tray": {
@@ -181,12 +182,20 @@
 		"escape": true
 	},
 
+    "custom/menu": {
+        "tooltip": false,
+        "format": "",
+        "return-type": "json",
+        "on-click": "$HOME/.local/bin/rofi_power.sh",
+        "escape": true
+    },
+
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "{icon} {format_source} {volume}%",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": " {icon} {volume}% {format_source}",
-        "format-bluetooth-muted": " {icon}  {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}  {format_source}",
+        "format-muted": "󰝟 {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
@@ -203,4 +212,3 @@
 }
 
 // vim: ft=json
-// -*- mode: json -*-

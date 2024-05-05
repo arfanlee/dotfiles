@@ -6,15 +6,16 @@
     "spacing": 4, // Gaps between modules in pixels
 
     // Choose the order of the modules
-    "modules-left": ["hyprland/workspaces", "hyprland/submap"],
+    "modules-left": ["custom/menu", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "idle_inhibitor", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock"],
+    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock"],
 
     // Modules configuration
     "hyprland/workspaces": {
 		"format": "{icon}",
+        "show-special": true,
 		"format-icons": {
-			"1": "一",
+            "1": "一",
 			"2": "二",
 			"3": "三",
 			"4": "四",
@@ -25,19 +26,25 @@
             "9": "九",
             "10": "十",
 			"urgent": "",
-			"focused": "",
+			// "active": "",
+            // "persistent": "", // won't override set format icons workspace above
+            "special": "",
+            "empty": "",
 			"default": ""
-		}
-    },
-
-    "hyprland/window": {
-    	"max-length": 30
+		},
+        "persistent-workspaces": {
+            "*": 5
+        }
     },
 
     "hyprland/submap": {
         "format": "{}",
-        "max-length": 8,
+        "max-length": 10,
         "tooltip": false
+    },
+
+    "hyprland/window": {
+        "max-length": 30
     },
 
     "keyboard-state": {
@@ -83,7 +90,8 @@
         "format-icons": {
             "activated": "",
             "deactivated": ""
-        }
+        },
+        "timeout": 1
     },
 
     "tray": {
@@ -175,12 +183,20 @@
 		"escape": true
 	},
 
+    "custom/menu": {
+        "tooltip": false,
+        "format": "",
+        "return-type": "json",
+        "on-click": "$HOME/.local/bin/rofi_power.sh",
+        "escape": true
+    },
+
     "pulseaudio": {
         "scroll-step": 5, // %, can be a float
-        "format": "{icon} {format_source} {volume}%",
+        "format": "{icon} {volume}% {format_source}",
         "format-bluetooth": " {icon} {volume}% {format_source}",
-        "format-bluetooth-muted": " {icon}  {format_source}",
-        "format-muted": " {format_source}",
+        "format-bluetooth-muted": "󰝟 {icon}  {format_source}",
+        "format-muted": "󰝟 {format_source}",
         "format-source": " {volume}%",
         "format-source-muted": "",
         "format-icons": {
@@ -197,4 +213,3 @@
 }
 
 // vim: ft=json
-// -*- mode: json -*-
