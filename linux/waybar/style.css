@@ -29,7 +29,6 @@
 window#waybar {
     background-color: @sumiInk1;
     color: @fujiWhite;
-    /*border-bottom: 3px solid rgba(100, 114, 125, 0.5);*/
     transition-property: background-color;
     transition-duration: .5s;
 }
@@ -45,13 +44,11 @@ window#waybar.empty {
 window#waybar.solo {
     background-color: #FFFFFF;
 }
-*/
 
-window#waybar.chromium {
-    background-color: @sumiInk1;
-    border: none;
+window#waybar.kitty {
+    background-color: @surimiOrange;
 }
-
+*/
 button {
     /* Use box-shadow instead of border so the text isn't offset */
     box-shadow: inset 0 -3px transparent;
@@ -70,7 +67,7 @@ button:hover {
     padding: 0 8px;
     background-color: @sumiInk3;
     border: none;
-	border-radius: 3px;
+	border-radius: 25%;
     color: @sumiInk1;
 	box-shadow: inset 0 -3px transparent;
     margin: 4px;
@@ -84,17 +81,11 @@ button:hover {
 #workspaces button.focused {
     background-color: @crystalBlue;
     color: @sumiInk3;
-    /*box-shadow: inset 0 -3px @crystalBlue;*/  /*Bottom underline*/
 }
 
 #workspaces button.active {
     background-color: @crystalBlue;
     color: @sumiInk3;
-    /*box-shadow: inset 0 -3px @crystalBlue;*/  /*Bottom underline*/
-}
-
-#workspaces button.urgent {
-    background-color: @autumnRed;
 }
 
 #workspaces button.urgent {
@@ -102,8 +93,16 @@ button:hover {
 }
 
 #mode {
-    background-color: #64727D;
-    border-bottom: 3px solid @fujiWhite;
+    background-color: transparent;
+    color: @surimiOrange;
+}
+
+#submap {
+    background-color: transparent;
+}
+
+#submap.resize {
+    color: @surimiOrange;
 }
 
 #backlight,
@@ -115,8 +114,10 @@ button:hover {
 #idle_inhibitor,
 #memory,
 #mode,
+#submap,
 #network,
 #custom-notification,
+#custom-menu,
 #pulseaudio,
 #scratchpad,
 #tray,
@@ -220,6 +221,14 @@ label:focus {
 	margin: 6px 2px;
 }
 
+#custom-menu {
+    font-size: 25px;
+    background: transparent;
+    color: #0B57A4;
+	margin: 6px 0 6px 12px;
+    padding: 0;
+}
+
 #custom-notification.notification {
     color: @autumnRed;
 }
@@ -303,15 +312,8 @@ custom-notification.inhibited-notification {
 }
 
 #tray {
-    background-color: transparent;
-}
-
-#bluetooth {
-    color: @fujiWhite;
-    background-color: @waveBlue1;
-	/*padding: 0 10px;*/
-	margin: 6px 2px;
-	border-radius: 50px;
+    background-color: @sumiInk3;
+    border-radius: 50px;
 }
 
 #tray > .passive {
@@ -321,6 +323,13 @@ custom-notification.inhibited-notification {
 #tray > .needs-attention {
     -gtk-icon-effect: highlight;
     background-color: @autumnRed;
+}
+
+#bluetooth {
+    color: @fujiWhite;
+    background-color: @waveBlue1;
+	margin: 6px 2px;
+	border-radius: 50px;
 }
 
 #idle_inhibitor {
@@ -364,7 +373,7 @@ custom-notification.inhibited-notification {
 #keyboard-state {
     background: @waveBlue2;
     color: @sumiInk3;
-    padding: 0 0px;
+    padding: 0;
 	margin: 6px 2px;
     min-width: 16px;
 }
