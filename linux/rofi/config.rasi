@@ -1,14 +1,31 @@
 /*****----- Configuration -----*****/
 configuration {
+    display-drun: "󱓞 Apps";
+    display-window: " Windows";
+    display-filebrowser: " Files";
+
+    filebrowser {
+        sorting-method: "atime";
+        cancel-returns-1: true;
+        command: "path/to/launcher.sh";
+    }
+
+    drun-display-format: "{name}";
+    window-format: "{title}";
+    modi: "drun,window,filebrowser";
+    show-icons: true;
+    icon-theme: "Papirus-Dark";
+    sidebar-mode: true;
+
     /* Adjusted some key functionality*/
-    case-sensitive: false;
     kb-accept-entry: "Return,KP_Enter";
     kb-mode-complete: "";
+    kb-mode-next: "Shift+Right,Control+Tab,Control+l";
+    kb-mode-previous: "Shift+Left,Control+Shift+Tab,Control+h";
     kb-remove-char-back: "BackSpace";
     kb-remove-to-eol: "Control+Shift+e";
     kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
     kb-row-down: "Down,Control+n";
-    matching: "fuzzy";
     me-accept-entry: "!MousePrimary";
     me-select-entry: "MousePrimary";
     terminal: "kitty";
@@ -18,7 +35,7 @@ configuration {
 
 /*****----- Global Properties -----*****/
 * {
-    font: "JetBrainsMono Nerd Font 10";
+    font: "JetBrainsMono Nerd Font Bold 12";
 
     bg-normal: #1E2127;
     bg-focus: #7E9CD8;
@@ -45,35 +62,37 @@ window {
 /*****----- Main Box -----*****/
 mainbox {
     background-color: @bg-normal;
-    children: [inputbar, listview];
+    children: [inputbar, listview, mode-switcher];
 }
 
 /*****----- Input Bar -----*****/
 inputbar {
-    margin: 10px 10px 0 10px;
+    background-color:            transparent;
+    background-image:            url("path/to/image.jpg", width);
+    padding:                     150px 10px 10px 10px;
     children: [prompt, entry];
 }
 
 prompt {
     background-color: @bg-focus;
-    text-color: @bg-normal;
+    text-color: @fg-normal;
     enabled: true;
-    border-radius: 5px 0 0 5px;
-    padding: 12px 18px 12px 18px;
+    border-radius: 10px 0 0 10px;
+    padding: 15px;
 }
 
 entry {
     placeholder: "Search";
     placeholder-color: @fg-focus;
     background-color: @fg-normal;
-    padding: 12px;
-    border-radius: 0 5px 5px 0;
+    padding: 15px;
+    border-radius: 0 10px 10px 0;
     text-color: @fg-focus;
 }
 
 /*****----- Listview -----*****/
 listview {
-    padding: 7px;
+    padding: 5px;
     background-color: @bg-normal;
     columns: 1;
     lines: 6;
@@ -83,16 +102,18 @@ listview {
 /*****----- Elements -----*****/
 element {
     padding: 10px;
-    text-color: @fg-focus;
     border: 1px;
-    border-radius: 5px;
+    spacing: 10px;
+    text-color: @fg-focus;
     border-color: @sumiInk3;
-    margin: 3px;
+    border-radius: 5px;
+    margin: 5px;
 }
 
 element selected {
     background-color: @bg-focus;
     text-color: @bg-normal;
+    border-color: @bg-focus;
     border-radius: 5px;
 }
 
@@ -101,6 +122,34 @@ element-text {
     text-color: inherit;
     vertical-align: 0.5;
     cursor: pointer;
+}
+
+element-icon {
+    size: 30;
+    padding: none;
+    background-color: transparent;
+}
+
+/*****----- Mode Switcher -----*****/
+mode-switcher {
+    background-color: @bg-normal;
+    padding: 0 5px 5px 5px;
+}
+
+button {
+    padding: 12px;
+    margin: 5px;
+    background-color: @bg-normal;
+    text-color: @fg-focus;
+    border-radius: 5px;
+    border: 1px;
+    border-color: @sumiInk3;
+}
+
+button selected {
+    background-color: @bg-focus;
+    text-color: @fg-normal;
+    border-radius: 5px;
 }
 
 /* vim: ft=sass
