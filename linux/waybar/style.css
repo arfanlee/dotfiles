@@ -225,10 +225,19 @@ label:focus {
     font-size: 25px;
     background: transparent;
     color: #0B57A4;
-	margin: 6px 0 6px 12px;
+	margin: 6px 0;
     padding: 0;
 }
 
+/* If menu is the leftmost module, adjust right margin */
+.modules-left > widget:first-child > #custom-menu {
+    margin-left: 6px;
+}
+
+/* If menu is the rightmost module, adjust left margin */
+.modules-right > widget:last-child > #custom-menu {
+    margin-right: 6px;
+}
 #custom-notification.notification {
     color: @autumnRed;
 }
@@ -314,6 +323,7 @@ custom-notification.inhibited-notification {
 #tray {
     background-color: @sumiInk3;
     border-radius: 50px;
+    margin: 6px 0;
 }
 
 #tray > .passive {
