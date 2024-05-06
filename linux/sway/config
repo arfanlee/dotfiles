@@ -1,7 +1,7 @@
 ### Variables
 
 # Set cursor theme
-seat seat0 xcursor_theme breeze_cursors 24
+seat seat0 xcursor_theme Bibata-Moder-Classic 24
 
 # Logo key. Use Mod1 for Alt.
 set $mod Mod4
@@ -21,12 +21,14 @@ set $emacs emacsclient -c -a 'emacs'
 # Browser
 set $browser firefox
 
+# File browser
+set $file dolphin
 # Note: pass the final command to swaymsg so that the resulting window can be opened
 # on the original workspace that the command was run on.
 set $menu rofi -show drun | xargs swaymsg exec --
 
 # Clipman using rofi with custom config
-set $clip clipman pick --tool=CUSTOM -T 'rofi -dmenu -p '󰨸' -config ~/.config/rofi/clipboard/config.rasi'
+set $clip cliphist list | rofi -dmenu -p '󱘣 Clipboard' -config ~/.config/rofi/clipboard/config.rasi -display-columns 2 | cliphist decode | wl-copy
 
 # Controller script for volume and brightness that work with wob
 set $controller $HOME/.local/bin/controller.sh
@@ -86,7 +88,7 @@ input "1267:12734:MSFT0001:00_04F3:31BE_Touchpad" {
 
 ### Key bindings
 
-bindsym $mod+Shift+f exec dolphin 		# Clipman
+bindsym $mod+Shift+f exec $file # Dolphin
 bindsym $mod+Return exec $term  # Launch terminal
 bindsym $mod+x exec $emacs      # Launch Emacs
 bindsym $mod+b exec $browser    # Launch a browser
@@ -114,6 +116,7 @@ bindsym XF86MonBrightnessDown exec $controller "bd"
 
 # Screenshot
 bindsym Print exec $HOME/.local/bin/custom_grim.sh
+bindsym $mod+Print exec $HOME/.local/bin/custom_grim.sh "sl"
 
 ## Moving around:
 
@@ -254,5 +257,7 @@ for_window [app_id="mpv"] floating enable
 for_window [class="Sxiv"] floating enable
 for_window [app_id="imv"] floating enable
 for_window [app_id="feh"] floating enable
+for_window [app_id="nomacs"] floating enable
+for_window [app_id="zathura"] floating enable
 
 exec_always $HOME/.local/bin/autostart.sh
