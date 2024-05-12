@@ -31,10 +31,7 @@
             "special": "",
             "empty": "",
 			"default": ""
-		},
-        "persistent-workspaces": {
-            "*": 5
-        }
+		}
     },
 
     "hyprland/submap": {
