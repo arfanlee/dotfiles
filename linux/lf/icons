@@ -47,6 +47,7 @@ tw             # STICKY_OTHER_WRITABLE
 *.ini	
 *.jar   
 *.java	
+*.js	
 *.json	
 *.lua	
 *.md	
@@ -58,6 +59,8 @@ tw             # STICKY_OTHER_WRITABLE
 *.Rmd	
 *.rmd	
 *.rs	
+*.scss  
+*.sh	
 *.tex	
 *.toml	
 *.torrent 
