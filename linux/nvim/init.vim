@@ -7,6 +7,9 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kylechui/nvim-surround'
 
+" Indent line
+Plug 'lukas-reineke/indent-blankline.nvim'
+
 " Intellisense
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
