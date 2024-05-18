@@ -107,6 +107,8 @@ bindsym $mod+Shift+q exec $powermenu
 # Volume/Mic Keys
 bindsym XF86AudioLowerVolume exec $controller "lv"
 bindsym XF86AudioRaiseVolume exec $controller "rv"
+bindsym Shift+XF86AudioLowerVolume exec $controller "lm"
+bindsym Shift+XF86AudioRaiseVolume exec $controller "rm"
 bindsym XF86AudioMute exec $controller "ms"
 bindsym XF86AudioMicMute exec $controller "mm"
 
