@@ -1,22 +1,25 @@
-
-# set colors & icons
+# Set colors & icons
 set icons
 
-# to enable border
+# To enable border
 set drawbox
 
-# interpreter for shell commands
+# Interpreter for shell commands
 set shell sh
 
-# set file preview
-# make sure these files are marked as executables `chmod +x ~/.config/lf/lf_kitty_{clean,preview}`
+# Render sixel image in previewer
+set sixel
+
+# Set previewer & cleaner script
 set previewer '~/.config/lf/lf_kitty_preview'
 set cleaner '~/.config/lf/lf_kitty_clean'
 
-# to change the cursor in the preview pane
-set cursorpreviewfmt "\033[7m"
+# To change the cursor in the respective panes
+set cursorparentfmt "\033[3;90m"
+set cursoractivefmt "\033[7m"
+set cursorpreviewfmt "\033[3;90m"
 
-# set '-eu' options for shell commands
+# Set '-eu' options for shell commands
 # These options are used to have safer shell commands. Option '-e' is used to
 # exit on error and option '-u' is used to give error for unset variables.
 # Option '-f' disables pathname expansion which can be useful when $f, $fs, and
@@ -25,73 +28,31 @@ set cursorpreviewfmt "\033[7m"
 # times.
 set shellopts '-eu'
 
-# set internal field separator (IFS) to "\n" for shell commands
+# Set internal field separator (IFS) to "\n" for shell commands
 # This is useful to automatically split file names in $fs and $fx properly
 # since default file separator used in these variables (i.e. 'filesep' option)
 # is newline. You need to consider the values of these options and create your
 # commands accordingly.
 set ifs "\n"
 
-# leave some space at the top and the bottom of the screen
+# Leave some space at the top and the bottom of the screen
 set scrolloff 10
 
-# mkdir keybind
-map a push %mkdir<space>
-
-# use enter for shell commands
-map <enter> shell
-
-# execute current file (must be executable)
-map x $$f
-map X !$f
-
-# dedicated keys for file opener actions
-map o &mimeopen $f
-map O $mimeopen --ask $f
-
-# define a custom 'open' command
-# This command is called when current file is not a directory. You may want to
-# use either file extensions and/or mime types here. Below uses an editor for
-# text files and a file opener for the rest.
+# CUSTOM COMMANDS
+# Define a custom 'open' command for non-directory files
 cmd open ${{
     test -L $f && f=$(readlink -f $f)
     case $(file --mime-type $f -b) in
 		application/pdf) setsid -f zathura $fx;;
         text/*) $EDITOR $fx;;
-        image/gif) setsid -f mpv --loop $f -quiet >/dev/null 2>&1;;
-        image/*) setsid -f imv . -n $f;;
+        image/*) setsid -f nomacs $f >/dev/null 2>&1;;
 		video/*) setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1;;
 		audio/*) setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1;;
 	*) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done;;
     esac
 }}
 
-# define a custom 'rename' command without prompt for overwrite
-# cmd rename %[ -e $1 ] && printf "file exists" || mv $f $1
-# map r push :rename<space>
-
-# make sure trash folder exists
-# %mkdir -p ~/.trash
-
-# move current file or selected files to trash folder
-# (also see 'man mv' for backup/overwrite options)
-# cmd trash %set -f; mv $fx ~/.trash
-
-# use '<delete>' key for either 'trash' or 'delete' command
-# map <delete> trash
-map <delete> delete
-
-# shortcut to folders
-map g/ select /
-map gc cd ~/.config
-map gl cd ~/.local
-map g. cd ~/repos/dotfiles/linux
-
-# set the ctime decrementally
-map sf :{{ set sortby ctime; set reverse; }}
-
-# extract the current file with the right command
-# (xkcd link: https://xkcd.com/1168/)
+# Extract the current file with the right command
 cmd extract ${{
     set -f
     case $f in
@@ -104,20 +65,52 @@ cmd extract ${{
     esac
 }}
 
-# compress current file or selected files with tar and gunzip
+# Compress current file or selected files with tar and gunzip
 cmd tar ${{
     set -f
     mkdir $1
     cp -r $fx $1
-    tar czf $1.tar.gz $1
+    tar czf $1.tar.gz $1 >/dev/null 2>&1
     rm -rf $1
 }}
 
-# compress current file or selected files with zip
+# Compress current file or selected files with zip
 cmd zip ${{
     set -f
     mkdir $1
     cp -r $fx $1
-    zip -r $1.zip $1
+    zip -r $1.zip $1 >/dev/null 2>&1
     rm -rf $1
 }}
+
+# MAPS
+# Compress/decompressor file
+map xe extract $f
+map xt push :tar<space>
+map xz push :zip<space>
+
+# Shortcut to folders
+map g/ select /
+map gc cd ~/.config
+map gl cd ~/.local
+map g. cd ~/repos/dotfiles/linux
+
+# Set the ctime decrementally
+map sf :{{ set sortby ctime; set reverse; }}
+
+# Create folder
+map a push %mkdir<space>
+
+# Use enter for shell commands
+map <enter> shell
+
+# Execute current file (must be executable)
+map x$ $$f
+map x! !$f
+
+# Dedicated keys for file opener actions
+map o &mimeopen $f
+map O $mimeopen --ask $f
+
+# Use '<delete>' key for either 'trash' or 'delete' command
+map <delete> delete
