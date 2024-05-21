@@ -8,7 +8,7 @@ Copy and paste the following source script into your shell config file init (e.g
 
 ### Bash/ZSH
 Function script
-``` fish
+```
 lfcd () {
     tmp="$(mktemp)"
     lf -last-dir-path="$tmp" "$@"
@@ -24,17 +24,9 @@ lfcd () {
 }
 ```
 
-Source script
-```
-LFCD="/path/to/lfcd.sh"#  pre-built binary, make sure to use absolute path
-if [ -f "$LFCD" ]; then
-    source "$LFCD"
-fi
-```
-
 ### Fish
 Function script
-``` fish
+```
 function lfcd
     set tmp (mktemp)
     # `command` is needed in case `lfcd` is aliased to `lf`
@@ -51,19 +43,25 @@ function lfcd
 end
 ```
 
-Source script
-```
-set LFCD ~/.config/fish/functions/lfcd.fish  # pre-built binary, use absolute path
-if test -f "$LFCD"
-	source "$LFCD"
-end
-```
-
 You can also bind a key for this command like:
 
 ```
-bindkey -s '^o' 'lfcd\n'  # bash/zsh
-bind \co 'lfcd; commandline -f repaint' # fish
+# bash/zsh
+LFCD="path/to/lfcd.sh"
+if [ -f "$LFCD" ]; then
+    source "$LFCD"
+fi
+
+bind '"\C-o":"lfcd\C-m"'  # bash
+bindkey -s '^o' 'lfcd\n'  # zsh
+
+# fish
+set LFCD path/to/lfcd.fish
+if test -f "$LFCD"
+	source "$LFCD"
+end
+
+bind \co 'lfcd; commandline -f repaint'
 ```
 
 ## Optional tools for previwers
