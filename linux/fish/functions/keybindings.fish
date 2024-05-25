@@ -1,3 +1,5 @@
+#!/bin/sh
+
 # Custom FISh keybindings
 
 # Start typing + Up Arrow Key (default it's like fzf)
