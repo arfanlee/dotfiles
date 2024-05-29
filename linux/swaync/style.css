@@ -24,22 +24,20 @@
 	background: transparent;
 }
 
+/* This would also affect inside control centre */
 .notification {
     border: none;
 	border-radius: 2px;
-	margin: 6px;
+	margin: 0;
 	box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.3), 0 1px 3px 1px rgba(0, 0, 0, 0.7),
 	0 2px 6px 2px rgba(0, 0, 0, 0.3);
 	padding: 0;
 }
 
-/* Uncomment to enable specific urgency colors
 .low {
-	background: yellow;
-	padding: 6px;
-	border-radius: 12px;
+    border-left: transparent;
 }
-*/
+
 .normal {
     border-left: 4px solid @normal-green;
 }
@@ -49,9 +47,10 @@
 }
 
 .notification-content {
-	background: @noti-bg;
+	background: transparent;
 	padding: 12px;
-	border-radius: 2px;
+    margin: 10px;
+	border-radius: 0;
 }
 
 .close-button {
@@ -60,8 +59,8 @@
 	text-shadow: none;
 	padding: 0;
 	border-radius: 100%;
-	margin-top: 14px;
-	margin-right: 9px;
+	margin-top: 8px;
+	margin-right: 4px;
 	box-shadow: none;
 	border: none;
 	min-width: 12px;
@@ -77,11 +76,11 @@
 
 .notification-default-action,
 .notification-action {
-	padding: 4px;
+	padding: 0;
 	margin: 0;
 	box-shadow: none;
 	background: @noti-bg;
-	border: 1px solid @reddish;
+	border: none;
 	color: @text-color;
 	transition: all 0.15s ease-in-out;
 }
@@ -93,53 +92,51 @@
 }
 
 .notification-default-action {
-	border-radius: 12px;
-}
-
-/* When alternative actions are visible */
-.notification-default-action:not(:only-child) {
-	border-bottom-left-radius: 0px;
-	border-bottom-right-radius: 0px;
+	border-radius: 0;
 }
 
 .notification-action {
-	border-radius: 0px;
-	border-top: none;
-	border-right: none;
+	border-radius: 0;
+	border: none;
 }
 
 /* add bottom border radius to eliminate clipping */
 .notification-action:first-child {
-	border-bottom-left-radius: 10px;
+	border-bottom-left-radius: 0;
 }
 
 .notification-action:last-child {
-	border-bottom-right-radius: 10px;
-	border-right: 1px solid @noti-border-color;
+	border-bottom-right-radius: 2px;
+	border-right: none;
 }
 
 .inline-reply {
 	margin-top: 8px;
 }
+
 .inline-reply-entry {
 	background: @noti-bg-darker;
 	color: @text-color;
 	caret-color: @text-color;
 	border: 1px solid @noti-border-color;
 	border-radius: 12px;
+
 }
+
 .inline-reply-button {
 	margin-left: 4px;
 	background: @noti-bg;
-	border: 1px solid @noti-border-color;
+	border: none;
 	border-radius: 12px;
 	color: @text-color;
 }
+
 .inline-reply-button:disabled {
 	background: initial;
 	color: @text-color-disabled;
 	border: 1px solid transparent;
 }
+
 .inline-reply-button:hover {
 	background: @noti-bg-hover;
 }
@@ -184,6 +181,7 @@
 }
 
 .control-center-list {
+	/* background: @cc-bg; */
 	background: transparent;
 }
 
@@ -197,7 +195,7 @@
 
 /* Window behind control center and on all other monitors */
 .blank-window {
-	background: alpha(black, 0.25);
+    background: transparent;
 }
 
 /*** Widgets ***/
@@ -207,6 +205,7 @@
 	margin: 8px;
 	font-size: 1.5rem;
 }
+
 /* Clear all button */
 .widget-title > button {
 	font-size: initial;
@@ -217,6 +216,7 @@
 	box-shadow: none;
 	border-radius: 12px;
 }
+
 .widget-title > button:hover {
 	color: @text-color;
 }
@@ -226,15 +226,18 @@
 	margin: 8px;
 	font-size: 1.1rem;
 }
+
 .widget-dnd > switch {
 	font-size: initial;
 	border-radius: 12px;
 	border: 1px solid @noti-border-color;
 	box-shadow: none;
 }
+
 .widget-dnd > switch:checked {
   	background: @bg-selected;
 }
+
 .widget-dnd > switch slider {
 	background: @text-color;
     border: none;
@@ -248,6 +251,7 @@
 .widget-label {
 	margin: 8px;
 }
+
 .widget-label > label {
 	font-size: 1.1rem;
 }
@@ -256,14 +260,17 @@
 .widget-mpris {
   /* The parent to all players */
 }
+
 .widget-mpris-player {
 	padding: 8px;
 	margin: 8px;
 }
+
 .widget-mpris-title {
 	font-weight: bold;
 	font-size: 1.25rem;
 }
+
 .widget-mpris-subtitle {
 	font-size: 1.1rem;
 }
@@ -313,7 +320,6 @@
 }
 
 /* Volume widget */
-
 .widget-volume {
 	background-color: transparent;
 	padding: 8px;
@@ -329,7 +335,7 @@
 .per-app-volume {
 	background-color: @noti-bg-alt;
 	padding: 4px 8px 8px 8px;
-	margin: 0px 8px 8px 8px;
+	margin: 0 8px 8px 8px;
 	border-radius: 12px
 }
 
@@ -346,6 +352,7 @@
 	margin: 8px;
 	font-size: 1.5rem;
 }
+
 .widget-inhibitors > button {
 	font-size: initial;
 	color: @text-color;
