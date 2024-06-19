@@ -3,7 +3,7 @@
 # Get the current date and time in the desired format
 filename=$(date +'Screenshot_%Y%m%d_%H%M%S.png')
 
-# Specify the directory to save the screenshot
+# Specify the directory to save the screenshot (Requires xdg-user-dirs command need to be downloaded)
 directory=$(xdg-user-dir)/Pictures/Screenshots/
 
 # If no argument, just screenshot whole screen
