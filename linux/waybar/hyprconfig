@@ -8,7 +8,7 @@
     // Choose the order of the modules
     "modules-left": ["custom/menu", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock"],
+    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock", "custom/weather"],
 
     // Modules configuration
     "hyprland/workspaces": {
@@ -113,8 +113,7 @@
 		"format-off": "󰂲",
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": "󰂱",
-		"on-click": "/home/arfan/.local/bin/blue_check.sh",
-		"on-click-right": "bluetoothctl connect 41:42:48:26:C7:7A",
+		"on-click": "/path/to/blue_check.sh",
 		"format-connected-battery": "󰂱 {device_battery_percentage}%",
 		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
 		"tooltip-format-connected": "{device_enumerate}",
@@ -184,8 +183,16 @@
         "tooltip": false,
         "format": "",
         "return-type": "json",
-        "on-click": "$HOME/.local/bin/rofi_power.sh",
+        "on-click": "/path/to/rofi_power.sh",
         "escape": true
+    },
+
+    "custom/weather": {
+        "tooltip": false,
+        "format": "{}",
+        "return-type": "json",
+        "interval": 3600,
+        "exec": "/path/to/bin/weather.sh"
     },
 
     "pulseaudio": {
