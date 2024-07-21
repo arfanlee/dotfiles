@@ -96,7 +96,29 @@
     },
 
     "clock": {
-		"format": " {:%a, %d %b %H:%M}"
+		"format": " {:%a, %d %b %H:%M}",
+		"tooltip": true,
+		"tooltip-format": "<tt><small>{calendar}</small></tt>",
+		"calendar": {
+			"mode": "month",
+			"mode-mon-col": 3,
+			"weeks-pos": "",
+			"on-scroll": 1,
+			"format": {
+				"months": "<span color='#FFEAD3'><b>{}</b></span>",
+				"days": "<span color='#DCD7BA'><b>{}</b></span>",
+				"weeks": "<span color='#99FFDD'><b>{}</b></span>",
+				"weekdays": "<span color='#E6C384'><b>{}</b></span>",
+				"today": "<span color='#7E9CD8'><b><u>{}</u></b></span>"
+			}
+		},
+		"actions":  {
+			"on-click-right": "mode",
+			"on-click-forward": "tz_up",
+			"on-click-backward": "tz_down",
+			"on-scroll-up": "shift_up",
+			"on-scroll-down": "shift_down"
+		}
     },
 
     "cpu": {
@@ -154,8 +176,7 @@
         "format-ethernet": "󰈁 {ipaddr}/{cidr}",
         "tooltip-format": "󰀂 {ifname} via {gwaddr} ({signalStrength}%)",
         "format-linked": "󰩟 {ifname} (No IP)",
-        "format-disconnected": " 󰤮 ",
-        "format-alt": "󰁝 {bandwidthUpBits} 󰁅 {bandwidthDownBits}"
+        "format-disconnected": " 󰤮 "
     },
 
 	"custom/notification": {
@@ -169,7 +190,7 @@
 			"inhibited-notification": "󱅫",
 			"inhibited-none": "󰂚",
 			"dnd-inhibited-notification": "󰪑",
-		  	"dnd-inhibited-none": "󰪑"
+			"dnd-inhibited-none": "󰪑"
 		},
 		"return-type": "json",
 		"exec-if": "which swaync-client",
@@ -188,11 +209,12 @@
     },
 
     "custom/weather": {
-        "tooltip": false,
+        "tooltip": true,
         "format": "{}",
         "return-type": "json",
-        "interval": 3600,
-        "exec": "/path/to/bin/weather.sh"
+        "interval": 1800,
+        "exec": "/path/to/weather.sh",
+        "on-click": "/path/to/weather.sh"
     },
 
     "pulseaudio": {

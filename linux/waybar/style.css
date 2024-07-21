@@ -68,7 +68,6 @@ button:hover {
     color: @fujiWhite;
     padding: 0 8px;
     margin: 6px 4px;
-    border: 2px solid @fujiWhite;
 	border-radius: 50px;
 }
 
@@ -83,7 +82,6 @@ window#waybar.hidden {
 
 window#waybar.empty #window{
     background: transparent;
-    border-color: transparent;
 }
 
 #workspaces button {
@@ -128,6 +126,7 @@ window#waybar.empty #window{
 #custom-menu,
 #custom-media,
 #custom-notification,
+#custom-weather,
 #disk,
 #idle_inhibitor,
 #language,
@@ -159,6 +158,7 @@ window#waybar.empty #window{
 @keyframes charging {
     to {
         background: @springGreen;
+        border-color: @sumiInk1;
         color: @sumiInk1;
     }
 }
@@ -264,6 +264,12 @@ custom-notification.dnd-notification {
 
 custom-notification.inhibited-notification {
     color: @autumnRed;
+}
+
+#custom-weather {
+    background: @sumiInk1;
+    border: 2px solid @surimiOrange;
+    color: @surimiOrange;
 }
 
 #disk {
