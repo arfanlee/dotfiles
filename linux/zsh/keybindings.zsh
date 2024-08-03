@@ -39,6 +39,7 @@ if [[ -n "${terminfo[kcuu1]}" ]]; then
   bindkey -M emacs "${terminfo[kcuu1]}" up-line-or-beginning-search
   bindkey -M viins "${terminfo[kcuu1]}" up-line-or-beginning-search
   bindkey -M vicmd "${terminfo[kcuu1]}" up-line-or-beginning-search
+  bindkey '^p' up-line-or-beginning-search
 fi
 # Start typing + [Down-Arrow] - fuzzy find history backward
 if [[ -n "${terminfo[kcud1]}" ]]; then
@@ -48,6 +49,8 @@ if [[ -n "${terminfo[kcud1]}" ]]; then
   bindkey -M emacs "${terminfo[kcud1]}" down-line-or-beginning-search
   bindkey -M viins "${terminfo[kcud1]}" down-line-or-beginning-search
   bindkey -M vicmd "${terminfo[kcud1]}" down-line-or-beginning-search
+  bindkey '^n' down-line-or-beginning-search
+
 fi
 
 # [Home] - Go to beginning of line
@@ -117,8 +120,6 @@ bindkey -s '\eh' 'cd ~\n'
 autoload -U edit-command-line
 zle -N edit-command-line
 bindkey '\C-x\C-e' edit-command-line
-bindkey '^p' history-search-backward
-bindkey '^n' history-search-forward
 
 # file rename magick
 # bindkey "^[m" copy-prev-shell-word

@@ -1,12 +1,27 @@
+# Plugin Manager
+ZINIT_HOME="${XDG_DATA_HOME:-${HOME}/.local/share}/zinit/zinit.git"
+
+# Download if doesn't exist
+if [ ! -d "$ZINIT_HOME" ]; then
+	mkdir -p "$(dirname $ZINIT_HOME)"
+	git clone https://github.com/zdharma-continuum/zinit.git "$ZINIT_HOME"
+fi
+
+source "${ZINIT_HOME}/zinit.zsh"
+ABBR_SET_EXPANSION_CURSOR=1
+
 # Themes/Plugins
+eval "$(starship init zsh)"
+
+source ~/.config/zsh/aliases.zsh
+source ~/.config/zsh/colors.zsh
 source ~/.config/zsh/completion.zsh
 source ~/.config/zsh/keybindings.zsh
-#source ~/.config/zsh/prompt
-eval "$(starship init zsh)"
-source ~/.config/zsh/aliases.zsh
+source /usr/share/autojump/autojump.zsh
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/autojump/autojump.zsh
+
+zinit ice depth=1; zinit light olets/zsh-abbr
 
 # Add new path
 export PATH=$PATH:~/.local/bin
@@ -29,4 +44,4 @@ if [ -f "$LFCD" ]; then
     source "$LFCD"
 fi
 
-#source <(fzf --zsh)             # Only available in fzf >= 0.48.0
+source <(fzf --zsh)             # Only available in fzf >= 0.48.0
