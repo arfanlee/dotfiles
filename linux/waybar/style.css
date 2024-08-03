@@ -140,7 +140,7 @@ window#waybar.empty #window{
 #tray,
 #wireplumber {
 	border-radius: 50px;
-	padding: 0 8px;
+    padding: 0 8px;
 	margin: 6px 2px;
 }
 
@@ -209,7 +209,7 @@ window#waybar.empty #window{
 }
 
 #clock {
-    background: @oniViolet;
+    background: @lightBlue;
     color: @sumiInk3;
 }
 
@@ -250,12 +250,12 @@ window#waybar.empty #window{
 }
 
 #custom-notification {
-    background: @lightBlue;
+    background: @oniViolet;
     color: @sumiInk1;
 }
 
 #custom-notification.notification {
-    color: @autumnRed;
+    color: @carpYellow;
 }
 
 custom-notification.dnd-notification {
@@ -263,7 +263,7 @@ custom-notification.dnd-notification {
 }
 
 custom-notification.inhibited-notification {
-    color: @autumnRed;
+    color: @roninYellow;
 }
 
 #custom-weather {

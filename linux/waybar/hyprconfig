@@ -13,7 +13,7 @@
     // Modules configuration
     "hyprland/workspaces": {
 		"format": "{icon}",
-        "show-special": true,
+        "show-special": false,
 		"format-icons": {
             "1": "一",
 			"2": "二",
@@ -97,28 +97,28 @@
 
     "clock": {
 		"format": " {:%a, %d %b %H:%M}",
-		"tooltip": true,
-		"tooltip-format": "<tt><small>{calendar}</small></tt>",
-		"calendar": {
-			"mode": "month",
-			"mode-mon-col": 3,
-			"weeks-pos": "",
-			"on-scroll": 1,
-			"format": {
-				"months": "<span color='#FFEAD3'><b>{}</b></span>",
-				"days": "<span color='#DCD7BA'><b>{}</b></span>",
-				"weeks": "<span color='#99FFDD'><b>{}</b></span>",
-				"weekdays": "<span color='#E6C384'><b>{}</b></span>",
-				"today": "<span color='#7E9CD8'><b><u>{}</u></b></span>"
-			}
-		},
-		"actions":  {
-			"on-click-right": "mode",
-			"on-click-forward": "tz_up",
-			"on-click-backward": "tz_down",
-			"on-scroll-up": "shift_up",
-			"on-scroll-down": "shift_down"
-		}
+        "tooltip": true,
+        "tooltip-format": "<tt><small>{calendar}</small></tt>",
+        "calendar": {
+            "mode" : "month",
+            "mode-mon-col" : 3,
+            "weeks-pos" : "",
+            "on-scroll" : 1,
+            "format": {
+                "months": "<span color='#FFEAD3'><b>{}</b></span>",
+                "days": "<span color='#DCD7BA'><b>{}</b></span>",
+                "weeks": "<span color='#99FFDD'><b>{}</b></span>",
+                "weekdays": "<span color='#E6C384'><b>{}</b></span>",
+                "today": "<span color='#7E9CD8'><b><u>{}</u></b></span>"
+            }
+        },
+        "actions":  {
+            "on-click-right": "mode",
+            "on-click-forward": "tz_up",
+            "on-click-backward": "tz_down",
+            "on-scroll-up": "shift_up",
+            "on-scroll-down": "shift_down"
+        }
     },
 
     "cpu": {
@@ -183,14 +183,14 @@
 		"tooltip": false,
 		"format": "{icon}",
 		"format-icons": {
-   			"none": "󰂚",
-			"notification": "󱅫",
-			"dnd-notification": "󰂛",
-			"dnd-none": "󰂛",
-			"inhibited-notification": "󱅫",
-			"inhibited-none": "󰂚",
-			"dnd-inhibited-notification": "󰪑",
-			"dnd-inhibited-none": "󰪑"
+            "none": "󰂜",
+			"notification": "󰅸",
+			"dnd-notification": "󰪑",
+			"dnd-none": "󰪑",
+			"inhibited-notification": "󰪒",
+			"inhibited-none": "󰪓",
+			"dnd-inhibited-notification": "󰺁",
+            "dnd-inhibited-none": "󱏬"
 		},
 		"return-type": "json",
 		"exec-if": "which swaync-client",
