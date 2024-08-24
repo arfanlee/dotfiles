@@ -8,13 +8,13 @@ image() {
 	y=$5
 
 	if [[ "$(file -Lb --mime-type "$file")" =~ ^image ]]; then
-		if [ "$(echo $TERM)" == "xterm-kitty" ]; then
-			kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" < /dev/null > /dev/tty
-		else
+		if [[ "$(echo $TERM)" == "xterm-kitty" || "$(echo $TERM)" == "screen-256color" ]]; then
+            kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" </dev/null>/dev/tty
+        else
 			chafa -f sixel -s "${w}x${h}" --animate off --polite on "$file"
 		fi
-        exit 1
-	fi
+    fi
+    exit 1
 }
 
 batorcat() {
@@ -33,9 +33,9 @@ glowormdcat() {
 	shift
 	if command -v glow > /dev/null 2>&1
 	then
-		glow "$file"
+		glow --width 70 --style dark "$file"
 	else
-		mdcat "$file"
+		mdcat --ansi "$file"
 	fi
 }
 
@@ -55,7 +55,7 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.rar)
 		unrar l "$1" ;;
 	*.md)
-		glowormdcat "$1";;
+		glowormdcat "$1" ;;
 	*.7z)
 		7z l "$1" ;;
 	*.[1-8])
@@ -73,7 +73,7 @@ case "$(printf "%s\n" "$(readlink -f "$1")" | awk '{print tolower($0)}')" in
 	*.docx)
 		pandoc -s -t plain "$1" ;;
 	*.xml|*.html)
-		w3m -dump "$1";;
+		w3m -dump "$1" ;;
 	*.xls|*.xlsx)
 		ssconvert --export-type=Gnumeric_stf:stf_csv "$1" "fd://1" | batorcat --language=csv ;;
 	*.wav|*.mp3|*.flac|*.m4a|*.wma|*.ape|*.ac3|*.og[agx]|*.spx|*.opus|*.as[fx]|*.mka)
