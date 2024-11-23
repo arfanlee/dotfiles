@@ -78,11 +78,17 @@
 (setq server-window #'dw/show-server-edit-buffer)
 
 ;; FONTS
-(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font Mono" :height 120)
-(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font Mono" :height 120)
+(set-face-attribute 'default nil :font "JetBrainsMono Nerd Font" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "JetBrainsMono Nerd Font" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Noto Sans Mono CJK JP" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Noto Sans Mono CJK KR" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Noto Sans Mono CJK SC" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Noto Sans Mono CJK TC" :height 120)
+(set-face-attribute 'fixed-pitch nil :font "Noto Sans Mono CJK HK" :height 120)
+(set-face-attribute 'org-table nil :inherit 'fixed-pitch)
 
 ;; In case frame that is launched from emacsclient not using the font above.
-(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font Mono-12"))
+(add-to-list 'default-frame-alist '(font . "JetBrainsMono Nerd Font-12"))
 
 ;; PACKAGE INSTALLER (melpa)
 (require 'package)
@@ -131,12 +137,12 @@
   (setq centaur-tabs-set-bar 'under) ; The little line under focused tab
   (setq x-underline-at-descent-line t) ; The little line display fix for non-Spacemacs
   (setq centaur-tabs-gray-out-icons 'buffer)
+  (setq centaur-tabs-adjust-buffer-order 'left)
   (setq centaur-tabs-set-modified-marker t) ; For the modified marker on close button
   (setq centaur-tabs-modified-marker "")
   (setq centaur-tabs-cycle-scope 'tabs) ; To only cycle tabs in current buffer
   (setq centaur-tabs-label-fixed-length 8)
   (centaur-tabs-headline-match)
-  (centaur-tabs-enable-buffer-reordering)
   (centaur-tabs-mode t)
   :hook
   ;; Turns off tab in this modes
@@ -157,7 +163,7 @@
   (corfu-auto t)
   (corfu-preselect 'prompt)
   (corfu-auto-prefix 2)
-  (corfu-auto-delay 0.0)
+  (corfu-auto-delay 0.1)
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
@@ -240,7 +246,7 @@
   (define-key evil-insert-state-map (kbd "C-e") 'evil-end-of-visual-line)
   (define-key evil-insert-state-map (kbd "C-n") 'evil-next-line)
   (define-key evil-insert-state-map (kbd "C-p") 'evil-previous-line)
-  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-after-cursor-after)
+  (define-key evil-insert-state-map (kbd "C-y") 'evil-paste-before-cursor-after)
   (evil-mode 1))
 
 (use-package evil-nerd-commenter
@@ -307,6 +313,20 @@
     "n t" 'org-roam-dailies-capture-today
     "n f" 'org-roam-node-find
     "n i" 'org-roam-node-insert))
+
+(use-package hl-todo
+  :ensure t
+  :hook ((org-mode . hl-todo-mode)
+         (prog-mode . hl-todo-mode))
+  :config
+  (setq hl-todo-highlight-punctuation "!"
+        hl-todo-keyword-faces
+        `(("TODO" warning-bold)
+          ("FIXME" error bold)
+          ("HACK" font-lock-constant-face bold)
+          ("REVIEW" font-lock-keyword-face bold)
+          ("NOTE" success bold)
+          ("DEPRECATED" font-lock-doc-face bold))))
 
 (use-package ivy
   :diminish
@@ -391,6 +411,12 @@
   (lsp-pyright-typechecking-mode "off") ; lsp-pyright default is "standard"
   :config
   (setq python-indent 4))
+
+(use-package pyvenv
+  :ensure t
+  :config
+  (setenv "WORKON_HOME" "/path/to/envs")
+  (setq pyvenv-mode 1))
 
 (use-package markdown-mode
   :ensure t
@@ -496,6 +522,11 @@
   :after (treemacs evil)
   :config
   (evil-set-initial-state 'treemacs-mode 'normal))
+
+(use-package valign
+  :ensure t
+  :config (setq valign-fancy-bar 'non-nil)
+  :hook (org-mode . valign-mode))
 
 (use-package vterm
   :ensure t
