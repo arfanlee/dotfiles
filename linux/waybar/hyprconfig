@@ -1,30 +1,26 @@
 {
     "layer": "top",
-    "position": "top", // Waybar position (top|bottom|left|right)
+    "position": "top",
     "height": 40, // Waybar height (to be removed for auto height)
-    // "width": 1280, // Waybar width
+    "width": 1900, // Waybar width
     "spacing": 4, // Gaps between modules in pixels
+    "margin-top": 10,
 
     // Choose the order of the modules
     "modules-left": ["custom/menu", "hyprland/workspaces", "hyprland/submap"],
     "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "backlight", "battery", "clock", "custom/weather"],
+    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "battery", "custom/weather", "clock"],
 
     // Modules configuration
     "hyprland/workspaces": {
 		"format": "{icon}",
         "show-special": false,
 		"format-icons": {
-            "1": "一",
-			"2": "二",
-			"3": "三",
-			"4": "四",
-            "5": "五",
-            "6": "六",
-            "7": "七",
-            "8": "八",
-            "9": "九",
-            "10": "十",
+            "1": "",
+			"2": "󰭻",
+			"3": "",
+			"4": "",
+            "5": "󰊗",
 			"urgent": "",
 			// "active": "",
             // "persistent": "", // won't override set format icons workspace above
@@ -136,11 +132,11 @@
 		"format-disabled": "", // an empty format will hide the module
 		"format-connected": "󰂱",
 		"on-click": "/path/to/blue_check.sh",
-		"format-connected-battery": "󰂱 {device_battery_percentage}%",
-		"tooltip-format": "{controller_alias}\t{controller_address}\n\n{num_connections} connected",
+		"format-connected-battery": "󰥈 {device_battery_percentage}%",
+		"tooltip-format": "{controller_alias}\t{controller_address}\n{num_connections} connected",
 		"tooltip-format-connected": "{device_enumerate}",
 		"tooltip-format-enumerate-connected": "{device_alias}\t{device_address}",
-		"tooltip-format-enumerate-connected-battery": "{device_alias}\t{device_address}\t{device_battery_percentage}%"
+		"tooltip-format-enumerate-connected-battery": "{device_alias} {device_address} {device_battery_percentage}%"
 	},
 
     "temperature": {
