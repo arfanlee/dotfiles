@@ -4,11 +4,11 @@
         "height": 15,
 		"type": "auto",
 		"padding": {
-			"left": 5
+			"left": 1
 		}
     },
     "display": {
-        "separator": "  "
+        "separator": " "
     },
     "modules": [
         {
@@ -17,7 +17,7 @@
         },
         {
             "type": "host",
-            "key": "  󰌢"
+            "key": "  \u001b[38;5;74m󰌢"
         },
         {
             "type": "cpu",
@@ -37,7 +37,8 @@
         },
         {
             "type": "os",
-            "key": "  " // Just get your distro's logo off nerdfonts.com
+            "key": "  ", // Just get your distro's logo off nerdfonts.com
+            "format": "{3}"
         },
         {
             "type": "kernel",
