@@ -9,7 +9,7 @@ function lfcd
         rm -f $tmp
         if test -d "$dir"
             if test "$dir" != (pwd)
-                cd $dir
+                z $dir
             end
         end
     end

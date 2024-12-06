@@ -21,12 +21,21 @@ bind \cu kill-whole-line
 
 # Go to $HOME
 bind \eh 'cd; commandline -f repaint'
-bind \eb 'cd ..; commandline -f repaint'
 
 set LFCD ~/.config/fish/functions/lfcd.fish  # pre-built binary, use absolute path
 if test -f "$LFCD"
 	source "$LFCD"
 end
 
-# Use lf to change directory
-bind \co 'lfcd; commandline -f repaint'
+set YZCD ~/.config/fish/functions/yazicd.fish  # pre-built binary, use absolute path
+if test -f "$YZCD"
+	source "$YZCD"
+end
+
+# Use lf to change directory (assuming lf is compatible with your terminal)
+if test $TERM = "xterm-kitty"
+  bind \co 'lfcd; commandline -f repaint'
+else
+  # Use your preferred command for less compatible terminals
+  bind \co 'yazicd; commandline -f repaint'
+end

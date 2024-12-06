@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/fish
 
 # Aliases
 alias cp='cp -iv'
