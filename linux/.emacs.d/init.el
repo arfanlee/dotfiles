@@ -57,7 +57,7 @@
 (setq indent-line-function 'insert-tab)
 
 ;; Use spaces instead of tabs for indentation
-(setq-default indent-tabs-mode nil)
+(setq-default indent-tabs-mode t)
 
 (setq backup-directory-alist '(("." . "~/.emacs.d/saves"))) ; Redirect backup buffers
 
@@ -163,7 +163,7 @@
   (corfu-auto t)
   (corfu-preselect 'prompt)
   (corfu-auto-prefix 2)
-  (corfu-auto-delay 0.1)
+  (corfu-auto-delay 0.5)
   :bind
   (:map corfu-map
         ("TAB" . corfu-next)
@@ -404,7 +404,7 @@
                          (require 'lsp-pyright)
                          (lsp-deferred)))  ; or lsp-deferred
   (python-mode-hook . (lambda () 
-                        (setq python-indent-guess-indent-offset nil)))
+                        (setq python-indent-guess-indent-offset t)))
   :bind (("C-s" . python-indent-dedent-line)) ; Remove the keymap
   :custom
   (python-shell-interpreter "python3")
