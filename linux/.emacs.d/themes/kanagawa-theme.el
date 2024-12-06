@@ -171,8 +171,8 @@
   (message-header-to                             (:foreground old-white))
   (message-header-cc                             (:foreground waveAqua2))
   (message-header-xheader                        (:foreground old-white))
-  (custom-link                                   (:foreground crystalBlue))
-  (link                                          (:foreground crystalBlue))
+  (custom-link                                   (:underline (:color crystalBlue) :foreground crystalBlue))
+  (link                                          (:underline (:color crystalBlue) :foreground crystalBlue))
 
   ;; org-mode
   (org-done                                      (:foreground springGreen :bold t))
@@ -192,15 +192,15 @@
   (org-date                                      (:foreground lightBlue))
   (org-ellipsis                                  (:foreground waveBlue-2 :bold t))
   (org-property-value                            (:foreground sumiInk-4))
-  (org-list-dt                                   (:foreground springViolet2)) ; lists e.g. -, 1., 1) >
-  (org-level-1                                   (:foreground peachRed :height 1.5 :bold t))
-  (org-level-2                                   (:foreground surimiOrange :height 1.25 :bold t))
-  (org-level-3                                   (:foreground carpYellow :height 1.05 :bold t))
-  (org-level-4                                   (:foreground springGreen :bold t))
-  (org-level-5                                   (:foreground springBlue :bold t))
-  (org-level-6                                   (:foreground springViolet1 :bold t))
-  (org-level-7                                   (:foreground oniViolet :bold t))
-  (org-level-8                                   (:foreground waveRed :bold t))
+  (org-list-dt                                   (:foreground springViolet2)) ; lists e.g. -, 1., 1), >
+  (org-level-1                                   (:foreground springBlue :height 1.5 :bold t))
+  (org-level-2                                   (:foreground oniViolet :height 1.25 :bold t))
+  (org-level-3                                   (:foreground springViolet1 :height 1.05 :bold t))
+  (org-level-4                                   (:foreground peachRed :bold t))
+  (org-level-5                                   (:foreground waveRed :bold t))
+  (org-level-6                                   (:foreground surimiOrange :bold t))
+  (org-level-7                                   (:foreground carpYellow :bold t))
+  (org-level-8                                   (:foreground springGreen :bold t))
 
   ;; which-key
   (which-key-key-face                            (:inherit 'font-lock-variable-name-face))
@@ -250,13 +250,13 @@
   (tooltip                                       (:foreground sumiInk-0 :background carpYellow :bold t))
   
   ;; company-box
-  (company-tooltip                               (:background sumiInk-2))
-  (company-tooltip-common                        (:foreground autumnYellow))
+  (company-tooltip                               (:background waveBlue-1))
+  (company-tooltip-common                        (:foreground crystalBlue))
   (company-tooltip-quick-access                  (:foreground springViolet2))
-  (company-tooltip-scrollbar-thumb               (:background autumnRed))
+  (company-tooltip-scrollbar-thumb               (:background crystalBlue))
   (company-tooltip-scrollbar-track               (:background sumiInk-2))
   (company-tooltip-search                        (:background carpYellow :foreground sumiInk-0 :distant-foreground fujiWhite))
-  (company-tooltip-selection                     (:background peachRed :foreground winterRed :bold t))
+  (company-tooltip-selection                     (:background waveBlue-2))
   (company-tooltip-mouse                         (:background sumiInk-2 :foreground sumiInk-0 :distant-foreground fujiWhite))
   (company-tooltip-annotation                    (:foreground peachRed :distant-foreground sumiInk-1))
   (company-scrollbar-bg                          (:inherit 'tooltip))
