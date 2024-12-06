@@ -9,7 +9,7 @@ image() {
 
 	if [[ "$(file -Lb --mime-type "$file")" =~ ^image ]]; then
 		if [[ "$(echo $TERM)" == "xterm-kitty" || "$(echo $TERM)" == "screen-256color" ]]; then
-            kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" </dev/null>/dev/tty
+            kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" </dev/null >/dev/tty
         else
 			chafa -f sixel -s "${w}x${h}" --animate off --polite on "$file"
 		fi
@@ -33,7 +33,7 @@ glowormdcat() {
 	shift
 	if command -v glow > /dev/null 2>&1
 	then
-		glow --width 70 --style dark "$file"
+		glow -w 70 -s dark "$file"
 	else
 		mdcat --ansi "$file"
 	fi

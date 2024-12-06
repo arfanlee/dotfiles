@@ -3,12 +3,19 @@ set icons
 
 # To enable border
 set drawbox
+set roundbox
 
 # Render sixel image in previewer
 set sixel
 
 # Set sort on launch
 set sortby natural
+
+# Filesystem notifications to detect and display changes to files
+set watch
+
+# Set sort for some directories
+setlocal '/path/to/file' sortby time
 
 # Leave some space at the top and the bottom of the screen
 set scrolloff 10
@@ -49,10 +56,10 @@ cmd open ${{
 		application/pdf) setsid -f zathura $fx ;;
         text/*)
             case $f in
-                *.md) glow --width 100 --pager $f ;;
+                *.md) glow --width 100 --pager $f;;
                 *) $EDITOR $f ;;
             esac;;
-        image/*) setsid -f nomacs $f >/dev/null 2>&1 ;;
+        image/*) setsid -f imv-dir $f >/dev/null 2>&1 ;;
 		video/*) setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1 ;;
 		audio/*) setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1 ;;
 	*) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done ;;
@@ -110,6 +117,9 @@ map sf :{{ set sortby ctime; set reverse; }}
 
 # Create folder
 map a push %mkdir<space>
+
+# Create file
+map u push %touch<space>
 
 # Use enter for shell commands
 map <enter> shell
