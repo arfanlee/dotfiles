@@ -1,17 +1,17 @@
 /*****----- Configuration -----*****/
 configuration {
     /* Adjusted some key functionality*/
+    case-sensitive: false;
     kb-accept-entry: "Return,KP_Enter";
     kb-mode-complete: "";
     kb-remove-char-back: "BackSpace";
     kb-remove-to-eol: "Control+Shift+e";
     kb-row-up: "Up,Control+p,Shift+Tab,Shift+ISO_Left_Tab";
     kb-row-down: "Down,Control+n";
+    matching: "fuzzy";
     me-accept-entry: "!MousePrimary";
     me-select-entry: "MousePrimary";
     terminal: "kitty";
-    matching: "fuzzy";
-    case-sensitive: false;
 }
 
 @theme "/dev/null"
@@ -37,7 +37,7 @@ configuration {
 
 /*****----- Main Window -----*****/
 window {
-    width: 30%;
+    width: 25%;
     border-radius: 10px;
     cursor: "default";
 }
@@ -82,7 +82,7 @@ listview {
 
 /*****----- Elements -----*****/
 element {
-    padding: 10px;
+    padding: 20px 10px;
     text-color: @fg-focus;
     border: 1px;
     border-radius: 5px;

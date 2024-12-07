@@ -9,7 +9,7 @@ configuration {
 * {
     background:     #1F1F28;
     background-alt: #393552;
-    foreground:     #e0def4;
+    foreground:     #E0DEF4;
     selected:       #7E9CD8;
 
     font: "JetBrainsMono Nerd Font Mono 24";
@@ -31,7 +31,7 @@ mainbox {
     spacing:                     15px;
     padding:                     15px;
     background-color:            transparent;
-    children:                    [ "listview" ];
+    children:                    ["listview"];
 }
 
 /*****----- Message -----*****/
@@ -42,6 +42,7 @@ message {
     background-color:            @background-alt;
     text-color:                  @foreground;
 }
+
 textbox {
     font:                        "Symbols Nerd Font Mono 48";
     background-color:            inherit;
