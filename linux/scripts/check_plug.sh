@@ -26,14 +26,14 @@ for (( i=0; i<${#logged_users[@]}; i++ )); do
             fi
             light -S 10         # Set brightness to 10%
         else
+			su "$CURRENT_USER" -c "/usr/bin/gdbus call --session \
+				--dest org.freedesktop.Notifications \
+				--object-path /org/freedesktop/Notifications \
+				--method org.freedesktop.Notifications.CloseNotification \
+				'$(cat "$LOW_FILE")'"
+			rm "$LOW_FILE"
             if [[ "$1" == "play" ]]; then
-                su "$CURRENT_USER" -c "/usr/bin/gdbus call --session \
-                    --dest org.freedesktop.Notifications \
-                    --object-path /org/freedesktop/Notifications \
-                    --method org.freedesktop.Notifications.CloseNotification \
-                    '$(cat "$LOW_FILE")'"
                 su "$CURRENT_USER" -c "setsid -f ffplay -nodisp -autoexit /usr/share/sounds/ocean/stereo/power-plug.oga >/dev/null 2>&1" &
-                rm "$LOW_FILE"
             fi
             light -S 100        # Set brightness to 100%
         fi

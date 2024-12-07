@@ -30,7 +30,7 @@ case "$desc" in
         result="🌨️ ${temp}°C"
         tooltip="Snow";;
     *)
-        result="🚫 No data";;
+        result="🚫 Offline";;
 esac
 
 if [ -z "$1" ]; then
