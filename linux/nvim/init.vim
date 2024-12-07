@@ -24,7 +24,8 @@ Plug 'rebelot/kanagawa.nvim'
 
 " Statusline theme
 Plug 'nvim-lualine/lualine.nvim'
-" Plug 'kdheepak/tabline.nvim'
+
+" Tabline
 Plug 'akinsho/bufferline.nvim'
 
 " Fuzzy finder
