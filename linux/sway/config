@@ -31,13 +31,14 @@ set $menu rofi -show drun | xargs swaymsg exec --
 set $clip cliphist list | rofi -dmenu -p '󱘣 Clipboard' -config ~/.config/rofi/clipboard/config.rasi -display-columns 2 | cliphist decode | wl-copy
 
 # Controller script for volume and brightness that work with wob
-set $controller $HOME/.local/bin/controller.sh
-set $powermenu $HOME/.local/bin/rofi_power.sh
+set $controller /path/to/controller.sh
+set $powermenu /path/to/rofi_power.sh
+set $lockscreen hyprlock -q
 
 ### Output configuration
 
 # Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg $HOME/Pictures/Wallpapers/pastel-samurai.png fill
+output * bg /path/to/image.png fill
 
 # Disable window titlebar
 default_border pixel 2
@@ -99,6 +100,7 @@ bindsym $mod+q kill             # Kill focused window
 
 # Reload the configuration file
 bindsym $mod+Ctrl+r reload
+bindsym $mod+Ctrl+l exec $lockscreen
 
 # Exit sway (logs you out of your Wayland session)
 # bindsym $mod+Shift+q exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -B 'Yes, exit sway' 'swaymsg exit'
@@ -117,8 +119,8 @@ bindsym XF86MonBrightnessUp exec $controller "bu"
 bindsym XF86MonBrightnessDown exec $controller "bd"
 
 # Screenshot
-bindsym Print exec $HOME/.local/bin/custom_grim.sh
-bindsym $mod+Print exec $HOME/.local/bin/custom_grim.sh "sl"
+bindsym $mod+Print exec /path/to/custom_grim.sh
+bindsym $mod+Shift+Print exec /path/to/custom_grim.sh "sl"
 
 ## Moving around:
 
@@ -225,6 +227,9 @@ bindsym $mod+Shift+minus move scratchpad
 # If there are multiple scratchpad windows, this command cycles through them.
 bindsym $mod+minus scratchpad show
 
+bindswitch lid:off $lockscreen
+bindswitch lid:toggle exec $lockscreen
+
 ## Resizing containers:
 
 mode "resize" {
@@ -262,4 +267,4 @@ for_window [app_id="feh"] floating enable
 for_window [app_id="nomacs"] floating enable
 for_window [app_id="zathura"] floating enable
 
-exec_always $HOME/.local/bin/autostart.sh
+exec_always /path/to/autostart.sh
