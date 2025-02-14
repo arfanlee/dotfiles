@@ -1,3 +1,4 @@
+" Plugin Manager: vim-plug
 call plug#begin('~/.config/nvim/plugged')
 
 " Icons
@@ -7,47 +8,49 @@ Plug 'kyazdani42/nvim-web-devicons'
 Plug 'jiangmiao/auto-pairs'
 Plug 'kylechui/nvim-surround'
 
-" Indent line
+" Indentation guide
 Plug 'lukas-reineke/indent-blankline.nvim'
 
-" Intellisense
+" LSP and autocompletion
 Plug 'neovim/nvim-lspconfig'
 Plug 'hrsh7th/nvim-cmp'
 Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/vim-vsnip'
 
-" Rust linter
+" Rust tools
 Plug 'simrat39/rust-tools.nvim'
 
 " Themes
 Plug 'rebelot/kanagawa.nvim'
 
-" Statusline theme
+" Statusline
 Plug 'nvim-lualine/lualine.nvim'
 
 " Tabline
 Plug 'akinsho/bufferline.nvim'
 
-" Fuzzy finder
-Plug 'junegunn/fzf.vim'
-Plug 'junegunn/fzf'
-
-" Git plugin
+" Git integration
 Plug 'tpope/vim-fugitive'
+
+" Markdown support
 Plug 'gabrielelana/vim-markdown'
 
-" Python indent fix
+" Python indentation
 Plug 'Vimjas/vim-python-pep8-indent'
 
-" NERDTree
+" File explorer
 Plug 'preservim/nerdtree'
+
+" Fuzzy finder
+Plug 'nvim-telescope/telescope.nvim'
+Plug 'nvim-lua/plenary.nvim'
 
 call plug#end()
 
-" To have VIM jump to last position when reopen file
+" Jump to last position when reopening a file
 au BufReadPost * if line("'\"") > 1 && line("'\"") <= line("$") | exe "normal! g`\"" | endif
 
-" NERDTree config.
+" NERDTree configuration
 autocmd StdinReadPre * let s:std_in=1
 " Start NERDTree when Vim is started without file arguments.
 autocmd VimEnter * if argc() == 0 && !exists('s:std_in') | NERDTree | endif
@@ -59,66 +62,56 @@ autocmd BufEnter * if tabpagenr('$') == 1 && winnr('$') == 1 && exists('b:NERDTr
 " Close the tab if NERDTree is the only window remaining in it.
 autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif
 
+" Set color scheme
 colorscheme kanagawa
 
-set mousemoveevent
+" General settings
 set clipboard+=unnamedplus
 set cursorline
 set fsync
-set guifont=JetBrains\ Mono:h12
+set guifont=JetBrainsMono\ Nerd\ Font\ Mono:h12
 set hidden
 set laststatus=2
 set mouse=a
 set noshowmode
 set number
-set path+=** " pathing all files/directories on the machine
+set path+=**
 set relativenumber
 set shiftwidth=4
 set tabstop=4
-set wildmenu " display menu option with shift/S+shift to select
-setlocal scrolloff=999 " set the cursor always in center unless it's the start/begging of a file/buffer
+set wildmenu
+setlocal scrolloff=999
 
-" Neovide
-let g:neovide_remember_window_size=v:true
-let g:neovide_cursor_vfx_mode="torpedo"
+" Neovide settings
+let g:neovide_remember_window_size = v:true
+let g:neovide_cursor_smooth_blink = v:true
+let g:neovide_cursor_vfx_mode = "railgun"
+let g:neovide_cursor_animate_in_insert_mode = v:true
+let g:neovide_cursor_vfx_particle_phase = 3
 
-" NERDTRee
+" NERDTree settings
 let g:NERDTreeDirArrowCollapsible = '󰁊'
 let g:NERDTreeDirArrowExpandable = '󰁙'
 let g:NERDTreeMinimalUI = 1
 let g:NERDTreeShowHidden = 1
+let g:NERDTreeChDirMode = 0
+set autochdir
 
+" Markdown settings
 let g:markdown_mapping_switch_status = '<C-m>'
-" Built in :nohls macro key = <C-l>
 
-" Delete forward in insert mode
+" Key mappings
 inoremap <C-Del> <C-o>dw
-
-" To open new tab without entering the command
 nnoremap <silent> <C-t> :tabedit .<Return>
-
-" To change tabs in vim
-nnoremap <Tab> gt
-nnoremap <S-Tab> gT
-
-" To close current tab
-nnoremap <silent> <C-x> :tabclose<Return> 
-
-" Open buffer
+nnoremap <silent> <C-x> :bd<Return>
 nnoremap <S-b> :b<Space>
-" Navigate through buffer
-nnoremap <silent> <C-n> :bn<Return>
-nnoremap <silent> <C-p> :bp<Return>
-
-" Open fzf Alt/Meta + f
-nnoremap <silent> <M-f> :Files<Return>
-
-" Quick command
+nnoremap <silent> <C-Tab> :bn<Return>
+nnoremap <silent> <C-S-Tab> :bp<Return>
 nnoremap <silent> <Esc>q :q<Return>
 nnoremap <silent> <C-s> :w<Return>
-
-" NERDTree Toggle
 nnoremap <silent> <C-f> :NERDTreeToggle<Return>
+nnoremap <silent> <leader>sv :source $MYVIMRC<Return>
 
+" Load Lua configurations
 luafile ~/.config/nvim/lua/cmp-config.lua
 luafile ~/.config/nvim/lua/theme.lua
