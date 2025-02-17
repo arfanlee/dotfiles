@@ -10,6 +10,14 @@
   (add-hook mode (lambda () (display-line-numbers-mode 0))))
 (column-number-mode)
 
+;; Add path automatically when find-file
+(add-hook
+ 'find-file-hook
+ (lambda ()
+   (call-process-shell-command
+	(format "zoxide add %s"  (file-name-directory buffer-file-name))
+	nil 0)))
+
 ;; GLOBAL KEYBIND
 (global-set-key (kbd "<escape>") 'keyboard-escape-quit)
 
@@ -75,6 +83,21 @@
   (other-window 1)
   (set-buffer buffer))
 
+(defun find-file-with-zoxide ()
+  (interactive)
+  (let ((target (consult--read
+				 (consult--process-collection (lambda (x) (list "zoxide" "query" "-l" x)))
+				 :prompt "Zoxide  "
+				 :require-match nil
+				 :lookup #'consult--lookup-member
+				 :require-match t
+				 :category 'file
+				 :sort nil)))
+	(if target
+		(let ((default-directory (concat target "/")))
+		  (call-interactively 'find-file))
+	  (call-interactively 'find-file))))
+
 (setq server-window #'dw/show-server-edit-buffer)
 
 ;; FONTS
@@ -132,6 +155,7 @@
   (setq centaur-tabs-enable-key-keybindings t)
   :config
   (setq centaur-tabs-set-icons t) ; For prefix icon according to file type(s)
+  (setq centaur-tabs-icon-type 'all-the-icons)
   (setq centaur-tabs-style "bar")
   (setq centaur-tabs-height 35)
   (setq centaur-tabs-set-bar 'under) ; The little line under focused tab
@@ -205,7 +229,7 @@
   (progn
     (setq dashboard-startup-banner 'logo)
     (setq dashboard-display-icons-p t)
-    (setq dashboard-icon-type 'nerd-icons)
+    (setq dashboard-icon-type 'all-the-icons)
     (setq dashboard-set-heading-icons t)
     (setq dashboard-show-shortcuts nil)
     (setq dashboard-set-file-icons t)
@@ -292,7 +316,8 @@
     "o a" 'org-agenda :wk "Agenda")
 
   (al/leader-key-def
-    "f f" 'counsel-find-file :wk "Find file")
+    "f f" 'counsel-find-file :wk "Find file"
+    "f z" 'zoxide-find-file)
 
   (al/leader-key-def
     "b b" 'counsel-switch-buffer
