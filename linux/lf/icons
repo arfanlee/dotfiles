@@ -15,12 +15,12 @@ su             # SETUID
 tw             # STICKY_OTHER_WRITABLE
 
 # Custom Directories
-~/Desktop	
-~/Desktop	 
+~/Desktop	
 ~/Downloads	
 ~/Music		
-~/Pictures 	 
+~/Pictures 	
 ~/Videos	
+~/Public	
 
 # File names
 *config   		00;38;2;109;128;134

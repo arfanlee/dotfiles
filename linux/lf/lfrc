@@ -1,88 +1,100 @@
+# ============================
+# lf Configuration Settings
+# ============================
+
 # Set colors & icons
 set icons
+set colors
 
-# To enable border
-set drawbox
-set roundbox
+# Fuzzy search options:
+set findlen 0              # Allow matching with minimal typed characters
+set anchorfind false       # Search arbitrarily rather than only from the beginning
+set incsearch true         # Incremental search: jump to current match at each keystroke
+set incfilter true		   # Incremental filter: filter to current match at each keystroke
 
-# Render sixel image in previewer
-set sixel
+# Visual enhancements:
+set drawbox                # Enable drawing a border around selected items
+set roundbox               # Enable rounded borders
 
-# Set sort on launch
-set sortby natural
+# Image preview:
+set sixel                 # Enable rendering sixel images in previewer
 
-# Filesystem notifications to detect and display changes to files
-set watch
+# Sorting & filesystem watch:
+set sortby natural        # Use natural sorting on launch
+set watch                 # Enable filesystem notifications for changes
 
-# Set sort for some directories
+# Directory-specific sorting rules:
 setlocal '/path/to/file' sortby time
 
-# Leave some space at the top and the bottom of the screen
-set scrolloff 10
+# Scrolling offset:
+set scrolloff 10          # Leave some space at the top and bottom
 
-# Set previewer & cleaner script
-set previewer '~/.config/lf/lf_kitty_preview'
-set cleaner '~/.config/lf/lf_kitty_clean'
+# Previewer and cleaner script paths:
+set previewer '~/.config/lf/previewer'
+set cleaner '~/.config/lf/cleaner'
 
-# To change the cursor in the respective panes
+# Cursor formatting for different panes:
 set cursorparentfmt "\033[3;90m"
 set cursoractivefmt "\033[7m"
 set cursorpreviewfmt "\033[3;90m"
 
-# Interpreter for shell commands
-set shell zsh
+# Shell command interpreter settings:
+set shell zsh             # Use zsh as the shell for executing commands
+set shellopts '-euy'      # Exit on error (-e), unset variable error (-u), and treat failures as errors (-y)
+set ifs "\n"               # Set the internal field separator to newline
 
-# Set '-eu' options for shell commands
-# These options are used to have safer shell commands. Option '-e' is used to
-# exit on error and option '-u' is used to give error for unset variables.
-# Option '-f' disables pathname expansion which can be useful when $f, $fs, and
-# $fx variables contain names with '*' or '?' characters. However, this option
-# is used selectively within individual commands as it can be limiting at
-# times.
-set shellopts '-euy'
-
-# Set internal field separator (IFS) to "\n" for shell commands
-# This is useful to automatically split file names in $fs and $fx properly
-# since default file separator used in these variables (i.e. 'filesep' option)
-# is newline. You need to consider the values of these options and create your
-# commands accordingly.
-set ifs "\n"
-
+# ============================
 # CUSTOM COMMANDS
-# Define a custom 'open' command for non-directory files
+# ============================
+
+# 'open' command for non-directory files:
 cmd open ${{
+    # Resolve symbolic links
     test -L $f && f=$(readlink -f $f)
+    # Determine MIME type and choose an appropriate opener:
     case $(file --mime-type $f -b) in
-		application/pdf) setsid -f zathura $fx ;;
+        application/pdf)
+            setsid -f zathura $fx ;;
         text/*)
             case $f in
                 *.md) glow --width 100 --pager $f;;
                 *) $EDITOR $f ;;
-            esac;;
-        image/*) setsid -f imv-dir $f >/dev/null 2>&1 ;;
-		video/*) setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1 ;;
-		audio/*) setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1 ;;
-	*) for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done ;;
+            esac ;;
+        image/*)
+            setsid -f nomacs $f >/dev/null 2>&1 ;;
+        video/*)
+            setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1 ;;
+        audio/*)
+            setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1 ;;
+        *)
+            # For any other MIME types, open with the default opener for each file in $fx
+            for f in $fx; do setsid $OPENER $f > /dev/null 2> /dev/null & done ;;
     esac
 }}
 
-# Extract the current file with the right command
-cmd extract ${{
+# 'extract' command: Extract archives into a temporary directory, then remove it.
+cmd extract &{{
     set -f
     mkdir $1
-    cp -rf $fx $1
+    cp -rf $f $1
     case $f in
-        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2) tar xjvf $f >/dev/null 2>&1 ;;
-        *.tar.gz|*.tgz) tar xzvf $f >/dev/null 2>&1 ;;
-        *.tar.xz|*.txz) tar xJvf $f >/dev/null 2>&1 ;;
-        *.zip) unzip $f >/dev/null 2>&1 ;;
-        *.rar) unrar x $f >/dev/null 2>&1 ;;
-        *.7z) 7z x $f >/dev/null 2>&1 ;;
+        *.tar.bz|*.tar.bz2|*.tbz|*.tbz2)
+            tar xjvf $f >/dev/null 2>&1 ;;
+        *.tar.gz|*.tgz)
+            tar xzvf $f >/dev/null 2>&1 ;;
+        *.tar.xz|*.txz)
+            tar xJvf $f >/dev/null 2>&1 ;;
+        *.zip)
+            unzip $f >/dev/null 2>&1 ;;
+        *.rar)
+            unrar x $f >/dev/null 2>&1 ;;
+        *.7z)
+            7z x $f >/dev/null 2>&1 ;;
     esac
     rm -rf $1
 }}
 
-# Compress current file or selected files with tar and gunzip
+# 'tar' command: Compress current or selected files into a tar.gz archive.
 cmd tar ${{
     set -f
     mkdir $1
@@ -91,7 +103,7 @@ cmd tar ${{
     rm -rf $1
 }}
 
-# Compress current file or selected files with zip
+# 'zip' command: Compress current or selected files into a zip archive.
 cmd zip ${{
     set -f
     mkdir $1
@@ -100,37 +112,84 @@ cmd zip ${{
     rm -rf $1
 }}
 
-# MAPS
-# Compress/decompress file
+# fzf-based file search:
+cmd fzf_find ${{
+    result=$(fzf --ansi --header="Search file to edit" --delimiter=: \
+             --preview='~/.config/lf/cleaner; ~/.config/lf/previewer {1}' \
+             --preview-window='up,65%') && [ -n "$result" ] && $EDITOR "$result" || true
+}}
+
+# ZOXIDE INTEGRATION
+## Jump to directories using zoxide:
+cmd z %{{
+    result="$(zoxide query --exclude "$PWD" "$@" | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+cmd zi ${{
+    result="$(zoxide query -i | sed 's/\\/\\\\/g;s/"/\\"/g')"
+    lf -remote "send $id cd \"$result\""
+}}
+cmd on-cd &{{
+    zoxide add "$PWD"
+}}
+
+# FZF X RIPGREP
+cmd fzf_ripgrep ${{
+    cmd="rg --column --line-number --no-heading --color=always --smart-case"
+    fzf --ansi --disabled --layout=reverse --header="Search in files" --delimiter=: \
+        --no-scrollbar \
+        --padding 2% \
+        --bind="start:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind="change:reload([ -n {q} ] && $cmd -- {q} || true)" \
+        --bind='enter:become(lf -remote "send $id select \"$(printf "%s" {1} | sed '\''s/\\/\\\\/g;s/"/\\"/g'\'')\"")' \
+        --preview='~/.config/lf/cleaner; ~/.config/lf/previewer {1}' \
+        --preview-window='up,65%' \
+        || true
+}}
+
+# ============================
+# KEYBINDINGS
+# ============================
+
+# Archive operations:
 map xe extract $f
 map xt push :tar<space>
 map xz push :zip<space>
 
-# Shortcut to folders
+# Folder shortcuts:
 map g/ select /
 map gc cd ~/.config
 map gb cd ~/.local/bin
 map gd cd ~/Downloads
+map gp cd ~/Pictures
 
-# Set the ctime decrementally
+# Sorting: Toggle sort by ctime in reverse order:
 map sf :{{ set sortby ctime; set reverse; }}
 
-# Create folder
-map a push %mkdir<space>
+# Create folder/file shortcuts:
+map a push %mkdir<space>		# Create folder
+map u push %touch<space>		# Create file
 
-# Create file
-map u push %touch<space>
-
-# Use enter for shell commands
+# Use Enter to run shell commands:
 map <enter> shell
 
-# Execute current file (must be executable)
+# Execute current file (if executable):
 map x$ $$f
 map x! !$f
 
-# Dedicated keys for file opener actions
+# File opener keys:
 map o &mimeopen $f
 map O $mimeopen --ask $f
 
-# Use '<delete>' key for either 'trash' or 'delete' command
+# Delete command:
 map <delete> delete
+
+# Fzf-find keybind:
+map f fzf_find
+
+# Zoxide integration keybind:
+map zi zi
+map gz z
+
+# FZF x RIPGREP keybind:
+map gs :fzf_ripgrep

@@ -8,7 +8,8 @@ image() {
 	y=$5
 
 	if [[ "$(file -Lb --mime-type "$file")" =~ ^image ]]; then
-		if [[ "$(echo $TERM)" == "xterm-kitty" || "$(echo $TERM)" == "screen-256color" ]]; then
+		#if [[ "$(echo $TERM)" == "xterm-kitty" || "$(echo $TERM)" == "screen-256color" || "$(echo $TERM)" == "xterm-ghostty" ]]; then
+		if [[ "$(echo $TERM)" == "xterm-kitty" || "$(echo $TERM)" == "xterm-ghostty" ]]; then
             kitty +kitten icat --silent --stdin no --transfer-mode file --place "${w}x${h}@${x}x${y}" "$file" </dev/null >/dev/tty
         else
 			chafa -f sixel -s "${w}x${h}" --animate off --polite on "$file"
