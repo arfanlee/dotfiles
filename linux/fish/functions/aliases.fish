@@ -2,10 +2,10 @@
 
 # Aliases
 alias cp='cp -iv'
+alias ls='eza --icons --no-quotes'
 alias la='ls -A'
 alias lla='ls -lA'
-alias ls='lsd'
-alias lt='lsd --ignore-glob .git --tree '
+alias lt='ls --ignore-glob .git --tree '
 alias mv='mv -i'
 alias rm='rm -i'
 

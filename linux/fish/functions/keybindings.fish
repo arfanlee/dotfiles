@@ -20,7 +20,9 @@ bind \b backward-kill-word
 bind \cu kill-whole-line
 
 # Go to $HOME
-bind \eh 'cd; commandline -f repaint'
+bind \en 'z; commandline -f repaint'
+bind \e\x7f 'z -; commandline -f repaint'
+bind \ez 'zi; commandline -f repaint'
 
 set LFCD ~/.config/fish/functions/lfcd.fish  # pre-built binary, use absolute path
 if test -f "$LFCD"
@@ -34,6 +36,8 @@ end
 
 # Use lf to change directory (assuming lf is compatible with your terminal)
 if test $TERM = "xterm-kitty"
+  bind \co 'lfcd; commandline -f repaint'
+else if test $TERM = "xterm-ghostty"
   bind \co 'lfcd; commandline -f repaint'
 else
   # Use your preferred command for less compatible terminals
