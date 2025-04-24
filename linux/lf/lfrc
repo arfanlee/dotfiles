@@ -2,9 +2,8 @@
 # lf Configuration Settings
 # ============================
 
-# Set colors & icons
+# Set colors & icons (requires proper definitions in your theme)
 set icons
-set colors
 
 # Fuzzy search options:
 set findlen 0              # Allow matching with minimal typed characters
@@ -63,7 +62,7 @@ cmd open ${{
         image/*)
             setsid -f nomacs $f >/dev/null 2>&1 ;;
         video/*)
-            setsid -f mpv --keep-open $f -quiet >/dev/null 2>&1 ;;
+            setsid -f haruna $f >/dev/null 2>&1 ;;
         audio/*)
             setsid -f ffplay -nodisp -autoexit $f >/dev/null 2>&1 ;;
         *)
@@ -138,7 +137,6 @@ cmd fzf_ripgrep ${{
     cmd="rg --column --line-number --no-heading --color=always --smart-case"
     fzf --ansi --disabled --layout=reverse --header="Search in files" --delimiter=: \
         --no-scrollbar \
-        --padding 2% \
         --bind="start:reload([ -n {q} ] && $cmd -- {q} || true)" \
         --bind="change:reload([ -n {q} ] && $cmd -- {q} || true)" \
         --bind='enter:become(lf -remote "send $id select \"$(printf "%s" {1} | sed '\''s/\\/\\\\/g;s/"/\\"/g'\'')\"")' \
@@ -178,8 +176,7 @@ map x$ $$f
 map x! !$f
 
 # File opener keys:
-map o &mimeopen $f
-map O $mimeopen --ask $f
+map o %xdg-open $f
 
 # Delete command:
 map <delete> delete

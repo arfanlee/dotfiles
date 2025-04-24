@@ -29,6 +29,7 @@ tw             # STICKY_OTHER_WRITABLE
 *Makefile 		00;38;2;109;128;134
 *makefile 		00;38;2;109;128;134
 *README	  		00;38;2;81;154;186
+*icons	  
 
 # File extensions
 *.c			00;38;2;89;158;255
