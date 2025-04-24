@@ -8,7 +8,7 @@
 @define-color lightBlue #A3D4D5;
 @define-color oniViolet #957FB8;
 @define-color peachRed #FF5D62;
-@define-color powerMenu #0B57A4;
+@define-color powerMenu #A8B2D1;
 @define-color roninYellow #FF9E3B;
 @define-color sakuraPink #D27E99;
 @define-color springBlue #7FB4CA;
@@ -44,7 +44,7 @@ button:hover {
 #submap {
     background: @sumiInk3;
     border: 1px solid @sumiInk3;
-	border-radius: 50px;
+	border-radius: 10px;
     margin: 6px 0;
     padding: 0 8px;
 }
@@ -60,10 +60,9 @@ button:hover {
 }
 
 #workspaces {
-    background: @sumiInk3;
-    border-radius: 50px;
-    border: 1px solid @crystalBlue;
-    margin: 5px 0;
+    background: @sumiInk1;
+    border: none;
+    margin: 5px;
 }
 
 /* If workspaces is the leftmost module, omit left margin */
@@ -78,11 +77,12 @@ button:hover {
 
 #workspaces button {
     border: none;
-    color: @sumiInk1;
-    margin: 0 10px;
-    padding: 0;
-    transition-duration: .5s;
-    transition-property: color;
+    background: @sumiInk3;
+	padding: 0 10px;
+	margin: 5px 10px;
+	border-radius: 50px;
+	animation: gradient_f 20s ease-in infinite;
+	transition: all 0.5s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button:hover {
@@ -99,7 +99,12 @@ button:hover {
 
 /* Hyprland */
 #workspaces button.active {
-    color: @crystalBlue;
+    background: @crystalBlue;
+	border-radius: 50px;
+	margin: 5px 10px;
+	min-width: 1.6rem;
+	padding: 0 10px;
+	transition: all 0.3s cubic-bezier(.55,-0.68,.48,1.682);
 }
 
 #workspaces button.urgent {
@@ -108,7 +113,7 @@ button:hover {
 
 #window {
     background: @sumiInk1;
-	border-radius: 50px;
+	border-radius: 10px;
     color: @fujiWhite;
     padding: 0 8px;
     margin: 6px 4px;
@@ -150,9 +155,9 @@ window#waybar.empty #window{
 #temperature,
 #tray,
 #wireplumber {
-	border-radius: 50px;
 	margin: 6px 2px;
-    padding: 0 8px;
+	border-radius: 10px;
+	padding: 0 8px;
 }
 
 #backlight {
@@ -243,7 +248,7 @@ window#waybar.empty #window{
 #custom-menu {
     background: transparent;
     color: @powerMenu;
-    font-size: 25px;
+    font-size: 20px;
     padding: 0;
 }
 

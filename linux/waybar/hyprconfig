@@ -1,5 +1,5 @@
 {
-    "layer": "top",
+    "layer": "bottom",
     "position": "top",
     "height": 40, // Waybar height (to be removed for auto height)
     "width": 1900, // Waybar width
@@ -7,26 +7,19 @@
     "margin-top": 10,
 
     // Choose the order of the modules
-    "modules-left": ["custom/menu", "hyprland/workspaces", "hyprland/submap"],
-    "modules-center": ["hyprland/window"],
-    "modules-right": ["tray", "custom/notification", "pulseaudio", "bluetooth", "network", "battery", "custom/weather", "clock"],
+    "modules-left": ["custom/menu", "tray", "hyprland/submap"],
+    "modules-center": ["hyprland/workspaces"],
+    "modules-right": ["custom/notification", "pulseaudio", "bluetooth", "network", "battery", "custom/weather", "clock"],
 
     // Modules configuration
     "hyprland/workspaces": {
 		"format": "{icon}",
         "show-special": false,
 		"format-icons": {
-            "1": "",
-			"2": "󰭻",
-			"3": "",
-			"4": "",
-            "5": "󰊗",
-			"urgent": "",
-			// "active": "",
-            // "persistent": "", // won't override set format icons workspace above
+			"active": "",
             "special": "",
-            "empty": "",
-			"default": ""
+            "empty": "",
+			"default": ""
 		}
     },
 
@@ -198,7 +191,7 @@
 
     "custom/menu": {
         "tooltip": false,
-        "format": "",
+        "format": "",
         "return-type": "json",
         "on-click": "/path/to/rofi_power.sh",
         "escape": true
