@@ -12,6 +12,9 @@ configuration {
     me-accept-entry: "!MousePrimary";
     me-select-entry: "MousePrimary";
     terminal: "kitty";
+
+    show-icons: false;
+    sidebar-mode: true;
 }
 
 @theme "/dev/null"

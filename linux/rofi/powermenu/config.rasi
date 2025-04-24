@@ -40,7 +40,7 @@ inputbar {
     spacing:                     0;
     padding:                     15px 15px 200px 15px;
     background-color:            transparent;
-    background-image:            url("path/to/image.jpg", width);
+    background-image:            url("/path/to/image.jpg", width);
     children:                    ["textbox-prompt-colon", "dummy", "prompt"];
 }
 
@@ -87,7 +87,7 @@ listview {
 
 /*****----- Elements -----*****/
 element {
-    padding:                     12px;
+    padding:                     25px;
     border-radius:               100%;
     background-color:            @background-alt;
     text-color:                  @foreground;
@@ -98,7 +98,7 @@ element-text {
     background-color:            transparent;
     text-color:                  inherit;
     cursor:                      inherit;
-    vertical-align:              0.5;
+    vertical-align:              0;
     horizontal-align:            0.5;
 }
 element selected.normal {
